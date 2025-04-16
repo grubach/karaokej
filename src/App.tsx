@@ -8,15 +8,9 @@ function App() {
     <div className={style.container}>
       <Controls />
       <Track>
-      <Cursor 
-      transpose={-12} 
-      />
-        <Cursor 
-        transpose={0} 
-        />
-        <Cursor 
-        transpose={12} 
-        />
+        <Cursor transpose={-12} />
+        <Cursor transpose={0} />
+        <Cursor transpose={12} />
       </Track>
     </div>
   );

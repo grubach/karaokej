@@ -18,11 +18,11 @@ const Cursor = ({transpose}:Props) => {
 
       if (!cursorRef.current) return;
       if (value === null) {
-        // cursorRef.current.style.opacity = "0";
+        cursorRef.current.style.opacity = "0";
       } else {
         cursorRef.current.style.opacity = "1";
         cursorRef.current.style.transform = `translateY(${
-          (-(value + transpose) * NOTE_HEIGHT).toFixed(2)
+          (-(value + transpose) * NOTE_HEIGHT/2).toFixed(2)
         }px)`;
       }
     },
