@@ -6,6 +6,8 @@ import { beatsToTime } from "./time";
 let interval: number;
 let startTime: number;
 let transpose: number = 0;
+let overallScore: number = 0;
+let overallDetections: number = 0;
 
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
@@ -67,6 +69,10 @@ const frame = () => {
 
   if (elapsed > song.endTime) {
     clearInterval(interval);
+    interval = 0;
+    console.log("Game Over");
+    console.log("Score:", overallScore);
+    console.log("Detections:", overallDetections);
     return;
   }
 
@@ -88,6 +94,8 @@ const frame = () => {
   if (difference !== null && Math.abs(difference) < 1) {
     points = 1 - Math.abs(difference);
   }
+  overallScore += points;
+  overallDetections +=1;
 
   const state = {
     elapsed,
@@ -104,6 +112,9 @@ export const startGame = async () => {
   resetGameHistory();
   await resetAudioContext();
   startTime = performance.now();
+  overallScore = 0;
+    overallDetections = 0;
+
   if (interval) {
     clearInterval(interval);
   }
