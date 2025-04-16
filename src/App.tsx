@@ -10,10 +10,8 @@ function App() {
     <div className={style.App}>
       <Controls />
       <Track>
-        <Cursor transpose={-12} />
-        <Cursor transpose={0} />
-        <Cursor transpose={12} />
         <Program song={song} />
+        <Cursor />
       </Track>
     </div>
   );

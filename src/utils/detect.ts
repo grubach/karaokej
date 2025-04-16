@@ -46,13 +46,19 @@ export const resetAudioContext = async () => {
   inputBuffer = new Float32Array(detector.inputLength);
 };
 
-const detect = () => {
-  if (!analyserNode || !inputBuffer) return;
+export const detect = () => {
+  if (!analyserNode || !inputBuffer) return null;
   analyserNode.getFloatTimeDomainData(inputBuffer);
   const [pitch, clarity] = detector.findPitch(inputBuffer, sampleRate);
   const value = clarity > MINIMUM_CLARITY ? pitch : null;
+  if (!value) {
+    return null;
+  }
+  return positionFromHz(value);
+};
 
-  pushToHistory(value ? positionFromHz(value) : null);
+const writeHistory = () => {
+  pushToHistory(detect());
 };
 
 let interval: number;
@@ -61,6 +67,6 @@ export const startDetecting = async () => {
     clearInterval(interval);
   }
   await resetAudioContext();
-  interval = setInterval(detect, 1000 / DETECTIONS_PER_SECOND);
+  interval = setInterval(writeHistory, 1000 / DETECTIONS_PER_SECOND);
   return true;
 };

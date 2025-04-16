@@ -1,20 +1,18 @@
-import useDetect from "./hooks/useDetect";
 import style from "./Cursor.module.css";
 import { useRef } from "react";
 import { NOTE_HEIGHT } from "./constants";
+import useGameState from "./hooks/useGameState";
 
-type Props = {
-  transpose: number;
-};
+type Props = {};
 
-const Cursor = ({ transpose }: Props) => {
+const Cursor = ({}: Props) => {
   const valueRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  useDetect(
-    (history) => {
-      // if (!valueRef.current) return;
-      const value = history[0];
-      // valueRef.current.innerText = value ? value.toFixed(2) : "null";
+  useGameState(
+    (gameState) => {
+      const value = gameState.detectedPitch
+        ? gameState.detectedPitch + gameState.transpose
+        : null;
 
       if (!cursorRef.current) return;
       if (value === null) {
@@ -22,18 +20,14 @@ const Cursor = ({ transpose }: Props) => {
       } else {
         cursorRef.current.style.opacity = "1";
         cursorRef.current.style.transform = `translateY(${(
-          (-(value + transpose) * NOTE_HEIGHT) /
+          (-value * NOTE_HEIGHT) /
           2
         ).toFixed(2)}px)`;
       }
     },
-    [valueRef, cursorRef, transpose]
+    [valueRef, cursorRef]
   );
 
-  return (
-    <div className={style.Cursor} ref={cursorRef}>
-      {/* <div ref={valueRef}>value</div> */}
-    </div>
-  );
+  return <div className={style.Cursor} ref={cursorRef}></div>;
 };
 export default Cursor;
