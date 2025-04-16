@@ -5,9 +5,9 @@ import { NOTE_HEIGHT } from "./constants";
 
 type Props = {
   transpose: number;
-}
+};
 
-const Cursor = ({transpose}:Props) => {
+const Cursor = ({ transpose }: Props) => {
   const valueRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   useDetect(
@@ -21,16 +21,17 @@ const Cursor = ({transpose}:Props) => {
         cursorRef.current.style.opacity = "0";
       } else {
         cursorRef.current.style.opacity = "1";
-        cursorRef.current.style.transform = `translateY(${
-          (-(value + transpose) * NOTE_HEIGHT/2).toFixed(2)
-        }px)`;
+        cursorRef.current.style.transform = `translateY(${(
+          (-(value + transpose) * NOTE_HEIGHT) /
+          2
+        ).toFixed(2)}px)`;
       }
     },
-    [valueRef, cursorRef,transpose]
+    [valueRef, cursorRef, transpose]
   );
 
   return (
-    <div className={style.cursor} ref={cursorRef}>
+    <div className={style.Cursor} ref={cursorRef}>
       {/* <div ref={valueRef}>value</div> */}
     </div>
   );

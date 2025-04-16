@@ -15,7 +15,7 @@ const Controls = () => {
   };
 
   return (
-    <div className={style.controls}>
+    <div className={style.Controls}>
       <button onClick={handleClick} disabled={isPending}>
         {isDetecting ? "Restart" : "Start"}
       </button>

@@ -1,4 +1,4 @@
-.container {
+.Track {
     position: relative;
     height: calc(24 * var(--note-height));
     width: 500px;

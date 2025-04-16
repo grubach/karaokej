@@ -1,7 +1,7 @@
-.cursor {
+.Cursor {
   position: absolute;
   background-color: white;
   height: var(--note-height);
   width: var(--note-height);
-  border-radius: 50%;
+  border-radius: var(--note-height);
 }
