@@ -1,6 +1,8 @@
 .Program {
     position: absolute;
 }
+
 .notes {
     position: absolute;
+    transition: transform 0.1s linear
 }

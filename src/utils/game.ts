@@ -95,7 +95,7 @@ const frame = () => {
     points = 1 - Math.abs(difference);
   }
   overallScore += points;
-  overallDetections +=1;
+  overallDetections += 1;
 
   const state = {
     elapsed,
@@ -113,7 +113,7 @@ export const startGame = async () => {
   await resetAudioContext();
   startTime = performance.now();
   overallScore = 0;
-    overallDetections = 0;
+  overallDetections = 0;
 
   if (interval) {
     clearInterval(interval);

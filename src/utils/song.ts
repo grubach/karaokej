@@ -17,7 +17,7 @@ export const song: Song = {
   name: "doremifasol",
   bpm: 120,
   startTime: 2000,
-  endTime: 10000,
+  endTime: 11000,
   notes: [
     {
       time: 0,

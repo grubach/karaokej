@@ -35,7 +35,7 @@ const Cursor = ({ historyIndex }: Props) => {
         `;
       }
 
-      goodRef.current.style.opacity = points.toFixed(2);
+      goodRef.current.style.opacity = points .toFixed(2);
     },
     [goodRef, cursorRef, historyIndex]
   );
