@@ -1,4 +1,5 @@
 import style from "./App.module.css";
+import { CURSOR_TAIL, HISTORY_SIZE } from "./constants";
 import Controls from "./Controls";
 import Cursor from "./Cursor";
 import Program from "./Program";
@@ -11,7 +12,9 @@ function App() {
       <Controls />
       <Track>
         <Program song={song} />
-        <Cursor />
+        {Array.from({ length: CURSOR_TAIL }, (_, index) => (
+          <Cursor key={index} historyIndex={index} />
+        ))}
       </Track>
     </div>
   );

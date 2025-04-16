@@ -14,7 +14,7 @@ const Program = ({ song }: Props) => {
   const notesRef = useRef<HTMLDivElement>(null);
   const { notes, startTime, endTime, bpm } = song;
   useGameState(
-    ({ elapsed }) => {
+    ([{ elapsed }]) => {
       if (!notesRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);
       const translate = beatsPassed * BEAT_WIDTH;

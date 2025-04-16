@@ -1,12 +1,12 @@
 import { DependencyList, useCallback } from "react";
 import useFrameLoop from "./useFrameLoop";
-import { GameState, getGameState } from "../utils/game";
+import { GameState, getGameHistory } from "../utils/game";
 
-type GameStateListener = (gameState: GameState) => void;
+type GameStateListener = (gameHistory: GameState[]) => void;
 
 const useGameState = (listener: GameStateListener, deps: DependencyList) => {
   const onFrame = useCallback(() => {
-    listener(getGameState());
+    listener(getGameHistory());
   }, [listener, deps]);
 
   useFrameLoop(onFrame);

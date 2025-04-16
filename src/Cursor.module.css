@@ -1,7 +1,15 @@
 .Cursor {
   position: absolute;
-  background-color: white;
+  background-color: var(--color-cursor);
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
+  transition: opacity 0.2s ease-out, transform 0.1s ease-out;
+  overflow: hidden;
+}
+
+.good {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-good);
 }
