@@ -1,0 +1,7 @@
+.cursor {
+  position: absolute;
+  background-color: white;
+  height: var(--note-height);
+  width: var(--note-height);
+  border-radius: 50%;
+}
