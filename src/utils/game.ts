@@ -3,11 +3,13 @@ import { detect, resetAudioContext } from "./detect";
 import { Song, song } from "./song";
 import { beatsToTime } from "./time";
 
+let lastPitch: number | null = null;
 let interval: number;
 let startTime: number;
 let transpose: number = 0;
 let overallScore: number = 0;
 let overallDetections: number = 0;
+let overallNoteDetections: number = 0;
 
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
@@ -73,10 +75,14 @@ const frame = () => {
     console.log("Game Over");
     console.log("Score:", overallScore);
     console.log("Detections:", overallDetections);
+    console.log("Note Detections:", overallNoteDetections);
+    console.log("Percenatage:", (overallScore / overallNoteDetections) * 100);
     return;
   }
 
-  const detectedPitch = detect();
+  const detectedPitch = detect() ?? lastPitch;
+  lastPitch = detectedPitch;
+
   const currentSongNote = getCurrentSongNote(song, elapsed);
   const nextSongNote = getNextSongNote(song, elapsed) ?? currentSongNote;
 
@@ -91,11 +97,14 @@ const frame = () => {
       : null;
 
   let points = 0;
-  if (difference !== null && Math.abs(difference) < 1) {
-    points = 1 - Math.abs(difference);
+  if (difference !== null && Math.abs(difference) < 6) {
+    points = (6 - Math.abs(difference)) / 6;
   }
   overallScore += points;
   overallDetections += 1;
+  if (currentSongNote) {
+    overallNoteDetections += 1;
+  }
 
   const state = {
     elapsed,
@@ -114,6 +123,8 @@ export const startGame = async () => {
   startTime = performance.now();
   overallScore = 0;
   overallDetections = 0;
+  overallNoteDetections = 0;
+  lastPitch = null;
 
   if (interval) {
     clearInterval(interval);
