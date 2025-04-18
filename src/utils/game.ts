@@ -3,6 +3,7 @@ import { detect, resetAudioContext } from "./detect";
 import { Song } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
+import { removeOutliners } from "./tools";
 
 let song: Song | null = null;
 
@@ -15,6 +16,8 @@ let overallNoteDetections: number = 0;
 let noteIndex: number = 0;
 let noteScore: number = 0;
 let noteDetections: number = 0;
+
+const pitchHistory: number[] = Array.from({ length: 15 }, () => 0);
 
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
@@ -116,7 +119,19 @@ const frame = async () => {
     return;
   }
 
-  const detectedPitch = detect(); //?? lastPitch;
+  let detectedPitch = detect();
+
+  if (detectedPitch !== null) {
+    pitchHistory.unshift(detectedPitch);
+    pitchHistory.pop();
+
+    const cleanHistory = removeOutliners(pitchHistory);
+    const averagePitch =
+      cleanHistory.reduce((acc, pitch) => acc + pitch, 0) / cleanHistory.length;
+    if (Math.abs(detectedPitch - averagePitch) >= 11) {
+      detectedPitch = null;
+    }
+  }
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
   }

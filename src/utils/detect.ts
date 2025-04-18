@@ -1,10 +1,10 @@
 import { PitchDetector } from "pitchy";
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 
-const INPUT_BUFFER_SIZE = 1024 * 4;
+const INPUT_BUFFER_SIZE = 1024 * 2;
 const SAMPLE_RATE = 48000;
-const MINIMUM_CLARITY = 0.25;
-const MINIMUM_DECIBELS = -25;
+const MINIMUM_CLARITY = 0.5;
+const MINIMUM_DECIBELS = -15;
 
 let analyserNode: AnalyserNode;
 let inputBuffer: Float32Array;

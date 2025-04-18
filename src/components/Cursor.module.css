@@ -2,14 +2,21 @@
   position: relative;
 }
 
+.movable {
+  position: absolute;
+  height: var(--note-height);
+  width: var(--note-height);
+  transition: opacity 0.5s ease-in, transform 0.1s ease-out;
+}
+
 .ball {
   position: absolute;
   background-color: var(--color-cursor);
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
-  transition: opacity 0.5s ease-in, transform 0.05s ease-in-out;
   overflow: hidden;
+  transition: opacity 0.1s ease-out;
 }
 
 .good {

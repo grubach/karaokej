@@ -13,7 +13,7 @@
   width: 100%;
   bottom: 100%;
   /* font-weight: bold; */
-  font-size: 14pt;
+  font-size: 15pt;
 }
 
 .passed {
@@ -22,7 +22,7 @@
   background-color: var(--color-passed);
   opacity: 0;
   border-radius: var(--note-height);
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 
 .good {
