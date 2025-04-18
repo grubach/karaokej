@@ -1,10 +1,14 @@
 .Cursor {
+  position: relative;
+}
+
+.ball {
   position: absolute;
   background-color: var(--color-cursor);
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
-  transition: opacity 0.1s ease-in, transform 0.1s ease-out;
+  transition: opacity 0.05s ease-in, transform 0.05s ease-out;
   overflow: hidden;
 }
 

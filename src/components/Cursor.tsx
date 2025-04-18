@@ -25,11 +25,14 @@ const Cursor = ({ historyIndex, song }: Props) => {
       if (!cursorRef.current || !goodRef.current) return;
 
       const gameState = gameHistory[historyIndex];
-      const { points, detectedPitch, transpose } = gameState;
-      const pitch = detectedPitch ? detectedPitch + transpose * 12 : null;
+      const { points, detectedPitch, lastPitch, transpose } = gameState;
+      const anyPitch = detectedPitch ?? lastPitch;
+      const pitch = anyPitch ? anyPitch + transpose * 12 : null;
 
       if (pitch === null) {
         cursorRef.current.style.opacity = "0";
+        } else if (detectedPitch === null) {
+          cursorRef.current.style.opacity = ".5";
       } else {
         cursorRef.current.style.opacity = "1";
         cursorRef.current.style.transform = `translateY(${(
@@ -45,12 +48,14 @@ const Cursor = ({ historyIndex, song }: Props) => {
   );
 
   return (
-    <div
-      className={style.Cursor}
-      ref={cursorRef}
-      style={{ left: `${left}px`, top: `${top}px` }}
-    >
-      <div className={style.good} ref={goodRef}></div>
+    <div className={style.Cursor}>
+      <div
+        className={style.ball}
+        ref={cursorRef}
+        style={{ left: `${left}px`, top: `${top}px` }}
+      >
+        <div className={style.good} ref={goodRef}></div>
+      </div>
     </div>
   );
 };

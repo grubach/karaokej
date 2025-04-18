@@ -35,6 +35,7 @@ const getNextSongNote = (song: Song, elapsed: number) => {
 export type GameState = {
   elapsed: number;
   detectedPitch: number | null;
+  lastPitch: number | null;
   transpose: number;
   points: number;
 };
@@ -42,6 +43,7 @@ export type GameState = {
 const initialState: GameState = {
   elapsed: 0,
   detectedPitch: null,
+  lastPitch: null,
   transpose: 0,
   points: 0,
 };
@@ -60,7 +62,7 @@ const resetGameHistory = () => {
 
 const findTranspose = (target: number, detectedPitch: number) => {
   let transpose = 0;
-  let diff = detectedPitch  - target;
+  let diff = detectedPitch - target;
   while (Math.abs(diff) > 6) {
     if (diff > 0) {
       transpose -= 1;
@@ -100,18 +102,20 @@ const frame = async () => {
   }
 
   const detectedPitch = detect(); //?? lastPitch;
-  lastPitch = detectedPitch;
+  if (detectedPitch !== null) {
+    lastPitch = detectedPitch;
+  }
 
   const currentSongNote = getCurrentSongNote(song, elapsed);
   const nextSongNote = getNextSongNote(song, elapsed) ?? currentSongNote;
 
   transpose =
-    nextSongNote && detectedPitch
+    nextSongNote?.pitch && detectedPitch
       ? findTranspose(nextSongNote.pitch, detectedPitch)
       : transpose;
 
   const difference =
-    currentSongNote && detectedPitch
+    currentSongNote?.pitch && detectedPitch
       ? findNearestDifference(currentSongNote.pitch, detectedPitch)
       : null;
 

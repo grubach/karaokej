@@ -36,9 +36,11 @@ const Program = ({ song }: Props) => {
           top: `${top}px`,
         }}
       >
-        {notes.map((note, index) => (
-          <ProgramItem key={index} songNote={note} />
-        ))}
+        {notes
+          .filter((note) => note.pitch !== null)
+          .map((note, index) => (
+            <ProgramItem key={index} songNote={note} />
+          ))}
       </div>
     </div>
   );

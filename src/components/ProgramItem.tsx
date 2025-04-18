@@ -14,7 +14,7 @@ const ProgramItem = ({ songNote }: Props) => {
       style={{
         width: `${duration * BEAT_WIDTH}px`,
         left: `${time * BEAT_WIDTH}px`,
-        top: `${(-pitch * NOTE_HEIGHT) / 2}px`,
+        top: `${(-pitch! * NOTE_HEIGHT) / 2}px`,
       }}
     >
       <span className={style.text}>{text}</span>

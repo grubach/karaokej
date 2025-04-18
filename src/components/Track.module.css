@@ -1,6 +1,11 @@
 .Track {
     position: relative;
     height: calc(24 * var(--note-height));
-    width: 500px;
+    width: 1000px;
     border: 1px solid var(--color-border);
+    display: flex  ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
