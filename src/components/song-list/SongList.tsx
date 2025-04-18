@@ -1,12 +1,10 @@
 import { Song } from "../../utils/song";
 import style from "./SongList.module.css";
-import { song1, song2 } from "../../utils/song";
+import songs from "../../songs";
 import SongItem from "./SongItem";
 
-const songs = [song1, song2];
-
 type Props = {
-  currentSong: Song;
+  currentSong?: Song;
   setCurrentSong: (song: Song) => void;
 };
 
@@ -18,7 +16,7 @@ const SongList = ({ currentSong, setCurrentSong }: Props) => {
           key={index}
           song={song}
           onSelect={setCurrentSong}
-          selected={currentSong.name === song.name}
+          selected={currentSong?.id === song.id}
         />
       ))}
     </div>

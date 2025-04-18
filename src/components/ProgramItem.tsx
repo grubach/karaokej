@@ -1,20 +1,20 @@
 import { BEAT_WIDTH, NOTE_HEIGHT } from "../constants";
 import style from "./ProgramItem.module.css";
-import { SongItem } from "../utils/song";
+import { SongNote } from "../utils/song";
 
 type Props = {
-  songItem: SongItem;
+  songNote: SongNote;
 };
 
-const ProgramItem = ({ songItem }: Props) => {
-  const { text, duration, position, time } = songItem;
+const ProgramItem = ({ songNote }: Props) => {
+  const { text, duration, pitch, time } = songNote;
   return (
     <div
       className={style.ProgramItem}
       style={{
         width: `${duration * BEAT_WIDTH}px`,
         left: `${time * BEAT_WIDTH}px`,
-        top: `${(-position * NOTE_HEIGHT) / 2}px`,
+        top: `${(-pitch * NOTE_HEIGHT) / 2}px`,
       }}
     >
       <span className={style.text}>{text}</span>

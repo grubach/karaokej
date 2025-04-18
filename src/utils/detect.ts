@@ -17,7 +17,7 @@ const history: (number | null)[] = Array.from(
 );
 
 export const positionFromHz = (hz: number): number => {
-  const position = 12 * Math.log2(hz / 440);
+  const position = 12 * Math.log2(hz / 440) + 57; // A4 = 440Hz
   return position;
 };
 

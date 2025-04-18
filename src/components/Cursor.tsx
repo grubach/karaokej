@@ -14,8 +14,11 @@ const Cursor = ({ historyIndex, song }: Props) => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
+  const { averagePitch, bpm } = song;
+
   const left =
-    -timeToBeats(historyIndex * DETECTIONS_PER_SECOND, song.bpm) * BEAT_WIDTH;
+    -timeToBeats(historyIndex * DETECTIONS_PER_SECOND, bpm) * BEAT_WIDTH;
+  const top = (averagePitch * NOTE_HEIGHT) / 2;
 
   useGameState(
     (gameHistory) => {
@@ -23,7 +26,7 @@ const Cursor = ({ historyIndex, song }: Props) => {
 
       const gameState = gameHistory[historyIndex];
       const { points, detectedPitch, transpose } = gameState;
-      const pitch = detectedPitch ? detectedPitch + transpose : null;
+      const pitch = detectedPitch ? detectedPitch + transpose * 12 : null;
 
       if (pitch === null) {
         cursorRef.current.style.opacity = "0";
@@ -36,13 +39,17 @@ const Cursor = ({ historyIndex, song }: Props) => {
         `;
       }
 
-      goodRef.current.style.opacity = points .toFixed(2);
+      goodRef.current.style.opacity = points.toFixed(2);
     },
     [goodRef, cursorRef, historyIndex]
   );
 
   return (
-    <div className={style.Cursor} ref={cursorRef} style={{ left: `${left}px` }}>
+    <div
+      className={style.Cursor}
+      ref={cursorRef}
+      style={{ left: `${left}px`, top: `${top}px` }}
+    >
       <div className={style.good} ref={goodRef}></div>
     </div>
   );

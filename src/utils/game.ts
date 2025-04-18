@@ -2,14 +2,12 @@ import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 import { detect, resetAudioContext } from "./detect";
 import { Song } from "./song";
 import { beatsToTime } from "./time";
-import "./player";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
 
 let song: Song | null = null;
 
 let lastPitch: number | null = null;
 let interval: number;
-let startTime: number;
 let transpose: number = 0;
 let overallScore: number = 0;
 let overallDetections: number = 0;
@@ -28,7 +26,8 @@ const getNextSongNote = (song: Song, elapsed: number) => {
   return (
     song.notes.find((note) => {
       const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
-      return elapsed < noteStartTime;
+      const noteEndTime = noteStartTime + beatsToTime(note.duration, song.bpm);
+      return elapsed <= noteEndTime;
     }) ?? null
   );
 };
@@ -59,14 +58,25 @@ const resetGameHistory = () => {
   }
 };
 
-const findNearestDifference = (target: number, detectedPitch: number) => {
-  const difference = (target - detectedPitch) % 12;
-  return difference > 6 ? difference - 12 : difference;
+const findTranspose = (target: number, detectedPitch: number) => {
+  let transpose = 0;
+  let diff = detectedPitch  - target;
+  while (Math.abs(diff) > 6) {
+    if (diff > 0) {
+      transpose -= 1;
+    } else {
+      transpose += 1;
+    }
+    diff = detectedPitch + transpose * 12 - target;
+  }
+
+  return transpose;
 };
 
-const findTranspose = (target: number, detectedPitch: number) => {
-  const difference = findNearestDifference(target, detectedPitch);
-  return target - difference - detectedPitch;
+const findNearestDifference = (target: number, detectedPitch: number) => {
+  const transpose = findTranspose(target, detectedPitch);
+  const diff = detectedPitch + transpose * 12 - target;
+  return diff;
 };
 
 const frame = async () => {
@@ -74,8 +84,7 @@ const frame = async () => {
     console.error("No song loaded");
     return;
   }
-  // const now = performance.now();
-  // const elapsed = now - startTime;
+
   const elapsed = await getVideoTime();
 
   if (elapsed > song.endTime) {
@@ -98,12 +107,12 @@ const frame = async () => {
 
   transpose =
     nextSongNote && detectedPitch
-      ? findTranspose(nextSongNote.position, detectedPitch)
+      ? findTranspose(nextSongNote.pitch, detectedPitch)
       : transpose;
 
   const difference =
     currentSongNote && detectedPitch
-      ? findNearestDifference(currentSongNote.position, detectedPitch)
+      ? findNearestDifference(currentSongNote.pitch, detectedPitch)
       : null;
 
   let points = 0;
@@ -119,6 +128,7 @@ const frame = async () => {
   const state = {
     elapsed,
     detectedPitch,
+    lastPitch,
     transpose,
     points,
   };
@@ -144,7 +154,6 @@ export const stopGame = () => {
 export const startGame = async () => {
   resetGameHistory();
   await resetAudioContext();
-  startTime = performance.now();
   overallScore = 0;
   overallDetections = 0;
   overallNoteDetections = 0;

@@ -1,16 +1,17 @@
-import { Song } from "../../utils/song";
+import { SongScored } from "../../songs";
+import { parseSongScored, Song } from "../../utils/song";
 import style from "./SongList.module.css";
 import c from "classnames";
 
 type Props = {
-  song: Song;
+  song: SongScored;
   onSelect: (song: Song) => void;
   selected: boolean;
 };
 
 const SongItem = ({ song, onSelect, selected }: Props) => {
   const handleClick = () => {
-    onSelect(song);
+    onSelect(parseSongScored(song));
   };
   return (
     <div
@@ -19,7 +20,7 @@ const SongItem = ({ song, onSelect, selected }: Props) => {
       })}
       onClick={handleClick}
     >
-      {song.name}
+      {song.artist} - {song.title}
     </div>
   );
 };

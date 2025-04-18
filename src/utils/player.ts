@@ -22,8 +22,6 @@ export const loadPlayer = () => {
       enablejsapi: 1,
     },
   });
-
-  player.cueVideoById("ayONooHdYdk");
 };
 
 export const loadVideo = (videoId: string) => {

@@ -1,131 +1,67 @@
-export type SongItem = {
+import { SongScored } from "../songs";
+
+export type SongNote = {
   time: number; // in seconds
   duration: number; // in beats
-  position: number; // in semitones
+  pitch: number; // in semitones
   text: string; // text to display
 };
 
 export type Song = {
-  name: string;
+  id: string; // unique identifier
+  title: string;
+  artist: string;
+  video: string; // YouTube video ID
   bpm: number; // beats per minute
   startTime: number; // in milliseconds
   endTime: number; // in milliseconds
-  video: string; // YouTube video ID
-  notes: SongItem[];
+  averagePitch: number; // in semitones
+  notes: SongNote[];
 };
 
-export const song1: Song = {
-  name: "doremifasol",
-  bpm: 120,
-  startTime: 2000,
-  endTime: 11000,
-  video: 'ayONooHdYdk',
-  notes: [
-    {
-      time: 0,
-      duration: 2, // beats
-      position: 0,
-      text: "do",
-    },
-    {
-      time: 2,
-      duration: 2,
-      position: 2,
-      text: "re",
-    },
-    {
-      time: 4,
-      duration: 2,
-      position: 4,
-      text: "mi",
-    },
-    {
-      time: 6,
-      duration: 2,
-      position: 5,
-      text: "fa",
-    },
-    {
-      time: 8,
-      duration: 2,
-      position: 7,
-      text: "sol",
-    },
-    {
-      time: 10,
-      duration: 2,
-      position: 9,
-      text: "la",
-    },
-    {
-      time: 12,
-      duration: 2,
-      position: 11,
-      text: "si",
-    },
-    {
-      time: 14,
-      duration: 2,
-      position: 12,
-      text: "do",
-    },
-  ],
+const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+
+const notesParser = (score: string): SongNote[] => {
+  console.log("score", score);
+  // split by whitespaces and remove empty strings
+  const notes = score.split(/\s+/).filter((note) => note.trim() !== "");
+  console.log("notes", notes);
+
+  let cursor = 0;
+  const parsedNotes: SongNote[] = [];
+  for (const note of notes) {
+    const [noteName, durationName, text] = note.split(":");
+    const [noteLetter, noteOctave] = noteName.split(/(?=[0-9])/);
+    // A4 = 57
+    // C4 = 48
+    // C5 = 60
+    const pitch = scale.indexOf(noteLetter) + 12 * parseInt(noteOctave);
+    const duration = parseInt(durationName);
+    const time = cursor;
+    cursor += duration;
+    parsedNotes.push({
+      time,
+      duration,
+      pitch,
+      text,
+    });
+  }
+  console.log("parsedNotes", parsedNotes);
+
+  return parsedNotes;
 };
 
-export const song2: Song = {
-  name: "sollafima",
-  bpm: 120,
-  startTime: 2000,
-  endTime: 11000,
-  video: '_qFfGbKFclM',
-  notes: [
-    {
-      time: 0,
-      duration: 2, // beats
-      position: 4,
-      text: "do",
-    },
-    {
-      time: 2,
-      duration: 2,
-      position: 0,
-      text: "re",
-    },
-    {
-      time: 4,
-      duration: 2,
-      position: 3,
-      text: "mi",
-    },
-    {
-      time: 6,
-      duration: 2,
-      position: 5,
-      text: "fa",
-    },
-    {
-      time: 8,
-      duration: 2,
-      position: 7,
-      text: "sol",
-    },
-    {
-      time: 10,
-      duration: 2,
-      position: 9,
-      text: "la",
-    },
-    {
-      time: 12,
-      duration: 2,
-      position: 11,
-      text: "si",
-    },
-    {
-      time: 14,
-      duration: 2,
-      position: 12,
-      text: "do",
-    },
-  ],
+export const parseSongScored = (songScored: SongScored): Song => {
+  const { score, ...rest } = songScored;
+  const parsedNotes = notesParser(score);
+console.log("parsedNotes", parsedNotes);
+  const averagePitch =
+    parsedNotes.reduce((acc, note) => acc + note.pitch, 0) / parsedNotes.length;
+console.log("averagePitch", averagePitch);
+
+  return {
+    ...rest,
+    averagePitch,
+    notes: parsedNotes,
+  };
 };
