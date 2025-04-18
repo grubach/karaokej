@@ -1,6 +1,7 @@
 import style from "./App.module.css";
 import Controls from "./Controls";
 import Cursor from "./Cursor";
+import Player from "./Player";
 import Program from "./Program";
 import Track from "./Track";
 import { song } from "./utils/song";
@@ -13,6 +14,7 @@ function App() {
         <Program song={song} />
         <Cursor historyIndex={0} />
       </Track>
+      <Player />
     </div>
   );
 }

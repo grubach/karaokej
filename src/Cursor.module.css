@@ -4,7 +4,7 @@
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
-  transition: opacity 0.5s ease-in, transform 0.1s ease-out;
+  transition: opacity 0.1s ease-in, transform 0.1s ease-out;
   overflow: hidden;
 }
 

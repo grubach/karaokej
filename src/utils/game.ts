@@ -2,6 +2,8 @@ import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 import { detect, resetAudioContext } from "./detect";
 import { Song, song } from "./song";
 import { beatsToTime } from "./time";
+import "./player";
+import { getVideoTime, pauseVideo, playVideo } from "./player";
 
 let lastPitch: number | null = null;
 let interval: number;
@@ -65,12 +67,14 @@ const findTranspose = (target: number, detectedPitch: number) => {
   return target - difference - detectedPitch;
 };
 
-const frame = () => {
-  const now = performance.now();
-  const elapsed = now - startTime;
+const frame = async () => {
+  // const now = performance.now();
+  // const elapsed = now - startTime;
+  const elapsed = await getVideoTime();
 
   if (elapsed > song.endTime) {
     clearInterval(interval);
+    pauseVideo();
     interval = 0;
     console.log("Game Over");
     console.log("Score:", overallScore);
@@ -80,7 +84,7 @@ const frame = () => {
     return;
   }
 
-  const detectedPitch = detect() ?? lastPitch;
+  const detectedPitch = detect() ;//?? lastPitch;
   lastPitch = detectedPitch;
 
   const currentSongNote = getCurrentSongNote(song, elapsed);
@@ -129,6 +133,9 @@ export const startGame = async () => {
   if (interval) {
     clearInterval(interval);
   }
+
+  playVideo();
+
   interval = setInterval(frame, 1000 / DETECTIONS_PER_SECOND);
   return true;
 };
