@@ -132,6 +132,15 @@ export const loadSong = (newSong: Song) => {
   loadVideo(newSong.video);
 };
 
+export const stopGame = () => {
+  if (interval) {
+    clearInterval(interval);
+  }
+  pauseVideo();
+  interval = 0;
+  return true;
+};
+
 export const startGame = async () => {
   resetGameHistory();
   await resetAudioContext();

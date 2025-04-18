@@ -1,5 +1,5 @@
 import style from "./App.module.css";
-import Controls from "./Controls";
+import Controls from "./controls/Controls";
 import Cursor from "./Cursor";
 import Player from "./Player";
 import Program from "./Program";

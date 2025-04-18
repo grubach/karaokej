@@ -3,3 +3,16 @@
   flex-direction: column;
   gap: 1rem;
 }
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+
+  &.selected {
+    background: var(--color-border);
+    cursor: default;
+  }
+}

@@ -18,7 +18,7 @@ const SongList = ({ currentSong, setCurrentSong }: Props) => {
           key={index}
           song={song}
           onSelect={setCurrentSong}
-          isSelected={currentSong.name === song.name}
+          selected={currentSong.name === song.name}
         />
       ))}
     </div>

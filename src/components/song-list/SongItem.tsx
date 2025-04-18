@@ -1,21 +1,21 @@
 import { Song } from "../../utils/song";
-import style from "./SongItem.module.css";
+import style from "./SongList.module.css";
 import c from "classnames";
 
 type Props = {
   song: Song;
   onSelect: (song: Song) => void;
-  isSelected: boolean;
+  selected: boolean;
 };
 
-const SongItem = ({ song, onSelect, isSelected }: Props) => {
+const SongItem = ({ song, onSelect, selected }: Props) => {
   const handleClick = () => {
     onSelect(song);
   };
   return (
     <div
-      className={c(style.SongItem, {
-        [style.selected]: isSelected,
+      className={c(style.item, {
+        [style.selected]: selected,
       })}
       onClick={handleClick}
     >
