@@ -5,16 +5,21 @@ import Player from "./Player";
 import Program from "./Program";
 import Track from "./Track";
 import { song2 } from "../utils/song";
+import { useState } from "react";
+import SongList from "./song-list/SongList";
 
 function App() {
+  const [currentSong, setCurrentSong] = useState(song2);
+
   return (
     <div className={style.App}>
+      <SongList currentSong={currentSong} setCurrentSong={setCurrentSong} />
       <Controls />
       <Track>
-        <Program song={song2} />
-        <Cursor historyIndex={0} song={song2} />
+        <Program song={currentSong} />
+        <Cursor historyIndex={0} song={currentSong} />
       </Track>
-      <Player />
+      <Player song={currentSong} />
     </div>
   );
 }

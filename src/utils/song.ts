@@ -19,7 +19,7 @@ export const song1: Song = {
   bpm: 120,
   startTime: 2000,
   endTime: 11000,
-  video: '_qFfGbKFclM',
+  video: 'ayONooHdYdk',
   notes: [
     {
       time: 0,
