@@ -1,6 +1,11 @@
 import style from "./Cursor.module.css";
 import { useRef } from "react";
-import { BEAT_WIDTH, DETECTIONS_PER_SECOND, NOTE_HEIGHT } from "../constants";
+import {
+  BEAT_WIDTH,
+  DETECTIONS_PER_SECOND,
+  NOTE_HEIGHT,
+  LATENCY,
+} from "../constants";
 import useGameState from "../hooks/useGameState";
 import { timeToBeats } from "../utils/time";
 import { Song } from "../utils/song";
@@ -17,7 +22,8 @@ const Cursor = ({ historyIndex, song }: Props) => {
   const { averagePitch, bpm } = song;
 
   const left =
-    -timeToBeats(historyIndex * DETECTIONS_PER_SECOND, bpm) * BEAT_WIDTH;
+    -timeToBeats(historyIndex * DETECTIONS_PER_SECOND + LATENCY, bpm) *
+    BEAT_WIDTH;
   const top = (averagePitch * NOTE_HEIGHT) / 2;
 
   useGameState(
@@ -31,8 +37,8 @@ const Cursor = ({ historyIndex, song }: Props) => {
 
       if (pitch === null) {
         cursorRef.current.style.opacity = "0";
-        } else if (detectedPitch === null) {
-          cursorRef.current.style.opacity = ".5";
+      } else if (detectedPitch === null) {
+        cursorRef.current.style.opacity = ".5";
       } else {
         cursorRef.current.style.opacity = "1";
         cursorRef.current.style.transform = `translateY(${(

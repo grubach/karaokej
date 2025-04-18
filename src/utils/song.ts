@@ -1,6 +1,7 @@
 import { SongScored } from "../songs";
 
 export type SongNote = {
+  index: number; // index of the note in the score
   time: number; // in seconds
   duration: number; // in beats
   pitch: number | null; // in semitones
@@ -29,7 +30,8 @@ const notesParser = (score: string): SongNote[] => {
 
   let cursor = 0;
   const parsedNotes: SongNote[] = [];
-  for (const note of notes) {
+  for (let i = 0; i < notes.length; i++) {
+    const note = notes[i];
     const [noteName, durationName, text] = note.split(":");
     const [noteLetter, noteOctave] = noteName.split(/(?=[0-9])/);
     // A4 = 57
@@ -43,6 +45,7 @@ const notesParser = (score: string): SongNote[] => {
     const time = cursor;
     cursor += duration;
     parsedNotes.push({
+      index: i,
       time,
       duration,
       pitch,
@@ -60,8 +63,8 @@ export const parseSongScored = (songScored: SongScored): Song => {
   console.log("parsedNotes", parsedNotes);
   const averagePitch =
     parsedNotes
-    .filter((note) => note.pitch !== null)
-    .reduce((acc, note) => acc + note.pitch!, 0) / parsedNotes.length;
+      .filter((note) => note.pitch !== null)
+      .reduce((acc, note) => acc + note.pitch!, 0) / parsedNotes.length;
   console.log("averagePitch", averagePitch);
 
   return {

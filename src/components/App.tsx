@@ -19,7 +19,9 @@ function App() {
           <Controls />
           <Track>
             <Program song={currentSong} />
-            <Cursor historyIndex={0} song={currentSong} />
+            {Array.from({ length: 1 }, (_, index) => (
+              <Cursor key={index} historyIndex={index} song={currentSong} />
+            ))}
           </Track>
           <Player song={currentSong} />
         </>
