@@ -4,15 +4,15 @@ import Cursor from "./Cursor";
 import Player from "./Player";
 import Program from "./Program";
 import Track from "./Track";
-import { song } from "./utils/song";
+import { song2 } from "./utils/song";
 
 function App() {
   return (
     <div className={style.App}>
       <Controls />
       <Track>
-        <Program song={song} />
-        <Cursor historyIndex={0} />
+        <Program song={song2} />
+        <Cursor historyIndex={0} song={song2} />
       </Track>
       <Player />
     </div>

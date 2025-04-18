@@ -3,13 +3,14 @@ import { useRef } from "react";
 import { BEAT_WIDTH, DETECTIONS_PER_SECOND, NOTE_HEIGHT } from "./constants";
 import useGameState from "./hooks/useGameState";
 import { timeToBeats } from "./utils/time";
-import { song } from "./utils/song";
+import { Song } from "./utils/song";
 
 type Props = {
   historyIndex: number;
+  song: Song;
 };
 
-const Cursor = ({ historyIndex }: Props) => {
+const Cursor = ({ historyIndex, song }: Props) => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 

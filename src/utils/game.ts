@@ -1,9 +1,11 @@
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 import { detect, resetAudioContext } from "./detect";
-import { Song, song } from "./song";
+import { Song } from "./song";
 import { beatsToTime } from "./time";
 import "./player";
-import { getVideoTime, pauseVideo, playVideo } from "./player";
+import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
+
+let song: Song | null = null;
 
 let lastPitch: number | null = null;
 let interval: number;
@@ -68,6 +70,10 @@ const findTranspose = (target: number, detectedPitch: number) => {
 };
 
 const frame = async () => {
+  if (!song) {
+    console.error("No song loaded");
+    return;
+  }
   // const now = performance.now();
   // const elapsed = now - startTime;
   const elapsed = await getVideoTime();
@@ -84,7 +90,7 @@ const frame = async () => {
     return;
   }
 
-  const detectedPitch = detect() ;//?? lastPitch;
+  const detectedPitch = detect(); //?? lastPitch;
   lastPitch = detectedPitch;
 
   const currentSongNote = getCurrentSongNote(song, elapsed);
@@ -119,6 +125,11 @@ const frame = async () => {
 
   gameHistory.unshift(state);
   gameHistory.pop();
+};
+
+export const loadSong = (newSong: Song) => {
+  song = newSong;
+  loadVideo(newSong.video);
 };
 
 export const startGame = async () => {

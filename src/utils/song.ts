@@ -10,14 +10,16 @@ export type Song = {
   bpm: number; // beats per minute
   startTime: number; // in milliseconds
   endTime: number; // in milliseconds
+  video: string; // YouTube video ID
   notes: SongItem[];
 };
 
-export const song: Song = {
+export const song1: Song = {
   name: "doremifasol",
   bpm: 120,
   startTime: 2000,
   endTime: 11000,
+  video: '_qFfGbKFclM',
   notes: [
     {
       time: 0,
@@ -35,6 +37,64 @@ export const song: Song = {
       time: 4,
       duration: 2,
       position: 4,
+      text: "mi",
+    },
+    {
+      time: 6,
+      duration: 2,
+      position: 5,
+      text: "fa",
+    },
+    {
+      time: 8,
+      duration: 2,
+      position: 7,
+      text: "sol",
+    },
+    {
+      time: 10,
+      duration: 2,
+      position: 9,
+      text: "la",
+    },
+    {
+      time: 12,
+      duration: 2,
+      position: 11,
+      text: "si",
+    },
+    {
+      time: 14,
+      duration: 2,
+      position: 12,
+      text: "do",
+    },
+  ],
+};
+
+export const song2: Song = {
+  name: "sollafima",
+  bpm: 120,
+  startTime: 2000,
+  endTime: 11000,
+  video: '_qFfGbKFclM',
+  notes: [
+    {
+      time: 0,
+      duration: 2, // beats
+      position: 4,
+      text: "do",
+    },
+    {
+      time: 2,
+      duration: 2,
+      position: 0,
+      text: "re",
+    },
+    {
+      time: 4,
+      duration: 2,
+      position: 3,
       text: "mi",
     },
     {

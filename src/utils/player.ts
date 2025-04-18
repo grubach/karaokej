@@ -26,6 +26,14 @@ export const loadPlayer = () => {
   player.cueVideoById("ayONooHdYdk");
 };
 
+export const loadVideo = (videoId: string) => {
+  if (!player) {
+    console.error("YouTube Player not loaded");
+    return;
+  }
+  player.cueVideoById(videoId);
+};
+
 export const playVideo = () => {
   if (!player) {
     console.error("YouTube Player not loaded");
