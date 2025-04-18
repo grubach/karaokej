@@ -1,6 +1,6 @@
 import { startTransition, useActionState } from "react";
 import style from "./Controls.module.css";
-import { startGame } from "./utils/game";
+import { startGame } from "../utils/game";
 
 
 const Controls = () => {

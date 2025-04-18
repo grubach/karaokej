@@ -1,9 +1,9 @@
 import style from "./Cursor.module.css";
 import { useRef } from "react";
-import { BEAT_WIDTH, DETECTIONS_PER_SECOND, NOTE_HEIGHT } from "./constants";
-import useGameState from "./hooks/useGameState";
-import { timeToBeats } from "./utils/time";
-import { Song } from "./utils/song";
+import { BEAT_WIDTH, DETECTIONS_PER_SECOND, NOTE_HEIGHT } from "../constants";
+import useGameState from "../hooks/useGameState";
+import { timeToBeats } from "../utils/time";
+import { Song } from "../utils/song";
 
 type Props = {
   historyIndex: number;

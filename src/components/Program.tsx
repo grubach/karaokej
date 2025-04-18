@@ -1,10 +1,10 @@
 import { useRef } from "react";
-import { BEAT_WIDTH } from "./constants";
+import { BEAT_WIDTH } from "../constants";
 import style from "./Program.module.css";
 import ProgramItem from "./ProgramItem";
-import { Song } from "./utils/song";
-import { timeToBeats } from "./utils/time";
-import useGameState from "./hooks/useGameState";
+import { Song } from "../utils/song";
+import { timeToBeats } from "../utils/time";
+import useGameState from "../hooks/useGameState";
 
 type Props = {
   song: Song;

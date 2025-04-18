@@ -4,7 +4,7 @@ import Cursor from "./Cursor";
 import Player from "./Player";
 import Program from "./Program";
 import Track from "./Track";
-import { song2 } from "./utils/song";
+import { song2 } from "../utils/song";
 
 function App() {
   return (

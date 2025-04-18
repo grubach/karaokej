@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { loadPlayer } from "./utils/player";
+import { loadPlayer } from "../utils/player";
 import style from "./Player.module.css";
 
 const Player = () => {

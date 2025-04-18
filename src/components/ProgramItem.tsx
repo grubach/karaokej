@@ -1,6 +1,6 @@
-import { BEAT_WIDTH, NOTE_HEIGHT } from "./constants";
+import { BEAT_WIDTH, NOTE_HEIGHT } from "../constants";
 import style from "./ProgramItem.module.css";
-import { SongItem } from "./utils/song";
+import { SongItem } from "../utils/song";
 
 type Props = {
   songItem: SongItem;
