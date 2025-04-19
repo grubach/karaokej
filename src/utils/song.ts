@@ -61,10 +61,11 @@ export const parseSongScored = (songScored: SongScored): Song => {
   const { score, karaokeVideo, originalVideo, ...rest } = songScored;
   const parsedNotes = notesParser(score);
   console.log("parsedNotes", parsedNotes);
+  const notesPitches = parsedNotes
+    .filter((note) => note.pitch !== null)
+    .map((note) => note.pitch!);
   const averagePitch =
-    parsedNotes
-      .filter((note) => note.pitch !== null)
-      .reduce((acc, note) => acc + note.pitch!, 0) / parsedNotes.length;
+    (Math.max(...notesPitches) + Math.min(...notesPitches)) / 2;
   console.log("averagePitch", averagePitch);
 
   return {

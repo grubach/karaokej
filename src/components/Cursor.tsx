@@ -24,7 +24,6 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   const { averagePitch, bpm } = song;
 
   const left = -timeToBeats(LATENCY, bpm) * BEAT_WIDTH;
-  const top = (averagePitch * NOTE_HEIGHT) / 2;
 
   const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 
@@ -40,21 +39,23 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       if (!pitch) return;
 
       const diff = pitch - positionRef.current;
-      positionRef.current += clamp(diff, -3, 3);
+      positionRef.current += clamp(diff, -5, 5);
 
-      let y = -(positionRef.current * NOTE_HEIGHT) / 2;
+      let y = ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2;
       const x =
         -timeToBeats((historyIndex * 1000) / DETECTIONS_PER_SECOND, bpm) *
         BEAT_WIDTH;
 
       if (!detectedPitch) {
         y +=
-          (Math.sin(timeToBeats(gameState.elapsed, bpm) * 2) * NOTE_HEIGHT) / 4;
+          (Math.sin(timeToBeats(gameState.elapsed, bpm) * Math.PI) *
+            NOTE_HEIGHT) /
+          4;
       }
 
       cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
     },
-    [cursorRef, positionRef, historyIndex, bpm, tailIndex]
+    [cursorRef, positionRef, historyIndex, bpm, averagePitch, tailIndex]
   );
 
   return (
@@ -66,7 +67,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
     >
       <div
         className={style.movable}
-        style={{ left: `${left}px`, top: `${top}px` }}
+        style={{ left: `${left}px` }}
         ref={cursorRef}
       >
         <div

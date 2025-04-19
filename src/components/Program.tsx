@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { BEAT_WIDTH, NOTE_HEIGHT } from "../constants";
+import { BEAT_WIDTH } from "../constants";
 import style from "./Program.module.css";
 import ProgramItem from "./ProgramItem";
 import { Song } from "../utils/song";
@@ -12,7 +12,7 @@ type Props = {
 
 const Program = ({ song }: Props) => {
   const notesRef = useRef<HTMLDivElement>(null);
-  const { notes, startTime, endTime, bpm, averagePitch } = song;
+  const { notes, startTime, endTime, bpm } = song;
   useGameState(
     ([{ elapsed }]) => {
       if (!notesRef.current) return;
@@ -24,7 +24,6 @@ const Program = ({ song }: Props) => {
   );
 
   const left = timeToBeats(startTime, bpm) * BEAT_WIDTH;
-  const top = (averagePitch * NOTE_HEIGHT) / 2;
 
   return (
     <div className={style.Program}>
@@ -33,13 +32,16 @@ const Program = ({ song }: Props) => {
         className={style.notes}
         style={{
           left: `${left}px`,
-          top: `${top}px`,
         }}
       >
         {notes
           .filter((note) => note.pitch !== null)
           .map((note, index) => (
-            <ProgramItem key={`${song.id}-${index}`} songNote={note} />
+            <ProgramItem
+              key={`${song.id}-${index}`}
+              songNote={note}
+              song={song}
+            />
           ))}
       </div>
     </div>

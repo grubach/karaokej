@@ -1,14 +1,15 @@
 import { BEAT_WIDTH, NOTE_HEIGHT } from "../constants";
 import style from "./ProgramItem.module.css";
-import { SongNote } from "../utils/song";
+import { Song, SongNote } from "../utils/song";
 import useGameState from "../hooks/useGameState";
 import { useRef } from "react";
 
 type Props = {
   songNote: SongNote;
+  song: Song;
 };
 
-const ProgramItem = ({ songNote }: Props) => {
+const ProgramItem = ({ songNote, song }: Props) => {
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +44,7 @@ const ProgramItem = ({ songNote }: Props) => {
       style={{
         width: `${duration * BEAT_WIDTH}px`,
         left: `${time * BEAT_WIDTH}px`,
-        top: `${(-pitch! * NOTE_HEIGHT) / 2}px`,
+        top: `${((song.averagePitch - pitch!) * NOTE_HEIGHT) / 2}px`,
       }}
     >
       <div className={style.passed} ref={passedRef}></div>
