@@ -33,7 +33,9 @@ const ProgramItem = ({ songNote }: Props) => {
     [index]
   );
 
-  const formattedText = text?.replace(/_/g, " ");
+  const formattedText = text
+    ?.replace(/_/g, " ") // Replace underscores with spaces
+    .replace(/--/g, "-"); // replace double hyphens with single hyphen)
 
   return (
     <div

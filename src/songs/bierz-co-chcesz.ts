@@ -42,7 +42,8 @@ export default {
   bpm: 140,
   startTime: 21940,
   endTime: 3 * 60000 + 33010,
-  video: "ayONooHdYdk",
+  karaokeVideo: "ayONooHdYdk",
+  originalVideo: "2W0UoEdECZI",
   score: `
 B4:1:Nie B4:1:mów B4:1:to C#5:0.5:nie- D5:0.5:moż- C#5:0.5:li- B4:1:we P:2.5
 A4:1:Nie A4:1:patrz A4:1:na- B4:0.5:iw- A4:0.5:nie F#4:2:tak C#5:2 

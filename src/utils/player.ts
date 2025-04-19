@@ -20,6 +20,7 @@ export const loadPlayer = () => {
       modestbranding: 1,
       rel: 0,
       enablejsapi: 1,
+      
     },
   });
 };
@@ -38,6 +39,7 @@ export const playVideo = () => {
     return;
   }
   player.seekTo(0, true);
+  player.setPlaybackRate(0.75);
   player.playVideo();
 };
 

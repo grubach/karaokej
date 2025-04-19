@@ -59,10 +59,11 @@ const Cursor = ({ historyIndex, song }: Props) => {
 
   return (
     <div className={style.Cursor}>
+      <div className={style.line} ></div>
       <div
         className={style.movable}
-        ref={cursorRef}
         style={{ left: `${left}px`, top: `${top}px` }}
+        ref={cursorRef}
       >
         <div
           className={style.ball}

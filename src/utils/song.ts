@@ -58,7 +58,7 @@ const notesParser = (score: string): SongNote[] => {
 };
 
 export const parseSongScored = (songScored: SongScored): Song => {
-  const { score, ...rest } = songScored;
+  const { score, karaokeVideo, originalVideo, ...rest } = songScored;
   const parsedNotes = notesParser(score);
   console.log("parsedNotes", parsedNotes);
   const averagePitch =
@@ -69,6 +69,7 @@ export const parseSongScored = (songScored: SongScored): Song => {
 
   return {
     ...rest,
+    video: originalVideo,
     averagePitch,
     notes: parsedNotes,
   };

@@ -10,10 +10,12 @@
   display: block;
   text-align: center;
   position: absolute;
-  width: 100%;
+
+  width: calc(var(--note-height) * 4);
+  left: calc(50% - (var(--note-height) * 2));
   bottom: 100%;
   /* font-weight: bold; */
-  font-size: 15pt;
+  font-size: 14pt;
 }
 
 .passed {
