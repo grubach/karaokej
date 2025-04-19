@@ -1,7 +1,7 @@
 export const DETECTIONS_PER_SECOND = 40;
 export const HISTORY_DURATION = 2.5; // seconds
 export const HISTORY_SIZE = HISTORY_DURATION * DETECTIONS_PER_SECOND;
-export const LATENCY = 250; // ms
+export const LATENCY = 150; // ms
 
 export const NOTE_HEIGHT = 20; // px
 document.documentElement.style.setProperty("--note-height", `${NOTE_HEIGHT}px`);

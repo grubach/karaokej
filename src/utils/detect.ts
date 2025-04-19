@@ -3,10 +3,10 @@ import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 
 const INPUT_BUFFER_SIZE = 1024 * 4;
 const SAMPLE_RATE = 48000;
-const MINIMUM_CLARITY = 0.1;
-const MINIMUM_DECIBELS = -25;
-const MINIMUM_PITCH = 12; // semitones
-const MAXIMUM_PITCH = 84; // semitones
+const MINIMUM_CLARITY = 0.25;
+const MINIMUM_DECIBELS = -20;
+const MINIMUM_HZ = 10; 
+const MAXIMUM_HZ = 1000; 
 
 let analyserNode: AnalyserNode;
 let inputBuffer: Float32Array;
@@ -30,7 +30,12 @@ const pushToHistory = (position: number | null) => {
 
 export const getHistory = () => history;
 
+let initialized = false;
 export const resetAudioContext = async () => {
+  if (initialized) {
+    return;
+  }
+  initialized = true;
   const audioContext = new AudioContext({
     sampleRate: SAMPLE_RATE,
   });
@@ -56,10 +61,13 @@ export const detect = () => {
   if (!value) {
     return null;
   }
-  const semitones = positionFromHz(value);
-  if (semitones < MINIMUM_PITCH || semitones > MAXIMUM_PITCH) {
+
+  if (value < MINIMUM_HZ || value > MAXIMUM_HZ) {
+    console.log("Out of range", value);
     return null;
   }
+  const semitones = positionFromHz(value);
+
   return semitones;
 };
 

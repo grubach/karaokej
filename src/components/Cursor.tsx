@@ -49,7 +49,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
 
       if (!detectedPitch) {
         y +=
-          (Math.sin(timeToBeats(gameState.elapsed, bpm) * 4) * NOTE_HEIGHT) / 4;
+          (Math.sin(timeToBeats(gameState.elapsed, bpm) * 2) * NOTE_HEIGHT) / 4;
       }
 
       cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;

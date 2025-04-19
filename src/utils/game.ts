@@ -16,11 +16,6 @@ let noteIndex: number = 0;
 let noteScore: number = 0;
 let noteDetections: number = 0;
 
-const transposeHistory: number[] = Array.from(
-  { length: DETECTIONS_PER_SECOND * 2 },
-  () => 0
-);
-
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
     song.notes
@@ -135,33 +130,19 @@ const frame = async () => {
   //   }
   // }
   if (detectedPitch !== null) {
-    // lastPitch = detectedPitch;
+    lastPitch = detectedPitch;
   }
+
+  const anyPitch = detectedPitch ?? lastPitch;
 
   const currentSongNote = getCurrentSongNote(song, elapsed - LATENCY);
   const nextSongNote =
     getNextSongNote(song, elapsed - LATENCY) ?? currentSongNote;
 
-  const newTranspose =
-    nextSongNote?.pitch && detectedPitch
-      ? findTranspose(nextSongNote.pitch, detectedPitch)
-      : null;
+  transpose = anyPitch
+    ? findTranspose(nextSongNote?.pitch ?? song.averagePitch, anyPitch)
+    : transpose;
 
-  if (newTranspose !== null) {
-    transposeHistory.unshift(newTranspose);
-    transposeHistory.pop();
-
-    if (
-      transposeHistory.filter((t) => t === newTranspose).length >=
-      transposeHistory.length / 2
-    ) {
-      transpose = newTranspose;
-    }
-  }
-
-  console.log("Transpose:", transpose, detectedPitch);
-
-  const anyPitch = detectedPitch ?? lastPitch;
   const difference =
     currentSongNote?.pitch && anyPitch
       ? findNearestDifference(currentSongNote.pitch, anyPitch)
