@@ -1,10 +1,12 @@
 import { PitchDetector } from "pitchy";
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 
-const INPUT_BUFFER_SIZE = 1024 * 2;
+const INPUT_BUFFER_SIZE = 1024 * 4;
 const SAMPLE_RATE = 48000;
-const MINIMUM_CLARITY = 0.5;
-const MINIMUM_DECIBELS = -15;
+const MINIMUM_CLARITY = 0.25;
+const MINIMUM_DECIBELS = -25;
+const MINIMUM_PITCH = 12; // semitones
+const MAXIMUM_PITCH = 96; // semitones
 
 let analyserNode: AnalyserNode;
 let inputBuffer: Float32Array;
@@ -36,7 +38,7 @@ export const resetAudioContext = async () => {
 
   analyserNode = new AnalyserNode(audioContext, {
     fftSize: INPUT_BUFFER_SIZE,
-    smoothingTimeConstant: 0,
+    smoothingTimeConstant: .1,
   });
   audioContext.createMediaStreamSource(micStream).connect(analyserNode);
   sampleRate = audioContext.sampleRate;
@@ -54,7 +56,11 @@ export const detect = () => {
   if (!value) {
     return null;
   }
-  return positionFromHz(value);
+  const semitones = positionFromHz(value);
+  if (semitones < MINIMUM_PITCH || semitones > MAXIMUM_PITCH) {
+    return null;
+  }
+  return semitones;
 };
 
 const writeHistory = () => {

@@ -69,7 +69,7 @@ export const parseSongScored = (songScored: SongScored): Song => {
 
   return {
     ...rest,
-    video: originalVideo,
+    video: karaokeVideo,
     averagePitch,
     notes: parsedNotes,
   };

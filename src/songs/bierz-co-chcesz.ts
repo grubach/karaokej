@@ -66,7 +66,7 @@ B4:1:Nie B4:1:mów B4:1:mi C#5:0.5:do- D5:0.5:wi- C#5:0.5:dze- B4:1:nia P:2.5
 A4:1:Nie A4:1:za- A4:1:bie- B4:0.5:raj A4:0.5:mi F#4:2:Sie- C#5:2:bie 
 
 B4:2:Przy G4:1.5:mnie A4:2:bądź P:2.5
-B4:2:Za- G4:1.5:wsze A4:2:bądź P:0.5
+B4:2:Za- D5:1.5:wsze C#5:2:bądź P:0.5
 
 D5:1:Bierz C#5:1:co B4:1.5:chcesz D5:1.5:wszy- C#5:1:tko- B4:1:weź P:3
 C#5:1.5:Co B4:1.5:tyl- A4:1:ko B4:1.5:mam 

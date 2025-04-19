@@ -20,7 +20,6 @@ export const loadPlayer = () => {
       modestbranding: 1,
       rel: 0,
       enablejsapi: 1,
-      
     },
   });
 };

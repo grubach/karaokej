@@ -4,6 +4,7 @@
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
+  border: 1px solid var(--color-background);
 }
 
 .text {
@@ -25,6 +26,7 @@
   opacity: 0;
   border-radius: var(--note-height);
   transition: opacity 0.2s ease-out;
+  border: 1px solid var(--color-background);
 }
 
 .good {
@@ -33,4 +35,5 @@
   background-color: var(--color-good);
   opacity: 0;
   border-radius: var(--note-height);
+  border: 1px solid var(--color-background);
 }

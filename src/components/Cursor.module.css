@@ -2,14 +2,7 @@
   position: absolute;
 }
 
-.line {
-  position: absolute;
-  width: 1px;
-  height: calc(24 * var(--note-height));
-  left: 0;
-  top: calc(-12 * var(--note-height));
-  background-color: var(--color-border);
-}
+
 
 .movable {
   position: absolute;
@@ -25,12 +18,7 @@
   height: var(--note-height);
   width: var(--note-height);
   border-radius: var(--note-height);
-  overflow: hidden;
-  transition: opacity 0.1s ease-out;
+  border: 1px solid var(--color-background);
 }
 
-.good {
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-good);
-}
+

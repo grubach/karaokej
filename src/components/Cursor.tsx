@@ -1,5 +1,5 @@
 import style from "./Cursor.module.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   BEAT_WIDTH,
   DETECTIONS_PER_SECOND,
@@ -9,24 +9,24 @@ import {
 import useGameState from "../hooks/useGameState";
 import { timeToBeats } from "../utils/time";
 import { Song } from "../utils/song";
+import { clamp } from "../utils/tools";
 
 type Props = {
   historyIndex: number;
+  tailIndex: number;
   song: Song;
 };
 
-const octaveShift = (12 * NOTE_HEIGHT) / 2;
-
-const Cursor = ({ historyIndex, song }: Props) => {
+const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [octave, setOctave] = useState(0);
+  const positionRef = useRef<number>(0);
 
   const { averagePitch, bpm } = song;
 
-  const left =
-    -timeToBeats(historyIndex * DETECTIONS_PER_SECOND + LATENCY, bpm) *
-    BEAT_WIDTH;
+  const left = -timeToBeats(LATENCY, bpm) * BEAT_WIDTH;
   const top = (averagePitch * NOTE_HEIGHT) / 2;
+
+  const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 
   useGameState(
     (gameHistory) => {
@@ -35,31 +35,35 @@ const Cursor = ({ historyIndex, song }: Props) => {
       const gameState = gameHistory[historyIndex];
       const { detectedPitch, lastPitch, transpose } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
-      const pitch = anyPitch; //? anyPitch + transpose * 12 : null;
+      const pitch = anyPitch ? anyPitch + transpose * 12 : null;
 
-      if (transpose !== octave) {
-        setOctave(transpose);
+      if (!pitch) return;
+
+      const diff = pitch - positionRef.current;
+      positionRef.current += clamp(diff, -1, 1);
+
+      let y = -(positionRef.current * NOTE_HEIGHT) / 2;
+      const x =
+        -timeToBeats((historyIndex * 1000) / DETECTIONS_PER_SECOND, bpm) *
+        BEAT_WIDTH;
+
+      if (!detectedPitch) {
+        y +=
+          (Math.sin(timeToBeats(gameState.elapsed, bpm) * 4) * NOTE_HEIGHT) / 4;
       }
 
-      if (pitch === null) {
-        cursorRef.current.style.opacity = "0";
-      } else if (detectedPitch === null) {
-        cursorRef.current.style.opacity = ".5";
-      } else {
-        cursorRef.current.style.opacity = "1";
-        cursorRef.current.style.transform = `translateY(${(
-          -(pitch * NOTE_HEIGHT) / 2
-        ).toFixed(2)}px)
-
-        `;
-      }
+      cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
     },
-    [cursorRef, historyIndex, octave]
+    [cursorRef, positionRef, historyIndex, bpm, tailIndex]
   );
 
   return (
-    <div className={style.Cursor}>
-      <div className={style.line} ></div>
+    <div
+      className={style.Cursor}
+      style={{
+        zIndex: 10 - tailIndex,
+      }}
+    >
       <div
         className={style.movable}
         style={{ left: `${left}px`, top: `${top}px` }}
@@ -68,28 +72,7 @@ const Cursor = ({ historyIndex, song }: Props) => {
         <div
           className={style.ball}
           style={{
-            opacity: octave === 0 ? 1 : 0,
-          }}
-        ></div>
-        <div
-          className={style.ball}
-          style={{
-            top: `${-octaveShift}px`,
-            opacity: octave === 1 ? 1 : 0,
-          }}
-        ></div>
-        <div
-          className={style.ball}
-          style={{
-            top: `${-octaveShift * 2}px`,
-            opacity: octave === 2 ? 1 : 0,
-          }}
-        ></div>
-        <div
-          className={style.ball}
-          style={{
-            top: `${-octaveShift * 3}px`,
-            opacity: octave === 3 ? 1 : 0,
+            transform: `scale(${scale})`,
           }}
         ></div>
       </div>

@@ -121,17 +121,17 @@ const frame = async () => {
 
   let detectedPitch = detect();
 
-  if (detectedPitch !== null) {
-    pitchHistory.unshift(detectedPitch);
-    pitchHistory.pop();
+  // if (detectedPitch !== null) {
+  //   pitchHistory.unshift(detectedPitch);
+  //   pitchHistory.pop();
 
-    const cleanHistory = removeOutliners(pitchHistory);
-    const averagePitch =
-      cleanHistory.reduce((acc, pitch) => acc + pitch, 0) / cleanHistory.length;
-    if (Math.abs(detectedPitch - averagePitch) >= 11) {
-      detectedPitch = null;
-    }
-  }
+  //   const cleanHistory = removeOutliners(pitchHistory);
+  //   const averagePitch =
+  //     cleanHistory.reduce((acc, pitch) => acc + pitch, 0) / cleanHistory.length;
+  //   if (Math.abs(detectedPitch - averagePitch) >= 11) {
+  //     detectedPitch = null;
+  //   }
+  // }
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
   }
@@ -150,6 +150,8 @@ const frame = async () => {
     currentSongNote?.pitch && anyPitch
       ? findNearestDifference(currentSongNote.pitch, anyPitch)
       : null;
+
+
 
   let points = 0;
   const pointsRange = 1;
