@@ -122,17 +122,8 @@ const frame = async () => {
 
   let detectedPitch = detect();
 
-  // if (detectedPitch !== null) {
-  //   pitchHistory.unshift(detectedPitch);
-  //   pitchHistory.pop();
 
-  //   const cleanHistory = removeOutliners(pitchHistory);
-  //   const averagePitch =
-  //     cleanHistory.reduce((acc, pitch) => acc + pitch, 0) / cleanHistory.length;
-  //   if (Math.abs(detectedPitch - averagePitch) >= 11) {
-  //     detectedPitch = null;
-  //   }
-  // }
+
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
   }
@@ -145,8 +136,8 @@ const frame = async () => {
   const nextSongPitchNote =
     getNextSongPitchNote(song, elapsedWithLatency) ?? currentSongNote;
 
-  transpose = anyPitch
-    ? findTranspose(nextSongPitchNote?.pitch ?? song.averagePitch, anyPitch)
+  transpose = detectedPitch
+    ? findTranspose(nextSongPitchNote?.pitch ?? song.averagePitch, detectedPitch)
     : transpose;
 
   const difference =
