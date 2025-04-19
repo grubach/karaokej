@@ -38,7 +38,7 @@ export const playVideo = () => {
     return;
   }
   player.seekTo(0, true);
-  player.setPlaybackRate(0.75);
+  player.setPlaybackRate(0.5);
   player.playVideo();
 };
 

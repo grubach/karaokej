@@ -98,7 +98,7 @@ export default {
   artist: "Britney Spears",
   bpm: 139,
   startTime: 3450,
-  endTime: 3 * 60000 + 3010,
+  endTime: 3 * 60000 + 47000,
   karaokeVideo: "McpTKMJP8Cc",
   originalVideo: "rMqayQ-U74s",
   score: `
@@ -156,18 +156,125 @@ C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0
 G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
 C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
 
-P:1.5 C#5:0.5:You C#5:0.5:say C#5:0.5:I'm C#5:0.5:cra- C#5:0.5:zy
-P:1.5 C#5:0.5:I C#5:0.5:got C#5:0.5:your C#5:0.5:cra- C#5:0.5:zy
-P:1.5 C#5:0.5:You're C#5:0.5:no- C#5:0.5:thing C#5:0.5:but C#5:0.5:a
-P:1 C#4:0.5:Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er P:0.5
+P:1.5 C#5:0.5:You C#5:0.5:say C#5:0.5:I'm C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:I C#5:0.5:got C#5:0.5:your C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:You're C#5:0.5:no- C#5:0.5:thing C#5:0.5:but C#5:0.5:a
+P:1 C#4:0.5:Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er P:1
 
 
-G#4:0.5:Da- F#4:0.5:ddy-- G#4:1:O, P:1
-F#4:0.5:you E4:0.5:got F#4:0.5:the G#4:0.5:swa- G#4:0.5:gger G#4:0.5:of F#4:0.5:a G#4:0.5:cham- B4:1:pion P:0.5
-F#4:0.5:Too G#4:0.5:bad F#4:0.5:for G#4:0.5:you, 
-F#4:0.5:you E4:0.5:just F#4:0.5:can't G#4:0.5:find G#4:0.5:the G#4:0.5:right F#4:0.5:com- G#4:0.5:pa- B4:1:nion P:0.5
+G#4:0.5:Da- F#4:0.5:ddy-- G#4:1:O, P:0.5
+F#4:0.5:you E4:0.5:got F#4:0.5:the G#4:0.5:swa- G#4:0.5:gger G#4:0.5:of F#4:0.5:a G#4:0.5:cham- B4:1:pion
+F#4:0.5:Too G#4:0.5:bad F#4:0.5:for G#4:0.5:you, P:1
+F#4:0.5:you E4:0.5:just F#4:0.5:can't G#4:0.5:find G#4:0.5:the G#4:0.5:right F#4:0.5:com- G#4:0.5:pa- B4:1:nion 
+
+A4:0.5:I A4:0.5:guess A4:0.5:when A4:0.5:you A4:0.5:have A4:0.5:one A4:0.5:too G#4:0.5:ma- F#4:0.5:ny, 
+A4:0.5:makes G#4:0.5:it G#4:0.5:hard G#4:0.5:what G#4:0.5:could G#4:0.5:be 
+F#4:0.5:ea- E4:0.5:sy 
+G#4:0.5:Who G4:0.5:you G4:2:are
+G4:0.5:that's G4:0.5:just F#4:0.5:who F#4:0.5:you F#4:1:are 
+C#4:1:ba- C#4:1:by 
+
+G#4:0.5:Lo- F#4:0.5:lli- G#4:0.5:pop, P:1.5
+E4:0.5:must F#4:0.5:mis- G#4:0.5:take G#4:0.5:me G#4:0.5:you're F#4:0.5:the G#4:0.5:suck- B4:1:er
+F#4:0.5:Too G#4:0.5:think F#4:0.5:that G#4:1:I P:0.5
+F#4:0.5:would E4:0.5:be F#4:0.5:a G#4:0.5:vic- G#4:0.5:tim, G#4:0.5:not F#4:0.5:a- G#4:0.5:no- B4:1:ther P:0.5
+
+A4:0.5:Say A4:0.5:it, A4:0.5:play A4:0.5:it, A4:0.5:how A4:0.5:you G#4:0.5:want F#4:0.5:it, 
+A4:0.5:But G#4:0.5:no G#4:0.5:way G#4:0.5:I'm G#4:0.5:ne- G#4:0.5:ver 
+F#4:0.5:gon- E4:0.5:na
+G#4:0.5:fall G4:0.5:for G4:2:you P:1
+F#4:0.5:ne- F#4:0.5:ver F#4:1:you
+C#4:1:ba- C#4:1:by 
 
 
+
+E5:0.5:Wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:wo- E5:0.5:man-- E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er 
+E5:1:Oh, E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+E5:1:oh, E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+C#5:0.5:ba- C#5:0.5:by 
+
+G#5:1:You, E5:0.5:you- E5:1:you C#5:1.5:are,
+G#5:1:you, E5:0.5:you- F#5:1:you F#5:1.5:are 
+G5:0.5:Wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
+G5:0.5:wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
+F#5:0.5:wo- F#5:0.5:ma- F#5:0.5:niz- F#5:0.5:er, 
+C#3:0.5:(Wo- C#3:0.5:ma- C#3:0.5:niz- C#3:0.5:er) 
+
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+
+P:1.5 C#5:0.5:You C#5:0.5:got C#5:0.5:me C#5:0.5:go- C#5:0.5:in'
+P:1.5 C#5:0.5:You're C#5:0.5:oh C#5:0.5:so C#5:0.5:char- C#5:0.5:min'
+P:1.5 C#5:0.5:But C#5:0.5:I C#5:0.5:can't C#5:0.5:do- C#5:0.5:it
+P:1.5 C#4:0.5:You C#4:0.5:wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er
+
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+
+P:1.5 C#5:0.5:You C#5:0.5:say C#5:0.5:I'm C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:I C#5:0.5:got C#5:0.5:your C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:You're C#5:0.5:no- C#5:0.5:thing C#5:0.5:but C#5:0.5:a
+P:1 C#4:0.5:Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er P:1
+
+P:2 
+
+E5:0.5:May- E5:0.5:be E5:0.5:if E5:0.5:we E5:1:both E5:1:lived E5:0.5:in D#5:0.5:a C#5:0.5:dif- E5:1:ferent D#5:1:world C#5:0.5 B4:1
+P:6 P:1
+E5:0.5:It E5:0.5:would E5:0.5:be E5:0.5:all E5:0.5:good E5:0.5:and E5:0.5:may- E5:0.5:be E5:0.5:I D#5:0.5:could C#5:0.5:be D#5:0.5:your C#5:1:girl 
+C#5:0.5:But D#5:0.5:I E5:1:can't, E5:0.5:'cause F#5:0.5:we E5:1.5:don't, 
+E5:0.5:you! A5:0.5 G#5:0.5 F#5:1
+
+E5:0.5:Wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:wo- E5:0.5:man-- E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er 
+E5:1:Oh, E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+E5:1:oh, E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+C#5:0.5:ba- C#5:0.5:by 
+
+G#5:1:You, E5:0.5:you- E5:1:you C#5:1.5:are,
+G#5:1:you, E5:0.5:you- F#5:1:you F#5:1.5:are 
+G5:0.5:Wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
+G5:0.5:wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
+F#5:0.5:wo- F#5:0.5:ma- F#5:0.5:niz- F#5:0.5:er, 
+C#3:0.5:(Wo- C#3:0.5:ma- C#3:0.5:niz- C#3:0.5:er) 
+
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+
+P:1.5 C#5:0.5:You C#5:0.5:got C#5:0.5:me C#5:0.5:go- C#5:0.5:in'
+P:1.5 C#5:0.5:You're C#5:0.5:oh C#5:0.5:so C#5:0.5:char- C#5:0.5:min'
+P:1.5 C#5:0.5:But C#5:0.5:I C#5:0.5:can't C#5:0.5:do- C#5:0.5:it
+P:1.5 C#4:0.5:You C#4:0.5:wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er
+
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+
+P:1.5 C#5:0.5:You C#5:0.5:say C#5:0.5:I'm C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:I C#5:0.5:got C#5:0.5:your C#5:1:cra- C#5:0.5:zy
+P:1 C#5:0.5:You're C#5:0.5:no- C#5:0.5:thing C#5:0.5:but C#5:0.5:a
+P:1 C#4:0.5:Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er P:1
+
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
+C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
+
+E5:0.5:Wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:wo- E5:0.5:man-- E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er, 
+E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er 
+E5:1:Oh, E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+E5:1:oh, E5:0.5:you're E5:0.5:a E5:0.5:wo- E5:0.5:ma- E5:0.5:niz- E5:0.5:er,
+C#5:0.5:ba- C#5:0.5:by 
 
   `,
 };
