@@ -3,10 +3,10 @@ import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 
 const INPUT_BUFFER_SIZE = 1024 * 4;
 const SAMPLE_RATE = 48000;
-const MINIMUM_CLARITY = 0.25;
+const MINIMUM_CLARITY = 0.1;
 const MINIMUM_DECIBELS = -25;
 const MINIMUM_PITCH = 12; // semitones
-const MAXIMUM_PITCH = 96; // semitones
+const MAXIMUM_PITCH = 84; // semitones
 
 let analyserNode: AnalyserNode;
 let inputBuffer: Float32Array;

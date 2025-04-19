@@ -3,7 +3,6 @@ import { detect, resetAudioContext } from "./detect";
 import { Song } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
-import { removeOutliners } from "./tools";
 
 let song: Song | null = null;
 
@@ -17,7 +16,10 @@ let noteIndex: number = 0;
 let noteScore: number = 0;
 let noteDetections: number = 0;
 
-const pitchHistory: number[] = Array.from({ length: 15 }, () => 0);
+const transposeHistory: number[] = Array.from(
+  { length: DETECTIONS_PER_SECOND * 2 },
+  () => 0
+);
 
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
@@ -133,25 +135,37 @@ const frame = async () => {
   //   }
   // }
   if (detectedPitch !== null) {
-    lastPitch = detectedPitch;
+    // lastPitch = detectedPitch;
   }
 
   const currentSongNote = getCurrentSongNote(song, elapsed - LATENCY);
   const nextSongNote =
     getNextSongNote(song, elapsed - LATENCY) ?? currentSongNote;
 
-  transpose =
+  const newTranspose =
     nextSongNote?.pitch && detectedPitch
       ? findTranspose(nextSongNote.pitch, detectedPitch)
-      : transpose;
+      : null;
+
+  if (newTranspose !== null) {
+    transposeHistory.unshift(newTranspose);
+    transposeHistory.pop();
+
+    if (
+      transposeHistory.filter((t) => t === newTranspose).length >=
+      transposeHistory.length / 2
+    ) {
+      transpose = newTranspose;
+    }
+  }
+
+  console.log("Transpose:", transpose, detectedPitch);
 
   const anyPitch = detectedPitch ?? lastPitch;
   const difference =
     currentSongNote?.pitch && anyPitch
       ? findNearestDifference(currentSongNote.pitch, anyPitch)
       : null;
-
-
 
   let points = 0;
   const pointsRange = 1;

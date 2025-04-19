@@ -40,7 +40,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       if (!pitch) return;
 
       const diff = pitch - positionRef.current;
-      positionRef.current += clamp(diff, -1, 1);
+      positionRef.current += clamp(diff, -3, 3);
 
       let y = -(positionRef.current * NOTE_HEIGHT) / 2;
       const x =
