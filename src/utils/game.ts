@@ -1,6 +1,6 @@
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE, LATENCY } from "../constants";
 import { detect, resetAudioContext } from "./detect";
-import { Song } from "./song";
+import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
 
@@ -12,14 +12,14 @@ let transpose: number = 0;
 let overallScore: number = 0;
 let overallDetections: number = 0;
 let overallNoteDetections: number = 0;
-let noteIndex: number = 0;
+let scoreNoteIndex: number = 0;
 let noteScore: number = 0;
 let noteDetections: number = 0;
 
 const getCurrentSongNote = (song: Song, elapsed: number) => {
   return (
     song.notes
-      .filter((note) => note.pitch !== null)
+      // .filter((note) => note.pitch !== null)
       .find((note) => {
         const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
         const noteEndTime =
@@ -28,7 +28,7 @@ const getCurrentSongNote = (song: Song, elapsed: number) => {
       }) ?? null
   );
 };
-const getNextSongNote = (song: Song, elapsed: number) => {
+const getNextSongPitchNote = (song: Song, elapsed: number) => {
   return (
     song.notes
       .filter((note) => note.pitch !== null)
@@ -43,23 +43,27 @@ const getNextSongNote = (song: Song, elapsed: number) => {
 
 export type GameState = {
   elapsed: number;
+  elapsedWithLatency: number;
   detectedPitch: number | null;
   lastPitch: number | null;
   transpose: number;
   points: number;
 
-  noteIndex: number;
+  currentSongNote: SongNote | null;
+  scoreNoteIndex: number;
   averageNoteScore: number;
 };
 
 const initialState: GameState = {
   elapsed: 0,
+  elapsedWithLatency: 0,
   detectedPitch: null,
   lastPitch: null,
   transpose: 0,
   points: 0,
 
-  noteIndex: -1,
+  currentSongNote: null,
+  scoreNoteIndex: -1,
   averageNoteScore: 0,
 };
 
@@ -135,17 +139,19 @@ const frame = async () => {
 
   const anyPitch = detectedPitch ?? lastPitch;
 
-  const currentSongNote = getCurrentSongNote(song, elapsed - LATENCY);
-  const nextSongNote =
-    getNextSongNote(song, elapsed - LATENCY) ?? currentSongNote;
+  const elapsedWithLatency = elapsed - LATENCY;
+  const currentSongNote = getCurrentSongNote(song, elapsed);
+  const scoreSongNote = getCurrentSongNote(song, elapsedWithLatency);
+  const nextSongPitchNote =
+    getNextSongPitchNote(song, elapsedWithLatency) ?? currentSongNote;
 
   transpose = anyPitch
-    ? findTranspose(nextSongNote?.pitch ?? song.averagePitch, anyPitch)
+    ? findTranspose(nextSongPitchNote?.pitch ?? song.averagePitch, anyPitch)
     : transpose;
 
   const difference =
-    currentSongNote?.pitch && anyPitch
-      ? findNearestDifference(currentSongNote.pitch, anyPitch)
+    scoreSongNote?.pitch && anyPitch
+      ? findNearestDifference(scoreSongNote.pitch, anyPitch)
       : null;
 
   let points = 0;
@@ -156,13 +162,13 @@ const frame = async () => {
 
   overallScore += points;
   overallDetections += 1;
-  if (currentSongNote) {
+  if (scoreSongNote) {
     overallNoteDetections += 1;
   }
 
-  if (currentSongNote) {
-    if (noteIndex !== currentSongNote.index) {
-      noteIndex = currentSongNote.index;
+  if (scoreSongNote) {
+    if (scoreNoteIndex !== scoreSongNote.index) {
+      scoreNoteIndex = scoreSongNote.index;
       noteScore = 0;
       noteDetections = 0;
     }
@@ -173,11 +179,13 @@ const frame = async () => {
 
   const state = {
     elapsed,
+    elapsedWithLatency,
     detectedPitch,
     lastPitch,
     transpose,
     points,
-    noteIndex,
+    currentSongNote,
+    scoreNoteIndex,
     averageNoteScore,
   };
 

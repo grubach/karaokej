@@ -19,7 +19,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
     ([gameState]) => {
       if (
         !gameState ||
-        gameState.noteIndex !== index ||
+        gameState.scoreNoteIndex !== index ||
         !goodRef.current ||
         !passedRef.current
       )

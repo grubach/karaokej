@@ -63,7 +63,6 @@ export const detect = () => {
   }
 
   if (value < MINIMUM_HZ || value > MAXIMUM_HZ) {
-    console.log("Out of range", value);
     return null;
   }
   const semitones = positionFromHz(value);

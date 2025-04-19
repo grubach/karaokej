@@ -7,6 +7,7 @@ import Track from "./Track";
 import { Song } from "../utils/song";
 import { useState } from "react";
 import SongList from "./song-list/SongList";
+import Wait from "./Wait";
 
 function App() {
   const [currentSong, setCurrentSong] = useState<Song>();
@@ -19,6 +20,7 @@ function App() {
           <Controls />
           <Track>
             <Program song={currentSong} />
+            <Wait song={currentSong} />
             {Array.from({ length: 10 }, (_, index) => (
               <Cursor
                 key={index}
