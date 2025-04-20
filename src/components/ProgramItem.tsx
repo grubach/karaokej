@@ -15,24 +15,24 @@ const ProgramItem = ({ songNote, song }: Props) => {
 
   const { index, text, duration, pitch, time } = songNote;
 
-  useGameState(
-    ([gameState]) => {
-      if (
-        !gameState ||
-        gameState.scoreNoteIndex !== index ||
-        !goodRef.current ||
-        !passedRef.current
-      )
-        return;
+  // useGameState(
+  //   ([gameState]) => {
+  //     if (
+  //       !gameState ||
+  //       gameState.scoreNoteIndex !== index ||
+  //       !goodRef.current ||
+  //       !passedRef.current
+  //     )
+  //       return;
 
-      const { averageNoteScore } = gameState;
-      if (averageNoteScore) {
-        passedRef.current.style.opacity = "1";
-        goodRef.current.style.opacity = averageNoteScore.toFixed(2);
-      }
-    },
-    [index]
-  );
+  //     const { averageNoteScore } = gameState;
+  //     if (averageNoteScore) {
+  //       passedRef.current.style.opacity = "1";
+  //       goodRef.current.style.opacity = averageNoteScore.toFixed(2);
+  //     }
+  //   },
+  //   [index]
+  // );
 
   const formattedText = text
     ?.replace(/_/g, " ") // Replace underscores with spaces

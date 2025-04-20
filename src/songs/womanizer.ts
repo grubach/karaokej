@@ -139,7 +139,7 @@ G#5:1:you, E5:0.5:you- F#5:1:you F#5:1.5:are
 G5:0.5:Wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 G5:0.5:wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 F#5:0.5:wo- F#5:0.5:ma- F#5:0.5:niz- F#5:0.5:er, 
-C#3:0.5:(Wo- C#3:0.5:ma- C#3:0.5:niz- C#3:0.5:er) 
+C#4:0.5:(Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er) 
 
 G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
 C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
@@ -200,7 +200,7 @@ G#5:1:you, E5:0.5:you- F#5:1:you F#5:1.5:are
 G5:0.5:Wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 G5:0.5:wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 F#5:0.5:wo- F#5:0.5:ma- F#5:0.5:niz- F#5:0.5:er, 
-C#3:0.5:(Wo- C#3:0.5:ma- C#3:0.5:niz- C#3:0.5:er) 
+C#4:0.5:(Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er) 
 
 G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
 C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5
@@ -242,7 +242,7 @@ G#5:1:you, E5:0.5:you- F#5:1:you F#5:1.5:are
 G5:0.5:Wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 G5:0.5:wo- G5:0.5:ma- G5:0.5:niz- G5:0.5:er, 
 F#5:0.5:wo- F#5:0.5:ma- F#5:0.5:niz- F#5:0.5:er, 
-C#3:0.5:(Wo- C#3:0.5:ma- C#3:0.5:niz- C#3:0.5:er) 
+C#4:0.5:(Wo- C#4:0.5:ma- C#4:0.5:niz- C#4:0.5:er) 
 
 G#5:0.5:Boy G#5:0.5:don't E5:0.5:try E5:0.5:to C#5:0.5:front, 
 C#5:0.5:I-- C#5:0.5:I C#5:0.5:know C#5:0.5:just, D#5:0.5:just, E5:0.5:what D#5:0.5:you C#5:0.5:are, C#5:0.5:are-- C#5:0.5:are P:0.5

@@ -5,8 +5,10 @@ const INPUT_BUFFER_SIZE = 1024 * 4;
 const SAMPLE_RATE = 48000;
 const MINIMUM_CLARITY = 0.25;
 const MINIMUM_DECIBELS = -20;
-const MINIMUM_HZ = 10; 
-const MAXIMUM_HZ = 1000; 
+const MINIMUM_HZ = 10;
+const MAXIMUM_HZ = 1000;
+const MAXIMUM_PITCH = 8 * 12; // semitones
+const MINIMUM_PITCH = 1 * 12; // semitones
 
 let analyserNode: AnalyserNode;
 let inputBuffer: Float32Array;
@@ -66,6 +68,10 @@ export const detect = () => {
     return null;
   }
   const semitones = positionFromHz(value);
+
+  if (semitones < MINIMUM_PITCH || semitones > MAXIMUM_PITCH) {
+    return null;
+  }
 
   return semitones;
 };
