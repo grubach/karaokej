@@ -5,16 +5,16 @@ import { Song } from "../utils/song";
 import { loadSong } from "../utils/game";
 
 type Props = {
-  song: Song
-}
+  song: Song;
+};
 
-const Player = ({song}:Props) => {
+const Player = ({ song }: Props) => {
   useEffect(() => {
     loadPlayer();
   }, []);
 
   useEffect(() => {
-   loadSong(song);
+    loadSong(song);
   }, [song]);
 
   return <div className={style.Player} id="video-player"></div>;

@@ -122,8 +122,6 @@ const frame = async () => {
 
   let detectedPitch = detect();
 
-
-
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
   }
@@ -137,7 +135,10 @@ const frame = async () => {
     getNextSongPitchNote(song, elapsedWithLatency) ?? currentSongNote;
 
   transpose = detectedPitch
-    ? findTranspose(nextSongPitchNote?.pitch ?? song.averagePitch, detectedPitch)
+    ? findTranspose(
+        nextSongPitchNote?.pitch ?? song.averagePitch,
+        detectedPitch
+      )
     : transpose;
 
   const difference =
@@ -185,8 +186,10 @@ const frame = async () => {
 };
 
 export const loadSong = (newSong: Song) => {
+  if (song?.id !== newSong.id) {
+    loadVideo(newSong.video);
+  }
   song = newSong;
-  loadVideo(newSong.video);
 };
 
 export const stopGame = () => {
