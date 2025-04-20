@@ -70,16 +70,16 @@ F#4:0.5:nie- G4:0.5:u- A4:0.5:ży- F#4:1:wa- D4:1:jąc B4:6:dat P:0.5
 
 P:3
 
-B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i- C5:2:lat P:1.5
+B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i C5:2:lat P:1.5
 B4:1:To E5:1:ży- B4:1:cie D5:0.5:mi- C5:0.5:ja B4:0.5:nie A4:0.5:ja P:0.5
 
-G4:0.5:Bli- A4:0.5:żej B4:1:gwiazd- B4:0.5:bli- B4:0.5:żej- B4:0.5:dna P:0.5
+G4:0.5:Bli- A4:0.5:żej B4:1:gwiazd B4:0.5:bli- B4:0.5:żej- B4:0.5:dna P:0.5
 G4:0.5:Jes- A4:0.5:tem B4:1:wciąż B4:0.5:ta- B4:0.5:ki B4:0.5:sam P:0.5 
 A4:1:Wciąż G4:1:ten D4:1:sam  
 
 P:7.5
 
-B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i- C5:2:lat P:1.5
+B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i C5:2:lat P:1.5
 B4:1:To E5:1:ży- B4:1:cie D5:0.5:mi- C5:0.5:ja B4:0.5:nie A4:0.5:ja P:0.5
 
 G4:0.5:Z_kil- A4:0.5:ku B4:1:dni B4:0.5:w_mo- B4:0.5:rzu B4:0.5:dat P:0.5
@@ -108,16 +108,16 @@ F#4:0.5:nie- G4:0.5:u- A4:0.5:ży- F#4:1:wa- D4:1:jąc B4:6:dat P:0.5
 
 P:3
 
-B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i- C5:2:lat P:1.5
+B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i C5:2:lat P:1.5
 B4:1:To E5:1:ży- B4:1:cie D5:0.5:mi- C5:0.5:ja B4:0.5:nie A4:0.5:ja P:0.5
 
-G4:0.5:Bli- A4:0.5:żej B4:1:gwiazd- B4:0.5:bli- B4:0.5:żej- B4:0.5:dna P:0.5
+G4:0.5:Bli- A4:0.5:żej B4:1:gwiazd B4:0.5:bli- B4:0.5:żej- B4:0.5:dna P:0.5
 G4:0.5:Jes- A4:0.5:tem B4:1:wciąż B4:0.5:ta- B4:0.5:ki B4:0.5:sam P:0.5 
 A4:1:Wciąż G4:1:ten D4:1:sam  
 
 P:7.5
 
-B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i- C5:2:lat P:1.5
+B4:1:Nie E5:1:li- B4:1:czę D5:0.5:go- C5:0.5:dzin- B4:0.5:i C5:2:lat P:1.5
 B4:1:To E5:1:ży- B4:1:cie D5:0.5:mi- C5:0.5:ja B4:0.5:nie A4:0.5:ja P:0.5
 
 G4:0.5:Z_kil- A4:0.5:ku B4:1:dni B4:0.5:w_mo- B4:0.5:rzu B4:0.5:dat P:0.5
