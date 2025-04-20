@@ -1,15 +1,19 @@
-import { DependencyList, useCallback } from "react";
-import useFrameLoop from "./useFrameLoop";
-import { GameState, getGameHistory } from "../utils/game";
+import { DependencyList, useEffect } from "react";
+import { GameState, subscribe } from "../utils/game";
 
 type GameStateListener = (gameHistory: GameState[]) => void;
 
-const useGameState = (listener: GameStateListener, deps: DependencyList) => {
-  const onFrame = useCallback(() => {
-    listener(getGameHistory());
-  }, [listener, deps]);
-
-  useFrameLoop(onFrame);
+const useGameState = (
+  id: string,
+  listener: GameStateListener,
+  deps: DependencyList
+) => {
+  useEffect(() => {
+    const unsubscribe = subscribe(id, listener);
+    return () => {
+      unsubscribe();
+    };
+  }, [id, listener, ...deps]);
 };
 
 export default useGameState;

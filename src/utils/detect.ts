@@ -1,8 +1,8 @@
 import { PitchDetector } from "pitchy";
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE } from "../constants";
 
-const INPUT_BUFFER_SIZE = 1024 * 4;
-const SAMPLE_RATE = 48000;
+const INPUT_BUFFER_SIZE = 1024 * 8;
+const SAMPLE_RATE = 44100;
 const MINIMUM_CLARITY = 0.25;
 const MINIMUM_DECIBELS = -25;
 const MINIMUM_HZ = 10;

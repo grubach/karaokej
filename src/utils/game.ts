@@ -12,7 +12,7 @@ let transpose: number = 0;
 let overallScore: number = 0;
 let overallDetections: number = 0;
 let overallNoteDetections: number = 0;
-let scoreNoteIndex: number = 0;
+let scoreNoteId: string | null = null;
 let noteScore: number = 0;
 let noteDetections: number = 0;
 
@@ -50,7 +50,7 @@ export type GameState = {
   points: number;
 
   currentSongNote: SongNote | null;
-  scoreNoteIndex: number;
+  scoreNoteId: string | null;
   averageNoteScore: number;
 };
 
@@ -63,7 +63,7 @@ const initialState: GameState = {
   points: 0,
 
   currentSongNote: null,
-  scoreNoteIndex: -1,
+  scoreNoteId: null,
   averageNoteScore: 0,
 };
 
@@ -72,10 +72,38 @@ const gameHistory: GameState[] = Array.from(
   () => initialState
 );
 
-export const getGameHistory = () => gameHistory;
+// export const getGameHistory = () => gameHistory;
 const resetGameHistory = () => {
   for (let i = 0; i < HISTORY_SIZE; i++) {
     gameHistory[i] = initialState;
+  }
+};
+
+const subscribtions: Record<string, ((history: GameState[]) => void)[]> = {};
+
+export const subscribe = (
+  id: string,
+  callback: (history: GameState[]) => void
+) => {
+ 
+  if (!subscribtions[id]) {
+    subscribtions[id] = [];
+  }
+  subscribtions[id].push(callback);
+
+  const unsubscribe = () => {
+    if (subscribtions[id]) {
+      subscribtions[id] = subscribtions[id].filter((cb) => cb !== callback);
+    }
+  };
+  return unsubscribe;
+};
+
+const notifySubscriber = (id: string) => {
+  if (subscribtions[id]) {
+    subscribtions[id].forEach((callback) => {
+      callback(gameHistory);
+    });
   }
 };
 
@@ -122,6 +150,11 @@ const frame = async () => {
 
   let detectedPitch = detect();
 
+  // if (detectedPitch && lastPitch) {
+  //   const diff = Math.abs(detectedPitch - lastPitch);
+  //   if (diff > 12) detectedPitch = null;
+  // }
+
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
   }
@@ -159,8 +192,8 @@ const frame = async () => {
   }
 
   if (scoreSongNote) {
-    if (scoreNoteIndex !== scoreSongNote.index) {
-      scoreNoteIndex = scoreSongNote.index;
+    if (scoreNoteId !== scoreSongNote.id) {
+      scoreNoteId = scoreSongNote.id;
       noteScore = 0;
       noteDetections = 0;
     }
@@ -177,12 +210,19 @@ const frame = async () => {
     transpose,
     points,
     currentSongNote,
-    scoreNoteIndex,
+    scoreNoteId,
     averageNoteScore,
   };
 
   gameHistory.unshift(state);
   gameHistory.pop();
+  notifySubscriber("cursor");
+  notifySubscriber("program");
+  notifySubscriber("wait");
+
+  if (scoreNoteId!==null) {
+    notifySubscriber(scoreNoteId);
+  }
 };
 
 export const loadSong = (newSong: Song) => {

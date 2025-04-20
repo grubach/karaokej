@@ -13,6 +13,7 @@ const Wait = ({ song }: Props) => {
   const fillRef = useRef<HTMLDivElement>(null);
 
   useGameState(
+    "wait",
     ([gameState]) => {
       const { elapsed, currentSongNote } = gameState;
       if (!containerRef.current || !fillRef.current) return;

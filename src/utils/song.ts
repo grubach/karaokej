@@ -1,6 +1,7 @@
 import { SongScored } from "../songs";
 
 export type SongNote = {
+  id: string; // unique identifier
   index: number; // index of the note in the score
   time: number; // in seconds
   duration: number; // in beats
@@ -22,7 +23,8 @@ export type Song = {
 
 const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const notesParser = (score: string): SongNote[] => {
+const notesParser = (song: SongScored): SongNote[] => {
+  const { score, id } = song;
   console.log("score", score);
   // split by whitespaces and remove empty strings
   const notes = score.split(/\s+/).filter((note) => note.trim() !== "");
@@ -45,6 +47,7 @@ const notesParser = (score: string): SongNote[] => {
     const time = cursor;
     cursor += duration;
     parsedNotes.push({
+      id: `${id}-${i}`,
       index: i,
       time,
       duration,
@@ -59,7 +62,7 @@ const notesParser = (score: string): SongNote[] => {
 
 export const parseSongScored = (songScored: SongScored): Song => {
   const { score, karaokeVideo, originalVideo, ...rest } = songScored;
-  const parsedNotes = notesParser(score);
+  const parsedNotes = notesParser(songScored);
   console.log("parsedNotes", parsedNotes);
   const notesPitches = parsedNotes
     .filter((note) => note.pitch !== null)

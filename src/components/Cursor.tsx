@@ -28,6 +28,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 
   useGameState(
+    "cursor",
     (gameHistory) => {
       if (!cursorRef.current) return;
 

@@ -14,6 +14,7 @@ const Program = ({ song }: Props) => {
   const notesRef = useRef<HTMLDivElement>(null);
   const { notes, startTime, endTime, bpm } = song;
   useGameState(
+    "program",
     ([{ elapsed }]) => {
       if (!notesRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);
@@ -36,12 +37,8 @@ const Program = ({ song }: Props) => {
       >
         {notes
           .filter((note) => note.pitch !== null)
-          .map((note, index) => (
-            <ProgramItem
-              key={`${song.id}-${index}`}
-              songNote={note}
-              song={song}
-            />
+          .map((note) => (
+            <ProgramItem key={note.id} songNote={note} song={song} />
           ))}
       </div>
     </div>
