@@ -25,7 +25,7 @@ function App() {
               <Cursor
                 key={index}
                 tailIndex={index}
-                historyIndex={index * 3}
+                historyIndex={index * 2}
                 song={currentSong}
               />
             ))}

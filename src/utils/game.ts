@@ -85,7 +85,6 @@ export const subscribe = (
   id: string,
   callback: (history: GameState[]) => void
 ) => {
- 
   if (!subscribtions[id]) {
     subscribtions[id] = [];
   }
@@ -149,11 +148,6 @@ const frame = async () => {
   }
 
   let detectedPitch = detect();
-
-  // if (detectedPitch && lastPitch) {
-  //   const diff = Math.abs(detectedPitch - lastPitch);
-  //   if (diff > 12) detectedPitch = null;
-  // }
 
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
@@ -220,7 +214,7 @@ const frame = async () => {
   notifySubscriber("program");
   notifySubscriber("wait");
 
-  if (scoreNoteId!==null) {
+  if (scoreNoteId !== null) {
     notifySubscriber(scoreNoteId);
   }
 };

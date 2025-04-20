@@ -35,7 +35,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       const gameState = gameHistory[historyIndex];
       const { detectedPitch, lastPitch, transpose } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
-      const pitch = anyPitch ? anyPitch + transpose * 12 : averagePitch;
+      const pitch = anyPitch ? anyPitch + 2 * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
