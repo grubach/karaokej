@@ -210,13 +210,16 @@ const frame = async () => {
 
   gameHistory.unshift(state);
   gameHistory.pop();
-  notifySubscriber("cursor");
-  notifySubscriber("program");
-  notifySubscriber("wait");
 
-  if (scoreNoteId !== null) {
-    notifySubscriber(scoreNoteId);
-  }
+  requestAnimationFrame(() => {
+    notifySubscriber("cursor");
+    notifySubscriber("program");
+    notifySubscriber("wait");
+
+    if (scoreNoteId !== null) {
+      notifySubscriber(scoreNoteId);
+    }
+  });
 };
 
 export const loadSong = (newSong: Song) => {

@@ -14,7 +14,7 @@
 .fill {
   position: absolute;
   inset: 0;
-  background-color: var(--color-note);
+  background-color: var(--color-cursor);
   transform-origin: left;
   transform: scaleX(1);
 }

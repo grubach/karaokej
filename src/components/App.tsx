@@ -18,7 +18,7 @@ function App() {
       {currentSong && (
         <>
           <Controls />
-          <Track>
+          <Track song={currentSong}>
             <Program song={currentSong} />
             <Wait song={currentSong} />
             {Array.from({ length: 10 }, (_, index) => (
