@@ -19,6 +19,7 @@ type Props = {
 
 const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   const cursorRef = useRef<HTMLDivElement>(null);
+  const accentRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
 
   const { averagePitch, bpm } = song;
@@ -30,12 +31,12 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   useGameState(
     "cursor",
     (gameHistory) => {
-      if (!cursorRef.current) return;
+      if (!cursorRef.current || !accentRef.current) return;
 
       const gameState = gameHistory[historyIndex];
       const { detectedPitch, lastPitch, transpose } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
-      const pitch = anyPitch ? anyPitch + 2 * 12 : averagePitch;
+      const pitch = anyPitch ? anyPitch + transpose * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
@@ -53,6 +54,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       }
 
       cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
+      accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
     },
     [cursorRef, positionRef, historyIndex, bpm, averagePitch, tailIndex]
   );
@@ -74,7 +76,9 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
           style={{
             transform: `scale(${scale})`,
           }}
-        ></div>
+        >
+          <div className={style.accent} ref={accentRef}></div>
+        </div>
       </div>
     </div>
   );

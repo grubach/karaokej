@@ -1,4 +1,4 @@
-export const DETECTIONS_PER_SECOND = 60;
+export const DETECTIONS_PER_SECOND = 40;
 export const HISTORY_DURATION = 1; // seconds
 export const HISTORY_SIZE = HISTORY_DURATION * DETECTIONS_PER_SECOND;
 export const PREHISTORY_SIZE = 5; 
@@ -18,6 +18,9 @@ document.documentElement.style.setProperty("--color-passed", COLOR_PASSED);
 
 export const COLOR_CURSOR = "#00ffff";
 document.documentElement.style.setProperty("--color-cursor", COLOR_CURSOR);
+
+export const COLOR_ACCENT = "#ff88ff";
+document.documentElement.style.setProperty("--color-accent", COLOR_ACCENT);
 
 export const COLOR_GOOD = "#00ff00";
 document.documentElement.style.setProperty("--color-good", COLOR_GOOD);
