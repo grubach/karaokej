@@ -34,29 +34,33 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       if (!cursorRef.current || !accentRef.current) return;
 
       const gameState = gameHistory[historyIndex];
-      const { detectedPitch, lastPitch, transpose } = gameState;
+
+      const { detectedPitch, lastPitch, transpose, elapsed } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
       const pitch = anyPitch ? anyPitch + transpose * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
 
-      let y = ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2;
+      // const phase = timeToBeats(elapsed, bpm) % 1;
+      const sinusoidalMovement = 0
+      // detectedPitch
+      //   ? 0
+      //   : Math.sin(phase * 2 * Math.PI) * NOTE_HEIGHT / 4;
+
+      const y = ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2 + sinusoidalMovement;
+
       const x =
-        -timeToBeats((historyIndex * 1000) / DETECTIONS_PER_SECOND, bpm) *
-        BEAT_WIDTH;
+        left -
+        timeToBeats((historyIndex * 1000) / DETECTIONS_PER_SECOND, bpm) *
+          BEAT_WIDTH;
 
-      if (!detectedPitch) {
-        y +=
-          (Math.sin(timeToBeats(gameState.elapsed, bpm) * Math.PI) *
-            NOTE_HEIGHT) /
-          4;
-      }
-
-      cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
-      accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
+      cursorRef.current.style.transform = `translate(${x.toFixed(
+        2
+      )}px, ${y.toFixed(2)}px)`;
+      // accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
     },
-    [cursorRef, positionRef, historyIndex, bpm, averagePitch, tailIndex]
+    [cursorRef, positionRef, historyIndex, bpm, averagePitch, tailIndex, left]
   );
 
   return (
@@ -66,11 +70,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
         zIndex: 10 - tailIndex,
       }}
     >
-      <div
-        className={style.movable}
-        style={{ left: `${left}px` }}
-        ref={cursorRef}
-      >
+      <div className={style.movable} ref={cursorRef}>
         <div
           className={style.ball}
           style={{

@@ -1,14 +1,14 @@
 export const bpmToTime = (bpm: number) => {
-  return (60 / bpm) * 1000;
-}
+  return (60 * 1000) / bpm;
+};
 export const timeToBpm = (time: number) => {
-  return (60 / time) * 1000;
-}
+  return (60 * 1000) / time;
+};
 
 export const timeToBeats = (time: number, bpm: number) => {
-  return (time / bpmToTime(bpm));
-}
+  return time / timeToBpm(bpm);
+};
 
 export const beatsToTime = (beats: number, bpm: number) => {
-  return (beats * bpmToTime(bpm));
-}
+  return beats * timeToBpm(bpm);
+};

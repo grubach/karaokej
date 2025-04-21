@@ -9,6 +9,8 @@ import { useState } from "react";
 import SongList from "./song-list/SongList";
 import Wait from "./Wait";
 
+const cursors = Array.from({ length: 10 }, (_, index) => index);
+
 function App() {
   const [currentSong, setCurrentSong] = useState<Song>();
 
@@ -20,7 +22,7 @@ function App() {
           <Track song={currentSong}>
             <Program song={currentSong} />
             <Wait song={currentSong} />
-            {Array.from({ length: 10 }, (_, index) => (
+            {cursors.map((index) => (
               <Cursor
                 key={index}
                 tailIndex={index}

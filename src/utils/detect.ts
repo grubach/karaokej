@@ -31,7 +31,7 @@ const prehistory: (number | null)[] = Array.from(
 
 const cleanupPrehistory = () => {
   const minLength = 3;
-  const maxDistance = 2;
+  const maxDistance = 8;
 
   const isBreak = (i: number) => {
     const note = prehistory[i];
@@ -79,7 +79,7 @@ export const getHistory = () => history;
 export const getLastDetectedPitch = () => history[0];
 
 let initialized = false;
-export const resetAudioContext = async () => {
+export const initAudioContext = async () => {
   if (initialized) {
     return;
   }
@@ -134,7 +134,7 @@ export const startDetecting = async () => {
   if (interval) {
     clearInterval(interval);
   }
-  await resetAudioContext();
+  await initAudioContext();
   interval = setInterval(writeHistory, 1000 / DETECTIONS_PER_SECOND);
   return true;
 };

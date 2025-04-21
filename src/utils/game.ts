@@ -1,5 +1,5 @@
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE, LATENCY } from "../constants";
-import { getLastDetectedPitch, resetAudioContext, startDetecting, stopDetecting } from "./detect";
+import { detect, initAudioContext } from "./detect";
 import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
@@ -127,13 +127,17 @@ const findNearestDifference = (target: number, detectedPitch: number) => {
   return diff;
 };
 
-const frame = async () => {
+let currentVideoTime = 0;
+const frame = () => {
   if (!song) {
     console.error("No song loaded");
     return;
   }
 
-  const elapsed = await getVideoTime();
+  const elapsed = currentVideoTime;
+  getVideoTime().then((time) => {
+    currentVideoTime = time;
+  });
 
   if (elapsed > song.endTime) {
     clearInterval(interval);
@@ -147,7 +151,7 @@ const frame = async () => {
     return;
   }
 
-  let detectedPitch = getLastDetectedPitch();
+  let detectedPitch = detect();
 
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
@@ -211,15 +215,13 @@ const frame = async () => {
   gameHistory.unshift(state);
   gameHistory.pop();
 
-  // requestAnimationFrame(() => {
-    notifySubscriber("cursor");
-    notifySubscriber("program");
-    notifySubscriber("wait");
+  notifySubscriber("cursor");
+  notifySubscriber("program");
+  notifySubscriber("wait");
 
-    if (scoreNoteId !== null) {
-      notifySubscriber(scoreNoteId);
-    }
-  // });
+  if (scoreNoteId !== null) {
+    notifySubscriber(scoreNoteId);
+  }
 };
 
 export const loadSong = (newSong: Song) => {
@@ -229,11 +231,26 @@ export const loadSong = (newSong: Song) => {
   song = newSong;
 };
 
-export const stopGame = () => {
-  if (interval) {
-    clearInterval(interval);
+let playing = false;
+let lastFrameTime = 0;
+const proceedGame = async () => {
+  const currentTime = performance.now();
+  if (Math.random() < 0.01) {
+    const fps = 1000 / (currentTime - lastFrameTime);
+    console.log("FPS:", fps);
   }
-  stopDetecting();
+  lastFrameTime = currentTime;
+
+  frame();
+
+  if (playing) {
+    requestAnimationFrame(proceedGame);
+  }
+};
+
+export const stopGame = () => {
+  playing = false;
+
   pauseVideo();
   interval = 0;
   return true;
@@ -241,19 +258,16 @@ export const stopGame = () => {
 
 export const startGame = async () => {
   resetGameHistory();
-  await resetAudioContext();
-  startDetecting();
+  await initAudioContext();
+
   overallScore = 0;
   overallDetections = 0;
   overallNoteDetections = 0;
   lastPitch = null;
 
-  if (interval) {
-    clearInterval(interval);
-  }
-
   playVideo();
+  playing = true;
+  proceedGame();
 
-  interval = setInterval(frame, 1000 / DETECTIONS_PER_SECOND);
   return true;
 };

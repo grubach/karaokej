@@ -13,28 +13,21 @@ type Props = {
 const Program = ({ song }: Props) => {
   const notesRef = useRef<HTMLDivElement>(null);
   const { notes, startTime, endTime, bpm } = song;
+  const left = timeToBeats(startTime, bpm) * BEAT_WIDTH;
   useGameState(
     "program",
     ([{ elapsed }]) => {
       if (!notesRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);
       const translate = beatsPassed * BEAT_WIDTH;
-      notesRef.current.style.transform = `translateX(${-translate}px)`;
+      notesRef.current.style.transform = `translateX(${left - translate}px)`;
     },
-    [notesRef, notes, startTime, endTime, bpm]
+    [notesRef, notes, startTime, endTime, bpm, left]
   );
-
-  const left = timeToBeats(startTime, bpm) * BEAT_WIDTH;
 
   return (
     <div className={style.Program}>
-      <div
-        ref={notesRef}
-        className={style.notes}
-        style={{
-          left: `${left}px`,
-        }}
-      >
+      <div ref={notesRef} className={style.notes}>
         {notes
           .filter((note) => note.pitch !== null)
           .map((note) => (

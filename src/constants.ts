@@ -1,4 +1,4 @@
-export const DETECTIONS_PER_SECOND = 40;
+export const DETECTIONS_PER_SECOND = 60;
 export const HISTORY_DURATION = 1; // seconds
 export const HISTORY_SIZE = HISTORY_DURATION * DETECTIONS_PER_SECOND;
 export const PREHISTORY_SIZE = 5; 
