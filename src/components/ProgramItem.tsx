@@ -10,6 +10,7 @@ type Props = {
 };
 
 const ProgramItem = ({ songNote, song }: Props) => {
+  const shapeRef = useRef<HTMLDivElement>(null);
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
@@ -18,12 +19,21 @@ const ProgramItem = ({ songNote, song }: Props) => {
   useGameState(
     id,
     ([gameState]) => {
-      if (!goodRef.current || !passedRef.current) return;
+      if (!goodRef.current || !passedRef.current || !shapeRef.current) return;
 
       const { averageNoteScore } = gameState;
       if (averageNoteScore) {
         passedRef.current.style.opacity = "1";
         goodRef.current.style.opacity = averageNoteScore.toFixed(2);
+        // shapeRef.current.style.transform = `scale(${
+        //   1 + averageNoteScore * 0.25
+        // })`;
+
+        // requestAnimationFrame(() => {
+        //   if (shapeRef.current) {
+        //     shapeRef.current.style.transform = `scale(1)`;
+        //   }
+        // });
       }
     },
     []
@@ -42,8 +52,10 @@ const ProgramItem = ({ songNote, song }: Props) => {
         top: `${((song.averagePitch - pitch!) * NOTE_HEIGHT) / 2}px`,
       }}
     >
-      <div className={style.passed} ref={passedRef}></div>
-      <div className={style.good} ref={goodRef}></div>
+      <div className={style.shape} ref={shapeRef}>
+        <div className={style.passed} ref={passedRef}></div>
+        <div className={style.good} ref={goodRef}></div>
+      </div>
       <span className={style.text}>{formattedText}</span>
     </div>
   );

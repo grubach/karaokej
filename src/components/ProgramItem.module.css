@@ -1,10 +1,7 @@
 .ProgramItem {
   position: absolute;
-  background-color: var(--color-note);
   height: var(--note-height);
   width: var(--note-height);
-  border-radius: var(--note-height);
-  border: 1px solid var(--color-background);
 }
 
 .text {
@@ -19,14 +16,23 @@
   font-size: 14pt;
 }
 
+.shape {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-note);
+  border-radius: var(--note-height);
+  border: 1px solid var(--color-background);
+  overflow: hidden;
+  transition: opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
 .passed {
   position: absolute;
   inset: 0;
   background-color: var(--color-passed);
   opacity: 0;
-  border-radius: var(--note-height);
   transition: opacity 0.2s ease-out;
-  border: 1px solid var(--color-background);
 }
 
 .good {
@@ -34,6 +40,4 @@
   inset: 0;
   background-color: var(--color-good);
   opacity: 0;
-  border-radius: var(--note-height);
-  border: 1px solid var(--color-background);
 }
