@@ -1,5 +1,7 @@
 import { SongScored } from "../songs";
 
+export type Modifier = "narrow";
+
 export type SongNote = {
   id: string; // unique identifier
   index: number; // index of the note in the score
@@ -7,6 +9,7 @@ export type SongNote = {
   duration: number; // in beats
   pitch: number | null; // in semitones
   text: string; // text to display
+  modifier: Modifier | null; // modifier to apply to the note
 };
 
 export type Song = {
@@ -34,7 +37,7 @@ const notesParser = (song: SongScored): SongNote[] => {
   const parsedNotes: SongNote[] = [];
   for (let i = 0; i < notes.length; i++) {
     const note = notes[i];
-    const [noteName, durationName, text] = note.split(":");
+    const [noteName, durationName, text, modifier] = note.split(":");
     const [noteLetter, noteOctave] = noteName.split(/(?=[0-9])/);
     // A4 = 57
     // C4 = 48
@@ -53,6 +56,7 @@ const notesParser = (song: SongScored): SongNote[] => {
       duration,
       pitch,
       text,
+      modifier: (modifier ?? null) as Modifier | null,
     });
   }
   console.log("parsedNotes", parsedNotes);
@@ -74,6 +78,7 @@ export const parseSongScored = (songScored: SongScored): Song => {
   return {
     ...rest,
     video: karaokeVideo,
+    // video: originalVideo,
     averagePitch,
     notes: parsedNotes,
   };

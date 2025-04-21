@@ -3,6 +3,7 @@ import style from "./ProgramItem.module.css";
 import { Song, SongNote } from "../utils/song";
 import useGameState from "../hooks/useGameState";
 import { useRef } from "react";
+import cx from "classnames";
 
 type Props = {
   songNote: SongNote;
@@ -14,7 +15,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
-  const { id, text, duration, pitch, time } = songNote;
+  const { id, text, duration, pitch, time, modifier } = songNote;
 
   useGameState(
     id,
@@ -56,7 +57,13 @@ const ProgramItem = ({ songNote, song }: Props) => {
         <div className={style.passed} ref={passedRef}></div>
         <div className={style.good} ref={goodRef}></div>
       </div>
-      <span className={style.text}>{formattedText}</span>
+      <span
+        className={cx(style.text, {
+          [style.narrow]: modifier === "narrow",
+        })}
+      >
+        {formattedText}
+      </span>
     </div>
   );
 };
