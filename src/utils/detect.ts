@@ -76,6 +76,8 @@ const pushToHistory = (position: number | null) => {
 
 export const getHistory = () => history;
 
+export const getLastDetectedPitch = () => history[0];
+
 let initialized = false;
 export const resetAudioContext = async () => {
   if (initialized) {
@@ -134,5 +136,13 @@ export const startDetecting = async () => {
   }
   await resetAudioContext();
   interval = setInterval(writeHistory, 1000 / DETECTIONS_PER_SECOND);
+  return true;
+};
+
+export const stopDetecting = () => {
+  if (interval) {
+    clearInterval(interval);
+  }
+  interval = 0;
   return true;
 };

@@ -1,5 +1,5 @@
 import { DETECTIONS_PER_SECOND, HISTORY_SIZE, LATENCY } from "../constants";
-import { detect, resetAudioContext } from "./detect";
+import { getLastDetectedPitch, resetAudioContext, startDetecting, stopDetecting } from "./detect";
 import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
@@ -147,7 +147,7 @@ const frame = async () => {
     return;
   }
 
-  let detectedPitch = detect();
+  let detectedPitch = getLastDetectedPitch();
 
   if (detectedPitch !== null) {
     lastPitch = detectedPitch;
@@ -211,7 +211,7 @@ const frame = async () => {
   gameHistory.unshift(state);
   gameHistory.pop();
 
-  requestAnimationFrame(() => {
+  // requestAnimationFrame(() => {
     notifySubscriber("cursor");
     notifySubscriber("program");
     notifySubscriber("wait");
@@ -219,7 +219,7 @@ const frame = async () => {
     if (scoreNoteId !== null) {
       notifySubscriber(scoreNoteId);
     }
-  });
+  // });
 };
 
 export const loadSong = (newSong: Song) => {
@@ -233,6 +233,7 @@ export const stopGame = () => {
   if (interval) {
     clearInterval(interval);
   }
+  stopDetecting();
   pauseVideo();
   interval = 0;
   return true;
@@ -241,6 +242,7 @@ export const stopGame = () => {
 export const startGame = async () => {
   resetGameHistory();
   await resetAudioContext();
+  startDetecting();
   overallScore = 0;
   overallDetections = 0;
   overallNoteDetections = 0;
