@@ -18,18 +18,18 @@ const Track = ({ children, song }: PropsWithChildren<Props>) => {
     ([{ elapsed }]) => {
       if (!backgroundRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);
-      const translate = (beatsPassed % 12)/12 * NOTE_HEIGHT*12;
+      const translate = ((beatsPassed % 12) / 12) * NOTE_HEIGHT * 12;
       backgroundRef.current.style.transform = `translateX(${-translate}px)`;
     },
     [backgroundRef, notes, startTime, endTime, bpm]
   );
 
-  return <div className={style.Track}>
-    <div className={style.background}
-    ref={backgroundRef}
-    ></div>
-    <div className={style.line}></div>
-    {children}
-    </div>;
+  return (
+    <div className={style.Track}>
+      <div className={style.background} ref={backgroundRef}></div>
+      <div className={style.line}></div>
+      {children}
+    </div>
+  );
 };
 export default Track;

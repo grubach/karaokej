@@ -17,6 +17,10 @@ const Player = ({ song }: Props) => {
     loadSong(song);
   }, [song]);
 
-  return <div className={style.Player} id="video-player"></div>;
+  return (
+    <div className={style.Player}>
+      <div className={style.iframe} id="video-player"></div>
+    </div>
+  );
 };
 export default Player;

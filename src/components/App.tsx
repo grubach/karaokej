@@ -17,7 +17,6 @@ function App() {
       <SongList currentSong={currentSong} setCurrentSong={setCurrentSong} />
       {currentSong && (
         <>
-          <Controls />
           <Track song={currentSong}>
             <Program song={currentSong} />
             <Wait song={currentSong} />
@@ -31,6 +30,7 @@ function App() {
             ))}
           </Track>
           <Player song={currentSong} />
+          <Controls />
         </>
       )}
     </div>

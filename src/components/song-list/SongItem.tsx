@@ -20,7 +20,15 @@ const SongItem = ({ song, onSelect, selected }: Props) => {
       })}
       onClick={handleClick}
     >
-      {song.artist} - {song.title}
+      <img
+        className={style.cover}
+        src={`https://img.youtube.com/vi/${song.karaokeVideo}/0.jpg`}
+        alt={song.title}
+      />
+      <div className={style.info}>
+        <div className={style.title}>{song.title}</div>
+        <div className={style.artist}>{song.artist}</div>
+      </div>
     </div>
   );
 };
