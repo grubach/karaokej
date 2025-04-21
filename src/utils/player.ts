@@ -50,12 +50,12 @@ export const pauseVideo = () => {
   player.pauseVideo();
 };
 
-export const seekTo = (time: number) => {
+export const seekTo = (seconds: number) => {
   if (!player) {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.seekTo(time / 1000, true); // Convert milliseconds to seconds
+  player.seekTo(seconds, true);
 };
 
 export const getVideoTime = async () => {
@@ -64,5 +64,5 @@ export const getVideoTime = async () => {
     return 0;
   }
   const time = await player.getCurrentTime();
-  return time * 1000; // Convert to milliseconds
+  return time; // Time in seconds
 };

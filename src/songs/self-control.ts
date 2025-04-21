@@ -37,8 +37,8 @@ export default {
   title: "Self Control",
   artist: "Laura Branigan",
   bpm: 107,
-  startTime: 1310,
-  endTime: 4 * 60000 + 17 * 1000,
+  startTime: 1.31,
+  endTime: 4 * 60 + 17,
   karaokeVideo: "4KtNvgaEScA",
   originalVideo: "RP0_8J7uxhs",
   score: `

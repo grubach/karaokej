@@ -1,4 +1,4 @@
-import { DETECTIONS_PER_SECOND, HISTORY_SIZE, LATENCY } from "../constants";
+import { HISTORY_SIZE, LATENCY } from "../constants";
 import { detect, initAudioContext } from "./detect";
 import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";

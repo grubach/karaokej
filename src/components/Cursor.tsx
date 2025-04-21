@@ -22,7 +22,7 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
   const accentRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
 
-  const { averagePitch, bpm } = song;
+  const { averagePitch, bpm, startTime } = song;
 
   const left = -timeToBeats(LATENCY, bpm) * BEAT_WIDTH;
 
@@ -42,25 +42,35 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
 
-      // const phase = timeToBeats(elapsed, bpm) % 1;
-      const sinusoidalMovement = 0
-      // detectedPitch
-      //   ? 0
-      //   : Math.sin(phase * 2 * Math.PI) * NOTE_HEIGHT / 4;
+      const phase = timeToBeats(elapsed - startTime, bpm) % 2;
+      const sin = Math.sin(phase * Math.PI) * 2;
+      const sinusoidalMovement = detectedPitch
+        ? 0
+        : (Math.round(sin) * NOTE_HEIGHT) / 8;
 
-      const y = ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2 + sinusoidalMovement;
+      const y =
+        ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2 +
+        sinusoidalMovement;
 
       const x =
         left -
-        timeToBeats((historyIndex * 1000) / DETECTIONS_PER_SECOND, bpm) *
-          BEAT_WIDTH;
+        timeToBeats(historyIndex / DETECTIONS_PER_SECOND, bpm) * BEAT_WIDTH;
 
       cursorRef.current.style.transform = `translate(${x.toFixed(
         2
       )}px, ${y.toFixed(2)}px)`;
-      // accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
+      accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
     },
-    [cursorRef, positionRef, historyIndex, bpm, averagePitch, tailIndex, left]
+    [
+      cursorRef,
+      positionRef,
+      historyIndex,
+      bpm,
+      averagePitch,
+      tailIndex,
+      left,
+      startTime,
+    ]
   );
 
   return (

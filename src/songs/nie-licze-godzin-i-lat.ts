@@ -45,7 +45,7 @@ export default {
   artist: "Andrzej Rybiński",
   bpm: 118,
   startTime: 0,
-  endTime: 3 * 60000 + 21000,
+  endTime: 3 * 60 + 21,
   karaokeVideo: "detOV0GWAKE",
   originalVideo: "ntSQBJdK0eQ",
   score: `

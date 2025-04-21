@@ -40,8 +40,8 @@ export default {
   title: "Bierz co chcesz",
   artist: "Shazza",
   bpm: 140,
-  startTime: 1370,
-  endTime: 3 * 60000 + 33010,
+  startTime: 1.370,
+  endTime: 3 * 60 + 33.010,
   karaokeVideo: "ayONooHdYdk",
   originalVideo: "2W0UoEdECZI",
   score: `

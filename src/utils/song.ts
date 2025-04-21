@@ -18,8 +18,8 @@ export type Song = {
   artist: string;
   video: string; // YouTube video ID
   bpm: number; // beats per minute
-  startTime: number; // in milliseconds
-  endTime: number; // in milliseconds
+  startTime: number; // in seconds
+  endTime: number; // in seconds
   averagePitch: number; // in semitones
   notes: SongNote[];
 };

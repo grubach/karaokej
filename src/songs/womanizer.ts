@@ -97,8 +97,8 @@ export default {
   title: "Womanizer",
   artist: "Britney Spears",
   bpm: 139,
-  startTime: 3450,
-  endTime: 3 * 60000 + 47000,
+  startTime: 3.45,
+  endTime: 3 * 60 + 47,
   karaokeVideo: "McpTKMJP8Cc",
   originalVideo: "rMqayQ-U74s",
   score: `
