@@ -3,6 +3,7 @@ import { detect, initAudioContext } from "./detect";
 import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
+import { createStore } from "./store";
 
 let song: Song | null = null;
 
@@ -67,44 +68,17 @@ const initialState: GameState = {
   averageNoteScore: 0,
 };
 
-const gameHistory: GameState[] = Array.from(
+const initialValue: GameState[] = Array.from(
   { length: HISTORY_SIZE },
   () => initialState
 );
 
-// export const getGameHistory = () => gameHistory;
-const resetGameHistory = () => {
-  for (let i = 0; i < HISTORY_SIZE; i++) {
-    gameHistory[i] = initialState;
-  }
-};
+export const gameStore = createStore(initialValue);
 
-const subscribtions: Record<string, ((history: GameState[]) => void)[]> = {};
 
-export const subscribe = (
-  id: string,
-  callback: (history: GameState[]) => void
-) => {
-  if (!subscribtions[id]) {
-    subscribtions[id] = [];
-  }
-  subscribtions[id].push(callback);
 
-  const unsubscribe = () => {
-    if (subscribtions[id]) {
-      subscribtions[id] = subscribtions[id].filter((cb) => cb !== callback);
-    }
-  };
-  return unsubscribe;
-};
 
-const notifySubscriber = (id: string) => {
-  if (subscribtions[id]) {
-    subscribtions[id].forEach((callback) => {
-      callback(gameHistory);
-    });
-  }
-};
+
 
 const findTranspose = (target: number, detectedPitch: number) => {
   let transpose = 0;
@@ -212,15 +186,17 @@ const frame = () => {
     averageNoteScore,
   };
 
+  const gameHistory = gameStore.getValue();
   gameHistory.unshift(state);
   gameHistory.pop();
+  gameStore.setValue(gameHistory);
 
-  notifySubscriber("cursor");
-  notifySubscriber("program");
-  notifySubscriber("wait");
+  gameStore.notifySubscriber("cursor");
+  gameStore.notifySubscriber("program");
+  gameStore.notifySubscriber("wait");
 
   if (scoreNoteId !== null) {
-    notifySubscriber(scoreNoteId);
+    gameStore.notifySubscriber(scoreNoteId);
   }
 };
 
@@ -257,7 +233,7 @@ export const stopGame = () => {
 };
 
 export const startGame = async () => {
-  resetGameHistory();
+  gameStore.resetValue();
   await initAudioContext();
 
   overallScore = 0;
@@ -266,7 +242,7 @@ export const startGame = async () => {
   lastPitch = null;
 
   playVideo();
-console.log("Playing video", playing);
+
   if (!playing) {
     playing = true;
     proceedGame();
