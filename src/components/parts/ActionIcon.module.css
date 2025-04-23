@@ -5,4 +5,7 @@
     color: var(--color-background);
     font-size: 2rem;
     border-radius: calc(var(--note-height) / 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

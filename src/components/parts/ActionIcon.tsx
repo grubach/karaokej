@@ -1,7 +1,8 @@
+import { ReactNode } from "react";
 import style from "./ActionIcon.module.css";
 
 type Props = {
-  icon: string;
+  icon: ReactNode
   onClick: () => void;
   disabled?: boolean;
 };

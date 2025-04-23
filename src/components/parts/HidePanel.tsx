@@ -1,10 +1,11 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, ReactNode, useState } from "react";
 import style from "./HidePanel.module.css";
 import ActionIcon from "./ActionIcon";
 import cx from "classnames";
 
 type Props = {
   direction: "left" | "right" | "up" | "down";
+  icon: ReactNode;
   className?: string;
 };
 
@@ -12,11 +13,12 @@ const HidePanel = ({
   direction,
   children,
   className,
+  icon,
 }: PropsWithChildren<Props>) => {
   const [hidden, setHidden] = useState(true);
-    const toggleHidden = () => {
-        setHidden((prev) => !prev);
-    };
+  const toggleHidden = () => {
+    setHidden((prev) => !prev);
+  };
   return (
     <div
       className={cx(style.HidePanel, className, {
@@ -27,7 +29,7 @@ const HidePanel = ({
         [style.down]: direction === "down",
       })}
     >
-   {children}
+      {children}
       <div
         className={cx(style.button, {
           [style.hidden]: hidden,
@@ -37,9 +39,7 @@ const HidePanel = ({
           [style.down]: direction === "down",
         })}
       >
-        <ActionIcon icon="◀" onClick={
-            toggleHidden
-        } />
+        <ActionIcon icon={icon} onClick={toggleHidden} />
       </div>
     </div>
   );
