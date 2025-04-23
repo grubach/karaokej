@@ -4,5 +4,5 @@
     background-color: var(--color-cursor);
     color: var(--color-background);
     font-size: 2rem;
-    /* border-radius: 50%; */
+    border-radius: calc(var(--note-height) / 2);
 }

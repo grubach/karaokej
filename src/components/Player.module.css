@@ -4,6 +4,8 @@
   left: 0;
   width: 80px;
   height: 45px;
+  padding: 0.5rem;
+  border-radius: calc(var(--note-height) / 2);
   overflow: hidden;
 }
 
