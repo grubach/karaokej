@@ -37,7 +37,6 @@ export const playVideo = () => {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.seekTo(0, true);
   // player.setPlaybackRate(0.5);
   player.playVideo();
 };
@@ -48,6 +47,15 @@ export const pauseVideo = () => {
     return;
   }
   player.pauseVideo();
+};
+
+export const stopVideo = () => {
+  if (!player) {
+    console.error("YouTube Player not loaded");
+    return;
+  }
+  player.pauseVideo();
+  player.seekTo(0, true);
 };
 
 export const seekTo = (seconds: number) => {

@@ -4,7 +4,7 @@
     background-color: var(--color-cursor);
     color: var(--color-background);
     font-size: 2rem;
-    border-radius: calc(var(--note-height) / 2);
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;

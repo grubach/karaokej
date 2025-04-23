@@ -14,8 +14,9 @@
   background-color: transparent;
   pointer-events: none;
   overflow: hidden;
-  border-radius: calc(var(--note-height) / 2);
+  border-radius: var(--border-radius);
 }
+
 .iframe {
   position: absolute;
   inset: 0;
