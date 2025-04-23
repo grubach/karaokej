@@ -8,7 +8,6 @@ import { Song } from "../utils/song";
 import { useState } from "react";
 import SongList from "./song-list/SongList";
 import Wait from "./Wait";
-import HidePanel from "./parts/HidePanel";
 
 const cursors = Array.from({ length: 10 }, (_, index) => index);
 
