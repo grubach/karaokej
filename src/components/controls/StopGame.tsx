@@ -1,6 +1,7 @@
 import { stopGame } from "../../utils/game";
+import ActionIcon from "../parts/ActionIcon";
 
 const StopGame = () => {
-  return <button onClick={stopGame}>Stop</button>;
+  return <ActionIcon onClick={stopGame} icon="■" />;
 };
 export default StopGame;

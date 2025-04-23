@@ -1,0 +1,8 @@
+.ActionIcon {
+    width: calc(2*var(--note-height));
+    height: calc(2*var(--note-height));
+    background-color: var(--color-cursor);
+    color: var(--color-background);
+    font-size: 2rem;
+    /* border-radius: 50%; */
+}

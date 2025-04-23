@@ -266,8 +266,11 @@ export const startGame = async () => {
   lastPitch = null;
 
   playVideo();
-  playing = true;
-  proceedGame();
+
+  if (!playing) {
+    playing = true;
+    proceedGame();
+  }
 
   return true;
 };

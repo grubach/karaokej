@@ -2,6 +2,7 @@ import { Song } from "../../utils/song";
 import style from "./SongList.module.css";
 import songs from "../../songs";
 import SongItem from "./SongItem";
+import HidePanel from "../parts/HidePanel";
 
 type Props = {
   currentSong?: Song;
@@ -10,7 +11,7 @@ type Props = {
 
 const SongList = ({ currentSong, setCurrentSong }: Props) => {
   return (
-    <div className={style.SongList}>
+    <HidePanel className={style.SongList} direction="left">
       {songs.map((song, index) => (
         <SongItem
           key={index}
@@ -19,7 +20,7 @@ const SongList = ({ currentSong, setCurrentSong }: Props) => {
           selected={currentSong?.id === song.id}
         />
       ))}
-    </div>
+    </HidePanel>
   );
 };
 export default SongList;
