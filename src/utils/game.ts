@@ -8,7 +8,6 @@ import { createStore } from "./store";
 let song: Song | null = null;
 
 let lastPitch: number | null = null;
-let interval: number;
 let transpose: number = 0;
 let overallScore: number = 0;
 let overallDetections: number = 0;
@@ -75,11 +74,6 @@ const initialValue: GameState[] = Array.from(
 
 export const gameStore = createStore(initialValue);
 
-
-
-
-
-
 const findTranspose = (target: number, detectedPitch: number) => {
   let transpose = 0;
   let diff = detectedPitch - target;
@@ -114,9 +108,7 @@ const frame = () => {
   });
 
   if (elapsed > song.endTime) {
-    clearInterval(interval);
-    pauseVideo();
-    interval = 0;
+    stopGame();
     console.log("Game Over");
     console.log("Score:", overallScore);
     console.log("Detections:", overallDetections);
@@ -228,7 +220,6 @@ export const stopGame = () => {
   playing = false;
 
   pauseVideo();
-  interval = 0;
   return true;
 };
 
