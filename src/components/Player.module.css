@@ -2,13 +2,20 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 80px;
-  height: 45px;
+
   padding: 0.5rem;
-  border-radius: calc(var(--note-height) / 2);
-  overflow: hidden;
 }
 
+.container {
+  position: relative;
+  width: 80px;
+  height: 45px;
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: calc(var(--note-height) / 2);
+}
 .iframe {
   position: absolute;
   inset: 0;

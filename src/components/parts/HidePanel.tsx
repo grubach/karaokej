@@ -1,11 +1,12 @@
-import { PropsWithChildren, ReactNode, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import style from "./HidePanel.module.css";
 import ActionIcon from "./ActionIcon";
 import cx from "classnames";
+import { IconType } from "react-icons";
 
 type Props = {
   direction: "left" | "right" | "up" | "down";
-  icon: ReactNode;
+  icon: IconType;
   className?: string;
 };
 

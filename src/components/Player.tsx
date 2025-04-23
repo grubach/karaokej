@@ -19,7 +19,9 @@ const Player = ({ song }: Props) => {
 
   return (
     <div className={style.Player}>
-      <div className={style.iframe} id="video-player"></div>
+      <div className={style.container}>
+        <div className={style.iframe} id="video-player"></div>
+      </div>
     </div>
   );
 };

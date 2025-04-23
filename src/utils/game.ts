@@ -266,7 +266,7 @@ export const startGame = async () => {
   lastPitch = null;
 
   playVideo();
-
+console.log("Playing video", playing);
   if (!playing) {
     playing = true;
     proceedGame();
