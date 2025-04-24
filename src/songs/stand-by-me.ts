@@ -49,7 +49,7 @@ export default {
   artist: "Ben E. King",
   bpm: 121,
   startTime: 0.42,
-  endTime: 3 * 60 + 57.4,
+  endTime: 2 * 60 + 57.4,
   karaokeVideo: "FDLvjWgefqM",
   originalVideo: "hwZNL7QVJjE",
   score: `
