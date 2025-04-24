@@ -12,16 +12,20 @@ type Props = {
 
 const SongItem = ({ songScored }: Props) => {
   const { song } = useStoreState(appStore);
+  const selected = song?.id === songScored.id;
+
   const handleClick = () => {
     appStore.updateValue((state) => ({
       ...state,
       listOpen: false,
     }));
+    
     loadSong(parseSongScored(songScored));
-    startGame();
-  };
 
-  const selected = song?.id === songScored.id;
+    if (!selected) {
+      startGame();
+    }
+  };
 
   return (
     <div

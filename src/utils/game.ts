@@ -192,8 +192,9 @@ const frame = () => {
 
 export const loadSong = (newSong: Song) => {
   const { song } = appStore.getValue();
-  if (song?.id === newSong.id) return;
-  loadVideo(newSong.video);
+  if (song?.id !== newSong.id) {
+    loadVideo(newSong.video);
+  }
   appStore.updateValue((store) => ({
     ...store,
     song: newSong,
