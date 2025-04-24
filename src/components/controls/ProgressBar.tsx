@@ -66,8 +66,8 @@ const ProgressBar = () => {
         </div>
       </div>
       <div className={styles.timers}>
-        <div className={styles.currentTime}>{formatSeconds(elapsed)}</div>
-        <div className={styles.duration}>{formatSeconds(song.endTime)}</div>
+        <span className={styles.currentTime}>{formatSeconds(elapsed)}</span>
+        <span className={styles.duration}>{formatSeconds(song.endTime)}</span>
       </div>
     </div>
   );

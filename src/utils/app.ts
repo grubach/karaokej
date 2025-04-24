@@ -1,14 +1,15 @@
 import { emptySong, Song } from "./song";
 import { createStore } from "./store";
+import { PlayerState } from "./player";
 
 export type AppState = {
   song: Song;
-  playerState: "idle" | "loading" | "playing" | "paused" | "stopped";
+  playerState: PlayerState
 };
 
 const initialState: AppState = {
   song: emptySong,
-  playerState: "idle",
+  playerState: 'unstarted',
 };
 
 export const appStore = createStore(initialState);

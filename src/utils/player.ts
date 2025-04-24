@@ -1,6 +1,18 @@
 import YouTubePlayer from "youtube-player";
+import { appStore } from "./app";
 
 export let player: ReturnType<typeof YouTubePlayer> | null = null;
+
+const stateNames = {
+  "-1": "unstarted",
+  0: "ended",
+  1: "playing",
+  2: "paused",
+  3: "buffering",
+  5: "video cued",
+} as const;
+
+export type PlayerState = (typeof stateNames)[keyof typeof stateNames];
 
 export const loadPlayer = () => {
   if (player) {
@@ -16,11 +28,25 @@ export const loadPlayer = () => {
   player = YouTubePlayer(playerElement, {
     playerVars: {
       autoplay: 0,
-      controls: 1,
+      controls: 0,
       modestbranding: 1,
       rel: 0,
       enablejsapi: 1,
     },
+  });
+
+  player.on("stateChange", (event) => {
+    const playerState = stateNames[event.data as keyof typeof stateNames];
+
+    if (!playerState) {
+      console.error("Unknown state:", event.data);
+      return;
+    }
+
+    appStore.updateValue((store) => ({
+      ...store,
+      playerState,
+    }));
   });
 };
 
@@ -47,6 +73,15 @@ export const pauseVideo = () => {
     return;
   }
   player.pauseVideo();
+};
+
+export const restartVideo = () => {
+  if (!player) {
+    console.error("YouTube Player not loaded");
+    return;
+  }
+  player.seekTo(0, true);
+  player.playVideo();
 };
 
 export const stopVideo = () => {

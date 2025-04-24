@@ -1,20 +1,36 @@
 import { startTransition, useActionState } from "react";
 import { startGame } from "../../utils/game";
 import ActionIcon from "../parts/ActionIcon";
-import { FiPlay, FiSkipBack } from "react-icons/fi";
+import { FiPause, FiPlay } from "react-icons/fi";
+import useStoreState from "../../hooks/useStoreState";
+import { appStore } from "../../utils/app";
+import { pauseVideo, playVideo, restartVideo } from "../../utils/player";
 
 const StartGame = () => {
-  const [isPlaying, handleStart, isPending] = useActionState(startGame, false);
+  const [, handleStart, isPending] = useActionState(startGame, false);
+  const { playerState } = useStoreState(appStore);
 
   const handleClick = () => {
-    startTransition(() => {
-      handleStart();
-    });
+    switch (playerState) {
+      case "playing":
+        pauseVideo();
+        break;
+      case "paused":
+        playVideo();
+        break;
+      case "video cued":
+        startTransition(() => {
+          handleStart();
+        });
+        break;
+      default:
+        restartVideo();
+    }
   };
 
   return (
     <ActionIcon
-      icon={isPlaying ? FiSkipBack : FiPlay}
+      icon={playerState === "playing" ? FiPause : FiPlay}
       onClick={handleClick}
       disabled={isPending}
     />
