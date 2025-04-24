@@ -68,6 +68,13 @@ export default {
   B3:0.5:be B3:1:a- A3:1:fraid P:1.5
   A3:0.5:Just B3:0.5:as C#4:0.25:long B3:0.25 A3:1 P:1.5
   B3:0.5:as C#4:0.5:you B3:0.5:stand, A3:0.5: P:2
-  C#4:0.5:stand B3:0.5:by A3:1 A3:1.5:me P:2
+  C#4:0.5:stand B3:0.5:by A3:1 A3:1.5:me P:1.5
+
+  E4:0.5:So F#4:1:dar- E4:1:lin', A4:1:dar- G#4:1:lin',
+  F#4:0.5:stand E4:0.5 F#4:1 P:0.5 F#4:1:by F#4:1:me P:1
+
+  F#4:1.5:Oh, E4:0.5 F#4:0.5 B3:0.5:stand A3:0.5 B3:0.25 C#4:1.5 B3:1.5:by A3:1:me P:1.5
+  C#4:1.5:Oh, B3:1:stand, A3:1 P:3 C#4:0.5:stand B3:1:by A3:1.5:me P:1
+  C#4:0.5:stand B3:1.5:by A3:1:me
   `,
 };
