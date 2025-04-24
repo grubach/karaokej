@@ -2,20 +2,21 @@ import { useRef } from "react";
 import { BEAT_WIDTH } from "../constants";
 import style from "./Program.module.css";
 import ProgramItem from "./ProgramItem";
-import { Song } from "../utils/song";
 import { timeToBeats } from "../utils/time";
-import useGameState from "../hooks/useGameState";
+import useStore from "../hooks/useStore";
+import { gameStore } from "../utils/game";
+import useStoreState from "../hooks/useStoreState";
+import { appStore } from "../utils/app";
 
-type Props = {
-  song: Song;
-};
 
-const Program = ({ song }: Props) => {
+const Program = () => {
+  const { song } = useStoreState(appStore);
   const notesRef = useRef<HTMLDivElement>(null);
   const { notes, startTime, endTime, bpm } = song;
   const left = timeToBeats(startTime, bpm) * BEAT_WIDTH;
-  useGameState(
-    "program",
+  useStore(
+    gameStore,
+    "default",
     ([{ elapsed }]) => {
       if (!notesRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);

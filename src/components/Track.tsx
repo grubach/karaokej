@@ -1,20 +1,20 @@
 import { PropsWithChildren, useRef } from "react";
 import style from "./Track.module.css";
-import useGameState from "../hooks/useGameState";
-import { Song } from "../utils/song";
 import { timeToBeats } from "../utils/time";
 import { NOTE_HEIGHT } from "../constants";
+import useStore from "../hooks/useStore";
+import useStoreState from "../hooks/useStoreState";
+import { appStore } from "../utils/app";
+import { gameStore } from "../utils/game";
 
-type Props = {
-  song: Song;
-};
-
-const Track = ({ children, song }: PropsWithChildren<Props>) => {
+const Track = ({ children }: PropsWithChildren) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const { song } = useStoreState(appStore);
   const { notes, startTime, endTime, bpm } = song;
 
-  useGameState(
-    "program",
+  useStore(
+    gameStore,
+    "default",
     ([{ elapsed }]) => {
       if (!backgroundRef.current) return;
       const beatsPassed = timeToBeats(elapsed, bpm);

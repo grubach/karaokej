@@ -24,6 +24,19 @@ export type Song = {
   notes: SongNote[];
 };
 
+export const emptySong: Song = {
+  id: "",
+  title: "",
+  artist: "",
+  video: "",
+  bpm: 0,
+  startTime: 0,
+  endTime: 0,
+  averagePitch: 0,
+  notes: [],
+};
+
+
 const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const notesParser = (song: SongScored): SongNote[] => {

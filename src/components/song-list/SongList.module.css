@@ -38,8 +38,6 @@
 
   .artist {
     font-size: 0.8rem;
-    /* font-weight: bold; */
-    color: var(--color-text);
   }
 
   &.selected {

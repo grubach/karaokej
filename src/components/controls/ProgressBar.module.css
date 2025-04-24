@@ -1,0 +1,46 @@
+.ProgressBar {
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.bar {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  flex: 1;
+  height: var(--stroke-width);
+  background-color: var(--color-cursor);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  height: calc(var(--note-height));
+  pointer-events: none;
+}
+.ball {
+  position: absolute;
+  left: calc(-1 * var(--note-height) / 2);
+  width: calc(var(--note-height));
+  height: calc(var(--note-height));
+  background-color: var(--color-cursor);
+  border: var(--stroke-width) solid var(--color-background);
+  border-radius: 50%;
+}
+
+.timers {
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

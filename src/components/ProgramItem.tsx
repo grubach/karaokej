@@ -1,9 +1,10 @@
 import { BEAT_WIDTH, NOTE_HEIGHT } from "../constants";
 import style from "./ProgramItem.module.css";
 import { Song, SongNote } from "../utils/song";
-import useGameState from "../hooks/useGameState";
+import useStore from "../hooks/useStore";
 import { useRef } from "react";
 import cx from "classnames";
+import { gameStore } from "../utils/game";
 
 type Props = {
   songNote: SongNote;
@@ -17,7 +18,8 @@ const ProgramItem = ({ songNote, song }: Props) => {
 
   const { id, text, duration, pitch, time, modifier } = songNote;
 
-  useGameState(
+  useStore(
+    gameStore,
     id,
     ([gameState]) => {
       if (!goodRef.current || !passedRef.current || !shapeRef.current) return;

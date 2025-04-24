@@ -1,18 +1,23 @@
+import useStoreState from "../../hooks/useStoreState";
 import { SongScored } from "../../songs";
-import { parseSongScored, Song } from "../../utils/song";
+import { appStore } from "../../utils/app";
+import { loadSong } from "../../utils/game";
+import { parseSongScored } from "../../utils/song";
 import style from "./SongList.module.css";
 import c from "classnames";
 
 type Props = {
-  song: SongScored;
-  onSelect: (song: Song) => void;
-  selected: boolean;
+  songScored: SongScored;
 };
 
-const SongItem = ({ song, onSelect, selected }: Props) => {
+const SongItem = ({ songScored }: Props) => {
+  const { song } = useStoreState(appStore);
   const handleClick = () => {
-    onSelect(parseSongScored(song));
+    loadSong(parseSongScored(songScored));
   };
+
+  const selected = song?.id === songScored.id;
+
   return (
     <div
       className={c(style.item, {
@@ -22,12 +27,12 @@ const SongItem = ({ song, onSelect, selected }: Props) => {
     >
       <img
         className={style.cover}
-        src={`https://img.youtube.com/vi/${song.karaokeVideo}/0.jpg`}
-        alt={song.title}
+        src={`https://img.youtube.com/vi/${songScored.karaokeVideo}/0.jpg`}
+        alt={songScored.title}
       />
       <div className={style.info}>
-        <div className={style.title}>{song.title}</div>
-        <div className={style.artist}>{song.artist}</div>
+        <div className={style.title}>{songScored.title}</div>
+        <div className={style.artist}>{songScored.artist}</div>
       </div>
     </div>
   );

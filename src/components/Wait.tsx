@@ -1,19 +1,19 @@
 import { useRef } from "react";
-import useGameState from "../hooks/useGameState";
-import { Song } from "../utils/song";
 import { beatsToTime } from "../utils/time";
 import styles from "./Wait.module.css";
+import useStore from "../hooks/useStore";
+import { gameStore } from "../utils/game";
+import { appStore } from "../utils/app";
+import useStoreState from "../hooks/useStoreState";
 
-type Props = {
-  song: Song;
-};
-
-const Wait = ({ song }: Props) => {
+const Wait = () => {
+  const { song } = useStoreState(appStore);
   const containerRef = useRef<HTMLDivElement>(null);
   const fillRef = useRef<HTMLDivElement>(null);
 
-  useGameState(
-    "wait",
+  useStore(
+    gameStore,
+    "default",
     ([gameState]) => {
       const { elapsed, currentSongNote } = gameState;
       if (!containerRef.current || !fillRef.current) return;

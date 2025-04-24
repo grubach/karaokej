@@ -6,18 +6,20 @@ import {
   NOTE_HEIGHT,
   LATENCY,
 } from "../constants";
-import useGameState from "../hooks/useGameState";
+import useStore from "../hooks/useStore";
 import { timeToBeats } from "../utils/time";
-import { Song } from "../utils/song";
 import { clamp } from "../utils/tools";
+import { gameStore } from "../utils/game";
+import useStoreState from "../hooks/useStoreState";
+import { appStore } from "../utils/app";
 
 type Props = {
   historyIndex: number;
   tailIndex: number;
-  song: Song;
 };
 
-const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
+const Cursor = ({ historyIndex, tailIndex }: Props) => {
+  const { song } = useStoreState(appStore);
   const cursorRef = useRef<HTMLDivElement>(null);
   const accentRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
@@ -28,8 +30,9 @@ const Cursor = ({ historyIndex, tailIndex, song }: Props) => {
 
   const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 
-  useGameState(
-    "cursor",
+  useStore(
+    gameStore,
+    "default",
     (gameHistory) => {
       if (!cursorRef.current || !accentRef.current) return;
 

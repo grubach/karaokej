@@ -4,8 +4,9 @@ import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
 import { createStore } from "./store";
+import { appStore } from "./app";
 
-let song: Song | null = null;
+// let song: Song | null = null;
 
 let lastPitch: number | null = null;
 let transpose: number = 0;
@@ -97,7 +98,8 @@ const findNearestDifference = (target: number, detectedPitch: number) => {
 
 let currentVideoTime = 0;
 const frame = () => {
-  if (!song) {
+  const song = appStore.getValue().song;
+  if (song.id === "") {
     console.error("No song loaded");
     return;
   }
@@ -183,20 +185,19 @@ const frame = () => {
   gameHistory.pop();
   gameStore.setValue(gameHistory);
 
-  gameStore.notifySubscriber("cursor");
-  gameStore.notifySubscriber("program");
-  gameStore.notifySubscriber("wait");
-
   if (scoreNoteId !== null) {
     gameStore.notifySubscriber(scoreNoteId);
   }
 };
 
 export const loadSong = (newSong: Song) => {
-  if (song?.id !== newSong.id) {
-    loadVideo(newSong.video);
-  }
-  song = newSong;
+  const { song } = appStore.getValue();
+  if (song?.id === newSong.id) return;
+  loadVideo(newSong.video);
+  appStore.updateValue((store) => ({
+    ...store,
+    song: newSong,
+  }));
 };
 
 let playing = false;
