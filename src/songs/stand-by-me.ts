@@ -55,8 +55,8 @@ export default {
   score: `
   P:30.5
 
-  C#4:0.5:When E4:0.5:the F#4:1:night P:2 
-  C#4:0.5:has E4:1.5:come P:5.5
+  C#4:0.5:When E4:0.5:the F#4:1:night P:2.5
+  C#4:0.5:has E4:1.5:come P:5
   A3:0.25:And B3:0.25:the C#4:0.5:land B3:1:is A3:1.5:dark P:1.5
   A3:0.5:And B3:0.5:the C#4:0.25:moon B3:0.25 A3:1 P:1.5
   A3:0.5:is C#4:0.5:the B3:0.5:on- A3:0.5 B3:0.5:ly C#4:1 P:0.5 
