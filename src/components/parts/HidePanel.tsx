@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 import style from "./HidePanel.module.css";
 import ActionIcon from "./ActionIcon";
 import cx from "classnames";
@@ -8,6 +8,8 @@ type Props = {
   direction: "left" | "right" | "up" | "down";
   icon: IconType;
   className?: string;
+  open: boolean;
+  onToggle: (value: boolean) => void;
 };
 
 const HidePanel = ({
@@ -15,15 +17,16 @@ const HidePanel = ({
   children,
   className,
   icon,
+  open,
+  onToggle,
 }: PropsWithChildren<Props>) => {
-  const [hidden, setHidden] = useState(true);
-  const toggleHidden = () => {
-    setHidden((prev) => !prev);
+  const handleClick = () => {
+    onToggle(!open);
   };
   return (
     <div
       className={cx(style.HidePanel, className, {
-        [style.hidden]: hidden,
+        [style.hidden]: !open,
         [style.left]: direction === "left",
         [style.right]: direction === "right",
         [style.up]: direction === "up",
@@ -33,14 +36,14 @@ const HidePanel = ({
       {children}
       <div
         className={cx(style.button, {
-          [style.hidden]: hidden,
+          [style.hidden]: !open,
           [style.left]: direction === "left",
           [style.right]: direction === "right",
           [style.up]: direction === "up",
           [style.down]: direction === "down",
         })}
       >
-        <ActionIcon icon={icon} onClick={toggleHidden} />
+        <ActionIcon icon={icon} onClick={handleClick} />
       </div>
     </div>
   );
