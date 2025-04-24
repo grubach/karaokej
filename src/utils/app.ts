@@ -4,12 +4,14 @@ import { PlayerState } from "./player";
 
 export type AppState = {
   song: Song;
-  playerState: PlayerState
+  playerState: PlayerState;
+  speed: number;
 };
 
 const initialState: AppState = {
   song: emptySong,
-  playerState: 'unstarted',
+  playerState: "unstarted",
+  speed: 1,
 };
 
 export const appStore = createStore(initialState);

@@ -19,14 +19,14 @@ type Props = {
 };
 
 const Cursor = ({ historyIndex, tailIndex }: Props) => {
-  const { song } = useStoreState(appStore);
+  const { song, speed } = useStoreState(appStore);
   const cursorRef = useRef<HTMLDivElement>(null);
   const accentRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
 
   const { averagePitch, bpm, startTime } = song;
 
-  const left = -timeToBeats(LATENCY, bpm) * BEAT_WIDTH;
+  const left = -timeToBeats(LATENCY, bpm) * speed * BEAT_WIDTH;
 
   const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 

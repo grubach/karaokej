@@ -1,15 +1,17 @@
 import style from "./Controls.module.css";
 import Player from "./Player";
 import ProgressBar from "./ProgressBar";
-import StartGame from "./StartGame";
+import PlayPauseGame from "./PlayPauseGame";
 import StopGame from "./StopGame";
+import Speed from "./Speed";
 
 const Controls = () => {
   return (
     <div className={style.Controls}>
       <Player />
       <ProgressBar />
-      <StartGame />
+      <Speed />
+      <PlayPauseGame />
       <StopGame />
     </div>
   );

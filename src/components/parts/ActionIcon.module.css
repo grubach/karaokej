@@ -1,10 +1,15 @@
 .ActionIcon {
     width: calc(2*var(--note-height));
     height: calc(2*var(--note-height));
-    color: var(--color-cursor);
-    font-size: 2rem;
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-cursor);
+}
+
+.text {
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: bold;
 }

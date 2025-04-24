@@ -6,7 +6,7 @@ import useStoreState from "../../hooks/useStoreState";
 import { appStore } from "../../utils/app";
 import { pauseVideo, playVideo, restartVideo } from "../../utils/player";
 
-const StartGame = () => {
+const PlayPauseGame = () => {
   const [, handleStart, isPending] = useActionState(startGame, false);
   const { playerState } = useStoreState(appStore);
 
@@ -36,4 +36,4 @@ const StartGame = () => {
     />
   );
 };
-export default StartGame;
+export default PlayPauseGame;

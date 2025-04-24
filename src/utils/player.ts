@@ -101,6 +101,14 @@ export const seekTo = (seconds: number) => {
   player.seekTo(seconds, true);
 };
 
+export const setVideoSpeed = (speed: number) => {
+  if (!player) {
+    console.error("YouTube Player not loaded");
+    return;
+  }
+  player.setPlaybackRate(speed);
+};
+
 export const getVideoTime = async () => {
   if (!player) {
     console.error("YouTube Player not loaded");
