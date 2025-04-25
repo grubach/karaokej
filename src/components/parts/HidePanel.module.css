@@ -1,8 +1,15 @@
 .HidePanel {
   transition: transform 0.2s ease-out;
+  max-height: 100%;
   &.hidden {
     transform: translateX(-100%);
   }
+}
+
+.content {
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .button {

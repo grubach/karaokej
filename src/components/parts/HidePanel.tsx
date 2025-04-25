@@ -33,7 +33,7 @@ const HidePanel = ({
         [style.down]: direction === "down",
       })}
     >
-      {children}
+      <div className={style.content}>{children}</div>
       <div
         className={cx(style.button, {
           [style.hidden]: !open,
