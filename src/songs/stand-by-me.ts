@@ -76,5 +76,47 @@ export default {
   F#4:1.5:Oh, E4:0.5 F#4:0.5 B3:0.5:stand A3:0.5 B3:0.25 C#4:1.5 B3:1.5:by A3:1:me P:1.5
   C#4:1.5:Oh, B3:1:stand, A3:1 P:3 C#4:0.5:stand B3:1:by A3:1.5:me P:1
   C#4:0.5:stand B3:1.5:by A3:1:me
+
+  P:3
+
+  C#4:0.5:If E4:0.5:the F#4:1:sky P:2
+  C#4:0.5:that E4:0.33:we:narrow E4:0.33:look F#4:0.34:u- E4:1.5:pon P:4
+  B3:0.5:Should C#4:0.5:tum- C#4:0.5:ble B3:1:and A3:1:fall P:1.5
+  A3:0.5:Or B3:0.5:the C#4:0.5:moun- B3:0.5:tains A3:1.5 P:1.5
+  C#4:0.5:should:narrow C#4:0.5:crum- B3:0.5:ble- A3:0.5 P:1
+  B3:0.5:to B3:1:the A3:1:sea P:6
+
+  C#4:0.5:I E4:0.5:won't F#4:1:cry P:2
+  C#4:0.5:I F#4:1:won't F#4:1:cry P:.5
+  F#4:0.5:No, F#4:0.5:I E4:0.5 P:0.25 C#4:0.5:won't B3:0.25 A3:0.25 C#4:0.5 P:2
+  B3:0.5:shed B3:1:a A3:1:tear P:1.5
+  A3:0.5:Just B3:0.5:as C#4:0.25:long B3:0.25 A3:1 P:1.5
+  B3:0.5:as C#4:0.5:you B3:0.5:stand, A3:0.5: P:2
+  C#4:0.5:stand B3:0.5:by A3:1 A3:1.5:me P:1.5
+
+  E4:0.5:And F#4:1:dar- E4:1:lin', A4:1:dar- G#4:1:lin',
+  F#4:0.5:stand E4:0.5 F#4:1 P:0.5 F#4:1:by F#4:1:me P:1
+
+  F#4:1.5:Oh, E4:0.5 F#4:0.5 B3:0.5:stand A3:0.5 B3:0.25 C#4:1.5 B3:1.5:by A3:1:me P:1.5
+  C#4:1.5:Woah, B3:1:stand, A3:1:now P:3 C#4:0.5:stand B3:1:by A3:1.5:me P:1
+  C#4:0.5:stand B3:1.5:by A3:1:me
+
+  P:65
+
+  F#4:1:dar- E4:1:lin', A4:1:dar- G#4:1:lin',
+  F#4:0.5:stand E4:0.5 F#4:1 P:0.5 F#4:1:by F#4:1:me P:1
+
+  F#4:1.5:Oh, E4:0.5 F#4:0.5 B3:0.5:stand A3:0.5 B3:0.25 C#4:1.5 B3:1.5:by A3:1:me P:1.5
+  C#4:1.5:Woah, B3:1:stand, A3:1:now P:1.5
+  C#4:0.5:stand B3:1:by A3:1.5:me P:1
+  C#4:0.5:stand B3:1.5:by A3:1:me P:1
+
+  F#4:0.5:When- F#4:0.5:e-  E4:0.5:ver E4:0.5:you're F#4:0.5:in E4:0.5:trou- F#4:0.5:ble E4:0.5:won't F#4:0.5:you  
+  A4:0.5:stand E4:0.5 F#4:1 P:0.5 F#4:1:by F#4:1:me P:1
+
+  F#4:1.5:Oh, E4:0.5 F#4:0.5 B3:0.5:stand A3:0.5 B3:0.25 C#4:1.5 B3:1.5:by A3:1:me P:1.5
+  C#4:1.5:Woah, B3:1:stand, A3:1:now P:1.5
+  C#4:0.5:stand B3:1:by A3:1.5:me P:1
+  C#4:0.5:stand B3:1.5:by A3:1:me
   `,
 };

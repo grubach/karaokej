@@ -38,7 +38,7 @@ export default {
   artist: "Laura Branigan",
   bpm: 107,
   startTime: 1.31,
-  endTime: 4 * 60 + 17,
+  endTime: 5 * 60 + 8,
   karaokeVideo: "4KtNvgaEScA",
   originalVideo: "RP0_8J7uxhs",
   score: `
@@ -246,6 +246,41 @@ E4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25
 E4:0.25:You F#4:0.75:take  A4:0.5:my B4:1:self  G#4:0.5:con- F#4:0.5:trol E4:0.5
 
 P:2
+
+F#4:2:I
+
+P:1.5
+
+F#4:0.5:I F#4:0.5:live  E4:0.5:a-  E4:0.5:mong  E4:0.25:the:narrow  A4:0.75:crea- G#4:0.5:tures  F#4:0.5:of  E4:0.25:the  F#4:0.75:night P:3
+F#4:0.5:I F#4:0.5:ha-  E4:0.5:ven't E4:0.5:got  E4:0.25:the  A4:0.75:wil-  G#4:0.5:to  F#4:0.5:try  E4:0.5:and  F#4:0.5:fight P:3
+
+F#4:0.5:I'm F#4:0.5:li- E4:0.5:ving  E4:0.5:in  E4:0.25:the  A4:0.75:fo- G#4:0.5:rest  F#4:0.5:of  E4:0.25:a  F#4:0.75:dream P:3
+F#4:0.5:I F#4:0.5:know  E4:0.5:the E4:0.5:night  E4:0.5:is  A4:0.5:not  G#4:0.5:as  F#4:0.5:it  E4:0.5:would  F#3:0.5:seem P:2
+
+F#4:0.5:is G#4:0.5:my C#4:0.5:world  P:2.5
+C#4:0.5:Ci- E4:0.5:ty F#4:0.5:light  P:2.5
+F#4:0.5:paint- G#4:0.5:ed  C#4:0.5:girl P:2.5
+
+P:2
+
+E4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25  
+E4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- F#4:0.5:trol E4:0.5
+
+P:2
+
+E4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25  
+E4:0.25:You F#4:0.75:take  A4:0.5:my B4:1:self  G#4:0.5:con- F#4:0.5:trol E4:0.5
+
+P:2
+
+E4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25  
+E4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- F#4:0.5:trol E4:0.5
+
+P:2
+
+E4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25  
+E4:0.25:You F#4:0.75:take  A4:0.5:my B4:1:self  G#4:0.5:con- F#4:0.5:trol E4:0.5
+
 
   `,
 };
