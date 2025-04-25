@@ -3,6 +3,8 @@ export const HISTORY_DURATION = 1; // seconds
 export const HISTORY_SIZE = HISTORY_DURATION * DETECTIONS_PER_SECOND;
 export const PREHISTORY_SIZE = 5;
 export const LATENCY = 0.5; // seconds
+export const TIMING_TOLERANCE = 0.25 // beats
+export const NOTE_SCORE_RANGE = 2; // semitones
 
 export const NOTE_HEIGHT = 20; // px
 export const BEAT_WIDTH = 4 * NOTE_HEIGHT; // px

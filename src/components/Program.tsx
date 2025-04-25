@@ -8,7 +8,6 @@ import { gameStore } from "../utils/game";
 import useStoreState from "../hooks/useStoreState";
 import { appStore } from "../utils/app";
 
-
 const Program = () => {
   const { song } = useStoreState(appStore);
   const notesRef = useRef<HTMLDivElement>(null);
@@ -29,7 +28,8 @@ const Program = () => {
   return (
     <div className={style.Program}>
       <div ref={notesRef} className={style.notes}>
-        {notes
+        {[...notes]
+          .reverse()
           .filter((note) => note.pitch !== null)
           .map((note) => (
             <ProgramItem key={note.id} songNote={note} song={song} />

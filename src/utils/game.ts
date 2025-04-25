@@ -1,12 +1,15 @@
-import { HISTORY_SIZE, LATENCY } from "../constants";
+import {
+  HISTORY_SIZE,
+  LATENCY,
+  NOTE_SCORE_RANGE,
+  TIMING_TOLERANCE,
+} from "../constants";
 import { detect, initAudioContext } from "./detect";
 import { Song, SongNote } from "./song";
 import { beatsToTime } from "./time";
 import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
 import { createStore } from "./store";
 import { appStore } from "./app";
-
-// let song: Song | null = null;
 
 let lastPitch: number | null = null;
 let transpose: number = 0;
@@ -17,18 +20,58 @@ let scoreNoteId: string | null = null;
 let noteScore: number = 0;
 let noteDetections: number = 0;
 
-const getCurrentSongNote = (song: Song, elapsed: number) => {
-  return (
-    song.notes
-      // .filter((note) => note.pitch !== null)
-      .find((note) => {
-        const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
-        const noteEndTime =
-          noteStartTime + beatsToTime(note.duration, song.bpm);
-        return elapsed >= noteStartTime && elapsed <= noteEndTime;
-      }) ?? null
-  );
+const findTranspose = (target: number, detectedPitch: number) => {
+  let transpose = 0;
+  let diff = detectedPitch - target;
+  while (Math.abs(diff) > 6) {
+    if (diff > 0) {
+      transpose -= 1;
+    } else {
+      transpose += 1;
+    }
+    diff = detectedPitch + transpose * 12 - target;
+  }
+
+  return transpose;
 };
+
+const findNearestDifference = (target: number, detectedPitch: number) => {
+  const transpose = findTranspose(target, detectedPitch);
+  const diff = detectedPitch + transpose * 12 - target;
+  return diff;
+};
+
+const getSongNoteAtTime = (song: Song, elapsed: number, pitch: number) => {
+  const notesAtTime = song.notes.filter((note) => {
+    const noteStartTime =
+      song.startTime + beatsToTime(note.time - TIMING_TOLERANCE, song.bpm);
+    const noteEndTime =
+      noteStartTime +
+      beatsToTime(note.duration + 2 * TIMING_TOLERANCE, song.bpm);
+    return elapsed >= noteStartTime && elapsed <= noteEndTime;
+  });
+
+  if (notesAtTime.length === 0) {
+    return null;
+  }
+
+  const nearestNote = notesAtTime.reduce((prev, curr) => {
+    const prevDiff = prev?.pitch
+      ? findNearestDifference(prev.pitch, pitch)
+      : Infinity;
+    const currDiff = curr?.pitch
+      ? findNearestDifference(curr.pitch, pitch)
+      : Infinity;
+    if (Math.abs(prevDiff) < Math.abs(currDiff)) {
+      return prev;
+    } else {
+      return curr;
+    }
+  });
+
+  return nearestNote;
+};
+
 const getNextSongPitchNote = (song: Song, elapsed: number) => {
   return (
     song.notes
@@ -75,27 +118,6 @@ const initialValue: GameState[] = Array.from(
 
 export const gameStore = createStore(initialValue);
 
-const findTranspose = (target: number, detectedPitch: number) => {
-  let transpose = 0;
-  let diff = detectedPitch - target;
-  while (Math.abs(diff) > 6) {
-    if (diff > 0) {
-      transpose -= 1;
-    } else {
-      transpose += 1;
-    }
-    diff = detectedPitch + transpose * 12 - target;
-  }
-
-  return transpose;
-};
-
-const findNearestDifference = (target: number, detectedPitch: number) => {
-  const transpose = findTranspose(target, detectedPitch);
-  const diff = detectedPitch + transpose * 12 - target;
-  return diff;
-};
-
 let currentVideoTime = 0;
 const frame = () => {
   const song = appStore.getValue().song;
@@ -128,8 +150,16 @@ const frame = () => {
   const anyPitch = detectedPitch ?? lastPitch;
 
   const elapsedWithLatency = elapsed - LATENCY;
-  const currentSongNote = getCurrentSongNote(song, elapsed);
-  const scoreSongNote = getCurrentSongNote(song, elapsedWithLatency);
+  const currentSongNote = getSongNoteAtTime(
+    song,
+    elapsed,
+    anyPitch ?? song.averagePitch
+  );
+  const scoreSongNote = getSongNoteAtTime(
+    song,
+    elapsedWithLatency,
+    anyPitch ?? song.averagePitch
+  );
   const nextSongPitchNote =
     getNextSongPitchNote(song, elapsedWithLatency) ?? currentSongNote;
 
@@ -146,9 +176,9 @@ const frame = () => {
       : null;
 
   let points = 0;
-  const pointsRange = 1;
-  if (difference !== null && Math.abs(difference) < pointsRange) {
-    points = (pointsRange - Math.abs(difference)) / pointsRange;
+
+  if (difference !== null && Math.abs(difference) < NOTE_SCORE_RANGE) {
+    points = (NOTE_SCORE_RANGE - Math.abs(difference)) / NOTE_SCORE_RANGE;
   }
 
   overallScore += points;
