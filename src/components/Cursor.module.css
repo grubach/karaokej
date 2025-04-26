@@ -18,12 +18,9 @@
   border-radius: var(--note-height);
   border: 1px solid var(--color-background);
   overflow: hidden;
-}
+  transition: opacity 0.25s ease-out;
 
-.accent {
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-accent);
-  opacity: 0;
-  transition: opacity 0.5s ease-in;
+  &.accent {
+    background-color: var(--color-accent);
+  }
 }
