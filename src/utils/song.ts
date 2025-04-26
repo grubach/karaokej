@@ -90,8 +90,8 @@ export const parseSongScored = (songScored: SongScored): Song => {
 
   return {
     ...rest,
-    // video: karaokeVideo,
-    video: originalVideo,
+    video: karaokeVideo,
+    // video: originalVideo,
     averagePitch,
     notes: parsedNotes,
   };

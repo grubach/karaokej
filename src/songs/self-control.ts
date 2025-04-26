@@ -255,7 +255,7 @@ F#4:0.5:I F#4:0.5:live  E4:0.5:a-  E4:0.5:mong  E4:0.25:the:narrow  A4:0.75:crea
 F#4:0.5:I F#4:0.5:ha-  E4:0.5:ven't E4:0.5:got  E4:0.25:the  A4:0.75:wil-  G#4:0.5:to  F#4:0.5:try  E4:0.5:and  F#4:0.5:fight P:3
 
 F#4:0.5:I'm F#4:0.5:li- E4:0.5:ving  E4:0.5:in  E4:0.25:the  A4:0.75:fo- G#4:0.5:rest  F#4:0.5:of  E4:0.25:a  F#4:0.75:dream P:3
-F#4:0.5:I F#4:0.5:know  E4:0.5:the E4:0.5:night  E4:0.5:is  A4:0.5:not  G#4:0.5:as  F#4:0.5:it  E4:0.5:would  F#3:0.5:seem P:2
+F#4:0.5:I F#4:0.5:know  E4:0.5:the E4:0.5:night  E4:0.5:is  A4:0.5:not  G#4:0.5:as  F#4:0.5:it  E4:0.5:would  F#4:0.5:seem P:2
 
 F#4:0.5:is G#4:0.5:my C#4:0.5:world  P:2.5
 C#4:0.5:Ci- E4:0.5:ty F#4:0.5:light  P:2.5
