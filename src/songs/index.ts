@@ -4,6 +4,7 @@ import womanizer from "./womanizer";
 import nieLiczeGodzinILat from "./nie-licze-godzin-i-lat";
 import selfControl from "./self-control";
 import standByMe from "./stand-by-me";
+import summerWine from "./summer-wine";
 
 export type SongScored = Omit<Song, "notes" | "averagePitch" | "video"> & {
   score: string;
@@ -17,6 +18,7 @@ const songs: SongScored[] = [
   nieLiczeGodzinILat,
   selfControl,
   standByMe,
+  summerWine,
   // Add more songs here
 ];
 

@@ -20,7 +20,7 @@ const Wait = () => {
       if (
         !currentSongNote ||
         currentSongNote.pitch !== null ||
-        currentSongNote.duration < 16
+        currentSongNote.duration < 8
       ) {
         containerRef.current.style.opacity = "0";
         return;
