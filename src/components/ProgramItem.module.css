@@ -3,6 +3,12 @@
   height: var(--note-height);
   width: var(--note-height);
 }
+.movable {
+  position: absolute;
+  width: 100%;
+  height: var(--note-height);
+  opacity: 0;
+}
 
 .text {
   position: relative;
@@ -28,8 +34,7 @@
   border-radius: var(--note-height);
   border: 1px solid var(--color-background);
   overflow: hidden;
-  transition: opacity 0.2s ease-out,
-    transform 0.2s ease-out;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .passed {

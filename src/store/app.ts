@@ -7,6 +7,8 @@ export type AppState = {
   playerState: PlayerState;
   speed: number;
   listOpen: boolean;
+  finished: boolean;
+  percentScored: number;
 };
 
 const initialState: AppState = {
@@ -14,6 +16,8 @@ const initialState: AppState = {
   playerState: "unstarted",
   speed: 1,
   listOpen: true,
+  finished: false,
+  percentScored: 0,
 };
 
 export const appStore = createStore(initialState);

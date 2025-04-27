@@ -38,7 +38,7 @@ export default {
   artist: "Laura Branigan",
   bpm: 107,
   startTime: 1.31,
-  endTime: 5 * 60 + 8,
+  endTime: 5 * 60 + 7,
   karaokeVideo: "4KtNvgaEScA",
   originalVideo: "RP0_8J7uxhs",
   score: `

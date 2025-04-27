@@ -41,7 +41,7 @@ export default {
   artist: "Shazza",
   bpm: 140,
   startTime: 1.370,
-  endTime: 3 * 60 + 33.010,
+  endTime: 3 * 60 + 32.010,
   karaokeVideo: "ayONooHdYdk",
   originalVideo: "2W0UoEdECZI",
   score: `

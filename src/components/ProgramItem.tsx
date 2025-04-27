@@ -5,6 +5,7 @@ import useStore from "../hooks/useStore";
 import { useRef } from "react";
 import cx from "classnames";
 import { gameStore } from "../store/game";
+import { timeToBeats } from "../utils/time";
 
 type Props = {
   songNote: SongNote;
@@ -14,20 +15,34 @@ type Props = {
 const pointsThreshold = 1 / NOTE_SCORE_RANGE;
 
 const ProgramItem = ({ songNote, song }: Props) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
   const { id, text, duration, pitch, time, modifier } = songNote;
+  const { bpm } = song;
 
   useStore(
     gameStore,
-    id,
+    "default",
     ([gameState]) => {
-      if (!goodRef.current || !passedRef.current || !shapeRef.current) return;
+      if (
+        !goodRef.current ||
+        !passedRef.current ||
+        !shapeRef.current ||
+        !containerRef.current
+      )
+        return;
 
-      const { averageNoteScore } = gameState;
-      if (averageNoteScore) {
+      const { averageNoteScore, elapsed, scoreNoteId } = gameState;
+
+      const left = (time - timeToBeats(elapsed, bpm)) * BEAT_WIDTH;
+
+      containerRef.current.style.transform = `translateX(${left}px)`;
+      containerRef.current.style.opacity = "1";
+
+      if (averageNoteScore && scoreNoteId === id) {
         passedRef.current.style.opacity = "1";
         const passedScore =
           averageNoteScore > pointsThreshold
@@ -45,7 +60,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
         });
       }
     },
-    []
+    [[bpm, time]]
   );
 
   const formattedText = text
@@ -57,21 +72,22 @@ const ProgramItem = ({ songNote, song }: Props) => {
       className={style.ProgramItem}
       style={{
         width: `${duration * BEAT_WIDTH}px`,
-        left: `${time * BEAT_WIDTH}px`,
         top: `${((song.averagePitch - pitch!) * NOTE_HEIGHT) / 2}px`,
       }}
     >
-      <div className={style.shape} ref={shapeRef}>
-        <div className={style.passed} ref={passedRef}></div>
-        <div className={style.good} ref={goodRef}></div>
+      <div ref={containerRef} className={style.movable}>
+        <div className={style.shape} ref={shapeRef}>
+          <div className={style.passed} ref={passedRef}></div>
+          <div className={style.good} ref={goodRef}></div>
+        </div>
+        <span
+          className={cx(style.text, {
+            [style.narrow]: modifier === "narrow",
+          })}
+        >
+          {formattedText}
+        </span>
       </div>
-      <span
-        className={cx(style.text, {
-          [style.narrow]: modifier === "narrow",
-        })}
-      >
-        {formattedText}
-      </span>
     </div>
   );
 };

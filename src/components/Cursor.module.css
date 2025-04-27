@@ -6,11 +6,15 @@
   position: absolute;
   height: var(--note-height);
   width: var(--note-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: opacity 0.5s ease-in, transform 0.1s ease-out;
 }
 
 .ball {
   position: absolute;
+  /* transform: translateY(-50%); */
   left: calc(-1 * var(--note-height) / 2);
   background-color: var(--color-cursor);
   height: var(--note-height);

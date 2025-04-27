@@ -84,9 +84,6 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
   return (
     <div
       className={style.Cursor}
-      style={{
-        zIndex: 10 - tailIndex,
-      }}
     >
       <div className={style.movable} ref={cursorRef}>
         {octaves.map((octave) => (
@@ -94,8 +91,11 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
             key={octave}
             className={cx(style.ball, { [style.accent]: octave % 2 === 1 })}
             style={{
-              top: `${octaveShift * (2 - octave)}px`,
-              transform: `scale(${scale})`,
+              top: `${
+                octaveShift * (2 - octave) + (NOTE_HEIGHT * (1 - scale)) / 2
+              }px`,
+              width: `${NOTE_HEIGHT * scale}px`,
+              height: `${NOTE_HEIGHT * scale}px`,
               opacity: octave === transpose ? 1 : 0,
             }}
           ></div>

@@ -7,7 +7,12 @@ import {
 import { detect, initAudioContext } from "../utils/detect";
 import { Song, SongNote } from "../utils/song";
 import { beatsToTime } from "../utils/time";
-import { getVideoTime, loadVideo, pauseVideo, playVideo } from "../utils/player";
+import {
+  getVideoTime,
+  loadVideo,
+  pauseVideo,
+  playVideo,
+} from "../utils/player";
 import { createStore } from "./store";
 import { appStore } from "./app";
 
@@ -134,10 +139,12 @@ const frame = () => {
   if (elapsed > song.endTime) {
     stopGame();
     console.log("Game Over");
-    console.log("Score:", overallScore);
-    console.log("Detections:", overallDetections);
-    console.log("Note Detections:", overallNoteDetections);
-    console.log("Percenatage:", (overallScore / overallNoteDetections) * 100);
+    const percentScored = (overallScore / overallNoteDetections) * 100;
+    appStore.updateValue((store) => ({
+      ...store,
+      finished: true,
+      percentScored,
+    }));
     return;
   }
 
@@ -215,9 +222,10 @@ const frame = () => {
   gameHistory.pop();
   gameStore.setValue(gameHistory);
 
-  if (scoreNoteId !== null) {
-    gameStore.notifySubscriber(scoreNoteId);
-  }
+  
+  // if (scoreNoteId !== null) {
+  //   gameStore.notifySubscriber(scoreNoteId);
+  // }
 };
 
 export const loadSong = (newSong: Song) => {
@@ -262,8 +270,14 @@ export const stopGame = () => {
 
 export const startGame = async () => {
   gameStore.resetValue();
+  appStore.updateValue((store) => ({
+    ...store,
+    finished: false,
+    percentScored: 0,
+  }));
   await initAudioContext();
 
+  currentVideoTime = 0;
   overallScore = 0;
   overallDetections = 0;
   overallNoteDetections = 0;

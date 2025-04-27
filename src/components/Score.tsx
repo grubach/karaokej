@@ -1,16 +1,19 @@
+import useStoreState from "../hooks/useStoreState";
+import { appStore } from "../store/app";
 import style from "./Score.module.css";
 
 const Score = () => {
+  const { percentScored, finished, song } = useStoreState(appStore);
+  if (!finished) return null;
   return (
     <div className={style.Score}>
-      <div className={style.score}>
-        <div className={style.scoreText}>Score</div>
-        <div className={style.scoreValue}>0</div>
-      </div>
-      <div className={style.combo}>
-        <div className={style.comboText}>Combo</div>
-        <div className={style.comboValue}>0</div>
-      </div>
+      <img
+        className={style.cover}
+        src={`https://img.youtube.com/vi/${song.video}/0.jpg`}
+      />
+      <div className={style.title}>{song.title}</div>
+      <div className={style.artist}>{song.artist}</div>
+      <div className={style.score}>{percentScored.toFixed(2)}%</div>
     </div>
   );
 };
