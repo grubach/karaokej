@@ -16,10 +16,8 @@ export type PlayerState = (typeof stateNames)[keyof typeof stateNames];
 
 export const loadPlayer = () => {
   if (player) {
-    console.log("YouTube Player already loaded");
     return;
   }
-  console.log("YouTube Player loaded");
 
   const playerElement = document.getElementById("video-player");
   if (!playerElement) {

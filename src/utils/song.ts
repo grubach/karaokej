@@ -36,15 +36,13 @@ export const emptySong: Song = {
   notes: [],
 };
 
-
 const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const notesParser = (song: SongScored): SongNote[] => {
   const { score, id } = song;
-  console.log("score", score);
+
   // split by whitespaces and remove empty strings
   const notes = score.split(/\s+/).filter((note) => note.trim() !== "");
-  console.log("notes", notes);
 
   let cursor = 0;
   const parsedNotes: SongNote[] = [];
@@ -72,7 +70,6 @@ const notesParser = (song: SongScored): SongNote[] => {
       modifier: (modifier ?? null) as Modifier | null,
     });
   }
-  console.log("parsedNotes", parsedNotes);
 
   return parsedNotes;
 };
@@ -80,13 +77,12 @@ const notesParser = (song: SongScored): SongNote[] => {
 export const parseSongScored = (songScored: SongScored): Song => {
   const { score, karaokeVideo, originalVideo, ...rest } = songScored;
   const parsedNotes = notesParser(songScored);
-  console.log("parsedNotes", parsedNotes);
+
   const notesPitches = parsedNotes
     .filter((note) => note.pitch !== null)
     .map((note) => note.pitch!);
   const averagePitch =
     (Math.max(...notesPitches) + Math.min(...notesPitches)) / 2;
-  console.log("averagePitch", averagePitch);
 
   return {
     ...rest,

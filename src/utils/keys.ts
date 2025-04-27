@@ -8,7 +8,6 @@ export const register = () => {
     const appState = appStore.getValue();
 
     const { key } = event;
-    console.log("Key pressed:", key);
 
     if (key === "ArrowLeft") {
       const newxtTime = gameState.elapsed - 1;
@@ -23,7 +22,6 @@ export const register = () => {
     }
 
     if (key === " ") {
-        console.log("Space pressed", appState.playerState);
       if (appState.playerState === "playing") {
         pauseVideo();
         return;
