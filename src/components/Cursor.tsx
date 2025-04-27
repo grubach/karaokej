@@ -20,7 +20,7 @@ type Props = {
 };
 
 const octaveShift = (12 * NOTE_HEIGHT) / 2;
-const octaves = Array.from({ length: 4 }, (_, i) => i );
+const octaves = Array.from({ length: 4 }, (_, i) => i);
 
 const Cursor = ({ historyIndex, tailIndex }: Props) => {
   const [transpose, setTranspose] = useState<number>(0);
@@ -91,9 +91,10 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       <div className={style.movable} ref={cursorRef}>
         {octaves.map((octave) => (
           <div
+            key={octave}
             className={cx(style.ball, { [style.accent]: octave % 2 === 1 })}
             style={{
-              top: `${octaveShift * (2-octave)}px`,
+              top: `${octaveShift * (2 - octave)}px`,
               transform: `scale(${scale})`,
               opacity: octave === transpose ? 1 : 0,
             }}

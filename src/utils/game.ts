@@ -232,14 +232,19 @@ export const loadSong = (newSong: Song) => {
 };
 
 let playing = false;
-let lastFrameTime = 0;
+
+let countStartTime = performance.now();
+let frameCount = 0;
+let fpsMetricPeriod = 10;
 const proceedGame = async () => {
   const currentTime = performance.now();
-  if (Math.random() < 0.01) {
-    const fps = 1000 / (currentTime - lastFrameTime);
+  if (currentTime - countStartTime > 1000 * fpsMetricPeriod) {
+    const fps = frameCount / fpsMetricPeriod;
     console.log("FPS:", fps);
+    countStartTime = currentTime;
+    frameCount = 0;
   }
-  lastFrameTime = currentTime;
+  frameCount += 1;
 
   frame();
 
