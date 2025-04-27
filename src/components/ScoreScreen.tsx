@@ -1,12 +1,12 @@
 import useStoreState from "../hooks/useStoreState";
 import { appStore } from "../store/app";
-import style from "./Score.module.css";
+import style from "./ScoreScreen.module.css";
 
-const Score = () => {
+const ScoreScreen = () => {
   const { percentScored, finished, song } = useStoreState(appStore);
   if (!finished) return null;
   return (
-    <div className={style.Score}>
+    <div className={style.ScoreScreen}>
       <img
         className={style.cover}
         src={`https://img.youtube.com/vi/${song.video}/0.jpg`}
@@ -17,4 +17,4 @@ const Score = () => {
     </div>
   );
 };
-export default Score;
+export default ScoreScreen;

@@ -5,7 +5,7 @@ import Program from "./Program";
 import Track from "./Track";
 import SongList from "./song-list/SongList";
 import Wait from "./Wait";
-import Score from "./Score";
+import ScoreScreen from "./ScoreScreen";
 
 const cursors = Array.from({ length: 10 }, (_, index) => index);
 
@@ -21,7 +21,7 @@ function App() {
         ))}
       </Track>
       <Controls />
-      <Score />
+      <ScoreScreen />
     </div>
   );
 }
