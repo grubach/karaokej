@@ -141,7 +141,7 @@ const frame = () => {
     const percentScored = (overallScore / overallNoteDetections) * 100;
     appStore.updateValue((store) => ({
       ...store,
-      finished: true,
+      appPhase: "finished",
       percentScored,
     }));
     return;
@@ -271,7 +271,7 @@ export const startGame = async () => {
   gameStore.resetValue();
   appStore.updateValue((store) => ({
     ...store,
-    finished: false,
+    appPhase: "playing",
     percentScored: 0,
   }));
   await initAudioContext();

@@ -1,4 +1,4 @@
-.ScoreScreen {
+.WelcomeScreen {
     position: absolute;
     inset: 0;
     z-index: 20;
@@ -26,7 +26,7 @@
     font-weight: bold;
   }
 
-  .artist {
+  .description {
     font-size: 0.7rem;
   }
 

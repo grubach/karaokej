@@ -6,6 +6,7 @@ import Track from "./Track";
 import SongList from "./song-list/SongList";
 import Wait from "./Wait";
 import ScoreScreen from "./ScoreScreen";
+import WelcomeScreen from "./WelcomeScreen";
 
 const cursors = Array.from({ length: 10 }, (_, index) => index);
 
@@ -21,6 +22,7 @@ function App() {
         ))}
       </Track>
       <Controls />
+      <WelcomeScreen />
       <ScoreScreen />
     </div>
   );

@@ -2,12 +2,14 @@ import { emptySong, Song } from "../utils/song";
 import { createStore } from "./store";
 import { PlayerState } from "../utils/player";
 
+export type AppPhase = "unstarted" | "playing" | "finished";
+
 export type AppState = {
   song: Song;
   playerState: PlayerState;
   speed: number;
   listOpen: boolean;
-  finished: boolean;
+  appPhase: AppPhase;
   percentScored: number;
 };
 
@@ -16,7 +18,7 @@ const initialState: AppState = {
   playerState: "unstarted",
   speed: 1,
   listOpen: true,
-  finished: false,
+  appPhase: "unstarted",
   percentScored: 0,
 };
 

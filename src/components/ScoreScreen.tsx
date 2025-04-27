@@ -3,8 +3,8 @@ import { appStore } from "../store/app";
 import style from "./ScoreScreen.module.css";
 
 const ScoreScreen = () => {
-  const { percentScored, finished, song } = useStoreState(appStore);
-  if (!finished) return null;
+  const { percentScored, appPhase, song } = useStoreState(appStore);
+  if (appPhase !== "finished") return null;
   return (
     <div className={style.ScoreScreen}>
       <img
