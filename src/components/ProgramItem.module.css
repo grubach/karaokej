@@ -14,7 +14,6 @@
   width: calc(var(--note-height) * 4);
   left: calc(50% - (var(--note-height) * 2));
   bottom: 100%;
-  /* font-weight: bold; */
   font-size: 14pt;
 
   &.narrow {
