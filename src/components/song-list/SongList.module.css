@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-border);
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 0 var(--border-radius) var(--border-radius)
     var(--border-radius);
   width: calc(100% - 2 * var(--note-height) - 1rem);
@@ -18,6 +18,7 @@
   align-items: center;
   cursor: pointer;
   gap: 0.5rem;
+  padding: 0.25rem;
   border-radius: var(--border-radius);
 
   .cover {

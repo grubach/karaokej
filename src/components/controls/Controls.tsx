@@ -3,10 +3,18 @@ import Player from "./Player";
 import ProgressBar from "./ProgressBar";
 import PlayPauseGame from "./PlayPauseGame";
 import Speed from "./Speed";
+import cx from "classnames";
+import { appStore } from "../../utils/app";
+import useStoreState from "../../hooks/useStoreState";
 
 const Controls = () => {
+  const { song } = useStoreState(appStore);
   return (
-    <div className={style.Controls}>
+    <div
+      className={cx(style.Controls, {
+        [style.hidden]: !song.id,
+      })}
+    >
       <Player />
       <ProgressBar />
       <Speed />
