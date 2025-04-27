@@ -1,9 +1,9 @@
 import { startTransition, useActionState } from "react";
-import { startGame } from "../../utils/game";
+import { startGame } from "../../store/game";
 import ActionIcon from "../parts/ActionIcon";
 import { FiPause, FiPlay } from "react-icons/fi";
 import useStoreState from "../../hooks/useStoreState";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 import { pauseVideo, playVideo, restartVideo } from "../../utils/player";
 
 const PlayPauseGame = () => {

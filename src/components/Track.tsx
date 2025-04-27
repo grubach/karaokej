@@ -4,8 +4,8 @@ import { timeToBeats } from "../utils/time";
 import { NOTE_HEIGHT } from "../constants";
 import useStore from "../hooks/useStore";
 import useStoreState from "../hooks/useStoreState";
-import { appStore } from "../utils/app";
-import { gameStore } from "../utils/game";
+import { appStore } from "../store/app";
+import { gameStore } from "../store/game";
 
 const Track = ({ children }: PropsWithChildren) => {
   const backgroundRef = useRef<HTMLDivElement>(null);

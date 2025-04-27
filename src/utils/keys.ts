@@ -1,5 +1,5 @@
-import { appStore } from "./app";
-import { gameStore, startGame } from "./game";
+import { appStore } from "../store/app";
+import { gameStore, startGame } from "../store/game";
 import { pauseVideo, playVideo, seekTo } from "./player";
 
 export const register = () => {

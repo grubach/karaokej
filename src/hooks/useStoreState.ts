@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Store } from "../utils/store";
+import { Store } from "../store/store";
 import useStore from "./useStore";
 
 const useStoreState = <T>(store: Store<T>): T => {

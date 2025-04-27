@@ -4,7 +4,7 @@ import SongItem from "./SongItem";
 import HidePanel from "../parts/HidePanel";
 import { FiList } from "react-icons/fi";
 import useStoreState from "../../hooks/useStoreState";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 
 const sortByTitle = (a: SongScored, b: SongScored) => {
   if (a.title < b.title) return -1;

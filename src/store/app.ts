@@ -1,6 +1,6 @@
-import { emptySong, Song } from "./song";
+import { emptySong, Song } from "../utils/song";
 import { createStore } from "./store";
-import { PlayerState } from "./player";
+import { PlayerState } from "../utils/player";
 
 export type AppState = {
   song: Song;

@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import useStore from "../../hooks/useStore";
-import { gameStore } from "../../utils/game";
+import { gameStore } from "../../store/game";
 import styles from "./ProgressBar.module.css";
 import { formatSeconds, roundTo } from "../../utils/tools";
 import useStoreState from "../../hooks/useStoreState";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 import { seekTo } from "../../utils/player";
 
 const ProgressBar = () => {

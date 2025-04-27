@@ -4,7 +4,7 @@ import { Song, SongNote } from "../utils/song";
 import useStore from "../hooks/useStore";
 import { useRef } from "react";
 import cx from "classnames";
-import { gameStore } from "../utils/game";
+import { gameStore } from "../store/game";
 
 type Props = {
   songNote: SongNote;

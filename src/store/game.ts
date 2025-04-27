@@ -4,10 +4,10 @@ import {
   NOTE_SCORE_RANGE,
   TIMING_TOLERANCE,
 } from "../constants";
-import { detect, initAudioContext } from "./detect";
-import { Song, SongNote } from "./song";
-import { beatsToTime } from "./time";
-import { getVideoTime, loadVideo, pauseVideo, playVideo } from "./player";
+import { detect, initAudioContext } from "../utils/detect";
+import { Song, SongNote } from "../utils/song";
+import { beatsToTime } from "../utils/time";
+import { getVideoTime, loadVideo, pauseVideo, playVideo } from "../utils/player";
 import { createStore } from "./store";
 import { appStore } from "./app";
 

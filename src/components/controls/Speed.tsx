@@ -1,7 +1,7 @@
 import ActionIcon from "../parts/ActionIcon";
 import { useEffect, useState } from "react";
 import { setVideoSpeed } from "../../utils/player";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 
 const speedValues = ["1", "0.5", "0.75"];
 

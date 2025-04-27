@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { loadPlayer } from "../../utils/player";
 import style from "./Player.module.css";
 import useStoreState from "../../hooks/useStoreState";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 
 const Player = () => {
   const { song } = useStoreState(appStore);

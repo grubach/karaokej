@@ -4,9 +4,9 @@ import style from "./Program.module.css";
 import ProgramItem from "./ProgramItem";
 import { timeToBeats } from "../utils/time";
 import useStore from "../hooks/useStore";
-import { gameStore } from "../utils/game";
+import { gameStore } from "../store/game";
 import useStoreState from "../hooks/useStoreState";
-import { appStore } from "../utils/app";
+import { appStore } from "../store/app";
 
 const Program = () => {
   const { song } = useStoreState(appStore);

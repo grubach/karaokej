@@ -2,8 +2,8 @@ import { useRef } from "react";
 import { beatsToTime } from "../utils/time";
 import styles from "./Wait.module.css";
 import useStore from "../hooks/useStore";
-import { gameStore } from "../utils/game";
-import { appStore } from "../utils/app";
+import { gameStore } from "../store/game";
+import { appStore } from "../store/app";
 import useStoreState from "../hooks/useStoreState";
 
 const Wait = () => {

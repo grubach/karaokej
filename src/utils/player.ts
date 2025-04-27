@@ -1,5 +1,5 @@
 import YouTubePlayer from "youtube-player";
-import { appStore } from "./app";
+import { appStore } from "../store/app";
 
 export let player: ReturnType<typeof YouTubePlayer> | null = null;
 

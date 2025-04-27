@@ -1,5 +1,5 @@
 import { DependencyList, useEffect } from "react";
-import { Store } from "../utils/store";
+import { Store } from "../store/store";
 
 const useStore = <T>(
   store: Store<T>,

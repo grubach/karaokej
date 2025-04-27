@@ -9,9 +9,9 @@ import {
 import useStore from "../hooks/useStore";
 import { timeToBeats } from "../utils/time";
 import { clamp } from "../utils/tools";
-import { gameStore } from "../utils/game";
+import { gameStore } from "../store/game";
 import useStoreState from "../hooks/useStoreState";
-import { appStore } from "../utils/app";
+import { appStore } from "../store/app";
 import cx from "classnames";
 
 type Props = {

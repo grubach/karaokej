@@ -4,7 +4,7 @@ import ProgressBar from "./ProgressBar";
 import PlayPauseGame from "./PlayPauseGame";
 import Speed from "./Speed";
 import cx from "classnames";
-import { appStore } from "../../utils/app";
+import { appStore } from "../../store/app";
 import useStoreState from "../../hooks/useStoreState";
 
 const Controls = () => {
