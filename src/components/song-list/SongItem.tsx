@@ -29,7 +29,6 @@ const SongItem = ({ songScored }: Props) => {
     loadSong(parseSongScored(songScored));
 
     if (!selected) {
-      console.log("load song", songScored);
       startGame();
     }
   };

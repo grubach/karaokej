@@ -138,7 +138,6 @@ const frame = () => {
 
   if (elapsed > song.endTime) {
     stopGame();
-    console.log("Game Over");
     const percentScored = (overallScore / overallNoteDetections) * 100;
     appStore.updateValue((store) => ({
       ...store,
@@ -222,7 +221,7 @@ const frame = () => {
   gameHistory.pop();
   gameStore.setValue(gameHistory);
 
-  
+
   // if (scoreNoteId !== null) {
   //   gameStore.notifySubscriber(scoreNoteId);
   // }
