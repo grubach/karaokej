@@ -5,6 +5,7 @@ import nieLiczeGodzinILat from "./nie-licze-godzin-i-lat";
 import selfControl from "./self-control";
 import standByMe from "./stand-by-me";
 import summerWine from "./summer-wine";
+import jakZapomniec from "./jak-zapomniec";
 
 export type SongScored = Omit<Song, "notes" | "averagePitch" | "video"> & {
   score: string;
@@ -19,6 +20,7 @@ const songs: SongScored[] = [
   selfControl,
   standByMe,
   summerWine,
+  jakZapomniec,
   // Add more songs here
 ];
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { setVideoSpeed } from "../../utils/player";
 import { appStore } from "../../store/app";
 
-const speedValues = ["1", "0.5", "0.75"];
+const speedValues = ["1", "0.25", "0.5", "0.75"];
 
 const Speed = () => {
   const [speed, setSpeed] = useState(0);
