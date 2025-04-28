@@ -12,6 +12,7 @@ import {
   loadVideo,
   pauseVideo,
   playVideo,
+  seekTo,
 } from "../utils/player";
 import { createStore } from "./store";
 import { appStore } from "./app";
@@ -221,7 +222,6 @@ const frame = () => {
   gameHistory.pop();
   gameStore.setValue(gameHistory);
 
-
   // if (scoreNoteId !== null) {
   //   gameStore.notifySubscriber(scoreNoteId);
   // }
@@ -264,6 +264,14 @@ export const stopGame = () => {
   playing = false;
 
   pauseVideo();
+  return true;
+};
+
+export const restartGame = () => {
+  seekTo(0);
+  setTimeout(() => {
+    startGame();
+  }, 100);
   return true;
 };
 
