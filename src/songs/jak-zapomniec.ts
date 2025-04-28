@@ -112,7 +112,7 @@ A3:0.66:Zdmuch- A3:0.66:nąć A3:0.67:wszyst- A3:0.66:kie A3:0.66:wspom- A3:0.5:
 C#4:1:Tak B3:1:już C#4:1:(Tak B3:1:już) P:0.5
 D3:0.5:Po B3:0.5:pros- C#4:0.5:tu C#4:0.5:nie D4:0.5:pa C#4:1:mię- A3:1:tać P:1 C#4:0.5:sy D4:0.5:tu- C#4:1:a- A3#:0.5:cji, 
 C#4:1:w_któ- C#4:0.5:rych C#4:0.5:ser- D4:0.5:ce C#4:1:klę- A3:0.5:ka 
-D4:2:Wiem, P:2
+B3:2:Wiem, P:2
 
 F#3:0.5:nie C#4:1:wyr- D4:0.5:wę C#4:1:się A3:0.5:cho- A3:1:ciaż A3:0.67:bar- A3:0.66:dzo A3:0.66:chcę,  P:1
 E3:0.5:Mam E3:0.5:na- E3:0.5:dzie- E3:0.5:ję, E3:0.5:że E3:0.5:to E3:1:wiesz C#4:1:i B3:1:Ty
@@ -127,7 +127,7 @@ A3:0.66:Zdmuch- A3:0.66:nąć A3:0.67:wszyst- A3:0.66:kie A3:0.66:wspom- A3:0.5:
 C#4:1:Tak B3:1:już P:0.5 C#4:1:(Tak B3:1:już) P:0.5
 D3:0.5:Po B3:0.5:pros- C#4:0.5:tu C#4:0.5:nie D4:0.5:pa C#4:1:mię- A3:1:tać P:1 C#4:0.5:sy D4:0.5:tu- C#4:1:a- A3#:0.5:cji, 
 C#4:1:w_któ- C#4:0.5:rych C#4:0.5:ser- D4:0.5:ce C#4:1:klę- A3:0.5:ka 
-D4:2:Wiem, P:2
+B3:2:Wiem, P:2
 
 F#3:0.5:nie C#4:1:wyr- D4:0.5:wę C#4:1:się A3:0.5:cho- A3:1:ciaż A3:0.67:bar- A3:0.66:dzo A3:0.66:chcę,  P:1
 E3:0.5:Mam E3:0.5:na- E3:0.5:dzie- E3:0.5:ję, E3:0.5:że E3:0.5:to E3:1:wiesz C#4:1:i B3:1:Ty
@@ -142,7 +142,7 @@ A3:0.66:Zdmuch- A3:0.66:nąć A3:0.67:wszyst- A3:0.66:kie A3:0.66:wspom- A3:0.5:
 C#4:1:Tak B3:1:już P:0.5 C#4:1:(Tak B3:1:już) P:0.5
 D3:0.5:Po B3:0.5:pros- C#4:0.5:tu C#4:0.5:nie D4:0.5:pa C#4:1:mię- A3:1:tać P:1 C#4:0.5:sy D4:0.5:tu- C#4:1:a- A3#:0.5:cji, 
 C#4:1:w_któ- C#4:0.5:rych C#4:0.5:ser- D4:0.5:ce C#4:1:klę- A3:0.5:ka 
-D4:2:Wiem, P:2
+B3:2:Wiem, P:2
 
 F#3:0.5:nie C#4:1:wyr- D4:0.5:wę C#4:1:się A3:0.5:cho- A3:1:ciaż A3:0.67:bar- A3:0.66:dzo A3:0.66:chcę,  P:1
 E3:0.5:Mam E3:0.5:na- E3:0.5:dzie- E3:0.5:ję, E3:0.5:że E3:0.5:to E3:1:wiesz C#4:1:i B3:1:Ty
@@ -157,7 +157,7 @@ A3:0.66:Zdmuch- A3:0.66:nąć A3:0.67:wszyst- A3:0.66:kie A3:0.66:wspom- A3:0.5:
 C#4:1:Tak B3:1:już P:0.5 C#4:1:(Tak B3:1:już) P:0.5
 D3:0.5:Po B3:0.5:pros- C#4:0.5:tu C#4:0.5:nie D4:0.5:pa C#4:1:mię- A3:1:tać P:1 C#4:0.5:sy D4:0.5:tu- C#4:1:a- A3#:0.5:cji, 
 C#4:1:w_któ- C#4:0.5:rych C#4:0.5:ser- D4:0.5:ce C#4:1:klę- A3:0.5:ka 
-D4:2:Wiem, P:2
+B3:2:Wiem, P:2
 
 F#3:0.5:nie C#4:1:wyr- D4:0.5:wę C#4:1:się A3:0.5:cho- A3:1:ciaż A3:0.67:bar- A3:0.66:dzo A3:0.66:chcę,  P:1
 E3:0.5:Mam E3:0.5:na- E3:0.5:dzie- E3:0.5:ję, E3:0.5:że E3:0.5:to E3:1:wiesz C#4:1:i B3:1:Ty

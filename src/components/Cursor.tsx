@@ -19,11 +19,10 @@ type Props = {
   tailIndex: number;
 };
 
-const octaveShift = (12 * NOTE_HEIGHT) / 2;
-const octaves = Array.from({ length: 4 }, (_, i) => i);
-
 const Cursor = ({ historyIndex, tailIndex }: Props) => {
-  const [transpose, setTranspose] = useState<number>(0);
+  const [currentTranspose, setCurrentTranspose] = useState<number>(0);
+  const transposeRef = useRef<number>(-1);
+
   const { song, speed } = useStoreState(appStore);
   const cursorRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
@@ -44,7 +43,7 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
 
       const { detectedPitch, lastPitch, transpose, elapsed } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
-      const pitch = anyPitch ? anyPitch + 2 * 12 : averagePitch;
+      const pitch = anyPitch ? anyPitch + transpose * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
@@ -66,40 +65,39 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       cursorRef.current.style.transform = `translate(${x.toFixed(
         2
       )}px, ${y.toFixed(2)}px)`;
-      setTranspose(transpose);
-      // accentRef.current.style.opacity = transpose % 2 === 0 ? "0" : "1";
+
+      if (transposeRef.current !== transpose) {
+        transposeRef.current = transpose;
+        setCurrentTranspose(transpose);
+      }
     },
     [
       cursorRef,
       positionRef,
+      transposeRef,
       historyIndex,
       bpm,
       averagePitch,
       tailIndex,
       left,
       startTime,
+      setCurrentTranspose,
     ]
   );
 
   return (
-    <div
-      className={style.Cursor}
-    >
+    <div className={style.Cursor}>
       <div className={style.movable} ref={cursorRef}>
-        {octaves.map((octave) => (
-          <div
-            key={octave}
-            className={cx(style.ball, { [style.accent]: octave % 2 === 1 })}
-            style={{
-              top: `${
-                octaveShift * (2 - octave) + (NOTE_HEIGHT * (1 - scale)) / 2
-              }px`,
-              width: `${NOTE_HEIGHT * scale}px`,
-              height: `${NOTE_HEIGHT * scale}px`,
-              opacity: octave === transpose ? 1 : 0,
-            }}
-          ></div>
-        ))}
+        <div
+          className={cx(style.ball, {
+            [style.accent]: currentTranspose % 2 === 1,
+          })}
+          style={{
+            top: `${(NOTE_HEIGHT * (1 - scale)) / 2}px`,
+            width: `${NOTE_HEIGHT * scale}px`,
+            height: `${NOTE_HEIGHT * scale}px`,
+          }}
+        ></div>
       </div>
     </div>
   );
