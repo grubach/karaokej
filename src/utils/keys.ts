@@ -22,6 +22,7 @@ export const register = () => {
     }
 
     if (key === " ") {
+      event.preventDefault();
       if (appState.playerState === "playing") {
         pauseVideo();
         return;
