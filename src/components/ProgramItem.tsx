@@ -20,7 +20,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
-  const { id, text, duration, pitch, time, modifier } = songNote;
+  const { id,index, text, duration, pitch, time } = songNote;
   const { bpm } = song;
 
   useStore(
@@ -82,7 +82,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
         </div>
         <span
           className={cx(style.text, {
-            [style.narrow]: modifier === "narrow",
+            [style.narrow]: index % 2 === 1,
           })}
         >
           {formattedText}
