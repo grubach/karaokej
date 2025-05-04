@@ -104,8 +104,8 @@ P:1.5
 A#4:0.5:Yeah G#4:0.5:I F#4:0.5:just D#4:0.5:wan- C#4:0.5:na D#4:0.5:dance F#4:0.5:with 
 P:0.75 
 A#4:0.5:Yeah G#4:0.5:I F#4:0.5:just D#4:0.5:wan- C#4:0.5:na D#4:0.5:dance F#4:0.5:with 
-P:0.75
-C#5:1:Dance C#5:1:all B4:1:night 
+D#4:0.5:I F#4:0.5:can 
+G#4:1:Dance G#4:1:all G4:1:night 
 P:33.5
 
 A#4:1:Ooh, D#4:1 P:1 F#4:0.5:what D#4:0.5:you F#4:1:Do- D#4:0.5 G#4:0.5:in'? D#4:0.5 P:1.5
