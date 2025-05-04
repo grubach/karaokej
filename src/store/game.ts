@@ -78,19 +78,6 @@ const getSongNoteAtTime = (song: Song, elapsed: number, pitch: number) => {
   return nearestNote;
 };
 
-const getNextSongPitchNote = (song: Song, elapsed: number) => {
-  return (
-    song.notes
-      .filter((note) => note.pitch !== null)
-      .find((note) => {
-        const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
-        const noteEndTime =
-          noteStartTime + beatsToTime(note.duration, song.bpm);
-        return elapsed <= noteEndTime;
-      }) ?? null
-  );
-};
-
 export type GameState = {
   elapsed: number;
   elapsedWithLatency: number;
@@ -167,15 +154,11 @@ const frame = () => {
     elapsedWithLatency,
     anyPitch ?? song.averagePitch
   );
-  const nextSongPitchNote =
-    getNextSongPitchNote(song, elapsedWithLatency) ?? currentSongNote;
 
-  transpose = detectedPitch
-    ? findTranspose(
-        nextSongPitchNote?.pitch ?? song.averagePitch,
-        detectedPitch
-      )
-    : transpose;
+  transpose =
+    detectedPitch && scoreSongNote?.pitch
+      ? findTranspose(scoreSongNote?.pitch, detectedPitch)
+      : transpose;
 
   const difference =
     scoreSongNote?.pitch && anyPitch
@@ -221,10 +204,6 @@ const frame = () => {
   gameHistory.unshift(state);
   gameHistory.pop();
   gameStore.setValue(gameHistory);
-
-  // if (scoreNoteId !== null) {
-  //   gameStore.notifySubscriber(scoreNoteId);
-  // }
 };
 
 export const loadSong = (newSong: Song) => {

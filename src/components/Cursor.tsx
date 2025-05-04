@@ -19,6 +19,8 @@ type Props = {
   tailIndex: number;
 };
 
+const octaveShift = (12 * NOTE_HEIGHT) / 2;
+
 const Cursor = ({ historyIndex, tailIndex }: Props) => {
   const [currentTranspose, setCurrentTranspose] = useState<number>(0);
   const transposeRef = useRef<number>(-1);
@@ -43,7 +45,7 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
 
       const { detectedPitch, lastPitch, transpose, elapsed } = gameState;
       const anyPitch = detectedPitch ?? lastPitch;
-      const pitch = anyPitch ? anyPitch + transpose * 12 : averagePitch;
+      const pitch = anyPitch ? anyPitch + 2 * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
       positionRef.current += clamp(diff, -3, 3);
@@ -51,7 +53,7 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       const phase = timeToBeats(elapsed - startTime, bpm) % 2;
       const sin = phase < 1 ? -1 : 1;
       const rest = detectedPitch === null;
-      const sinusoidalMovement = rest ? (sin * NOTE_HEIGHT / 2)  : 0;
+      const sinusoidalMovement = rest ? (sin * NOTE_HEIGHT) / 2 : 0;
       const beatTime = beatsToTime(1, bpm);
 
       const y =
@@ -91,12 +93,46 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       <div className={style.movable} ref={cursorRef}>
         <div
           className={cx(style.ball, {
-            [style.accent]: currentTranspose % 2 === 1,
+            [style.accent]: true,
+          })}
+          style={{
+            top: `${(NOTE_HEIGHT * (1 - scale)) / 2 - octaveShift}px`,
+            width: `${NOTE_HEIGHT * scale}px`,
+            height: `${NOTE_HEIGHT * scale}px`,
+            opacity: currentTranspose === 3 ? 1 : 0,
+          }}
+        ></div>
+        <div
+          className={cx(style.ball, {
+            [style.accent]: false,
           })}
           style={{
             top: `${(NOTE_HEIGHT * (1 - scale)) / 2}px`,
             width: `${NOTE_HEIGHT * scale}px`,
             height: `${NOTE_HEIGHT * scale}px`,
+            opacity: currentTranspose === 2 ? 1 : 0,
+          }}
+        ></div>
+        <div
+          className={cx(style.ball, {
+            [style.accent]: true,
+          })}
+          style={{
+            top: `${(NOTE_HEIGHT * (1 - scale)) / 2 + octaveShift}px`,
+            width: `${NOTE_HEIGHT * scale}px`,
+            height: `${NOTE_HEIGHT * scale}px`,
+            opacity: currentTranspose === 1 ? 1 : 0,
+          }}
+        ></div>
+        <div
+          className={cx(style.ball, {
+            [style.accent]: false,
+          })}
+          style={{
+            top: `${(NOTE_HEIGHT * (1 - scale)) / 2 + 2 * octaveShift}px`,
+            width: `${NOTE_HEIGHT * scale}px`,
+            height: `${NOTE_HEIGHT * scale}px`,
+            opacity: currentTranspose === 0 ? 1 : 0,
           }}
         ></div>
       </div>
