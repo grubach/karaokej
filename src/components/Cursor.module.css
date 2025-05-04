@@ -14,7 +14,6 @@
 
 .ball {
   position: absolute;
-  /* transform: translateY(-50%); */
   left: calc(-1 * var(--note-height) / 2);
   background-color: var(--color-cursor);
   height: var(--note-height);

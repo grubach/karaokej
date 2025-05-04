@@ -7,7 +7,7 @@ import {
   LATENCY,
 } from "../constants";
 import useStore from "../hooks/useStore";
-import { timeToBeats } from "../utils/time";
+import { beatsToTime, timeToBeats } from "../utils/time";
 import { clamp } from "../utils/tools";
 import { gameStore } from "../store/game";
 import useStoreState from "../hooks/useStoreState";
@@ -49,10 +49,10 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       positionRef.current += clamp(diff, -3, 3);
 
       const phase = timeToBeats(elapsed - startTime, bpm) % 2;
-      const sin = Math.sin(phase * Math.PI) * 2;
-      const sinusoidalMovement = detectedPitch
-        ? 0
-        : (Math.round(sin) * NOTE_HEIGHT) / 8;
+      const sin = phase < 1 ? -1 : 1;
+      const rest = detectedPitch === null;
+      const sinusoidalMovement = rest ? (sin * NOTE_HEIGHT / 2)  : 0;
+      const beatTime = beatsToTime(1, bpm);
 
       const y =
         ((averagePitch - positionRef.current) * NOTE_HEIGHT) / 2 +
@@ -65,6 +65,7 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       cursorRef.current.style.transform = `translate(${x.toFixed(
         2
       )}px, ${y.toFixed(2)}px)`;
+      cursorRef.current.style.transitionDuration = rest ? `${beatTime}s` : "";
 
       if (transposeRef.current !== transpose) {
         transposeRef.current = transpose;
