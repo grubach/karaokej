@@ -75,7 +75,6 @@ C#5:0.5:Now C#5:0.5:I'm D#5:1:grown, A#4:0.5:I G#4:0.5:know F#4:0.5:what G#4:0.5
 
 G#4:0.5:I A#4:1:still F#5:0.5:Like F5:1:dan- A#4:0.5:cing G#4:0.5:with F#4:0.5:the G#4:0.5:les- G#4:0.5:sons G#4:0.5:I F#4:0.5:all- G#4:0.5:rea- F#4:0.5:dy A#4:1:learned
 
-
 P:1.25
 
 C#5:0.25:I:narrow C#5:0.25:al- C#5:0.25:rea-:narrow C#5:0.25:dy G#4:0.5:know G#4:0.5:your D#4:1:type,
@@ -104,8 +103,7 @@ P:1.5
 A#4:0.5:Yeah G#4:0.5:I F#4:0.5:just D#4:0.5:wan- C#4:0.5:na D#4:0.5:dance F#4:0.5:with 
 P:0.75 
 A#4:0.5:Yeah G#4:0.5:I F#4:0.5:just D#4:0.5:wan- C#4:0.5:na D#4:0.5:dance F#4:0.5:with 
-D#4:0.5:I F#4:0.5:can 
-G#4:1:Dance G#4:1:all G4:1:night 
+D#4:0.5:I F#4:0.5:could G#4:1:dance G#4:1:all G4:1:night 
 P:33.5
 
 A#4:1:Ooh, D#4:1 P:1 F#4:0.5:what D#4:0.5:you F#4:1:Do- D#4:0.5 G#4:0.5:in'? D#4:0.5 P:1.5
