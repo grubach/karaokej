@@ -8,7 +8,6 @@ import {
 } from "../constants";
 import useStore from "../hooks/useStore";
 import { beatsToTime, timeToBeats } from "../utils/time";
-import { clamp } from "../utils/tools";
 import { gameStore } from "../store/game";
 import useStoreState from "../hooks/useStoreState";
 import { appStore } from "../store/app";
@@ -48,7 +47,8 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
       const pitch = anyPitch ? anyPitch + 2 * 12 : averagePitch;
 
       const diff = pitch - positionRef.current;
-      positionRef.current += clamp(diff, -3, 3);
+      const bigDiff = Math.abs(diff) > 11;
+      positionRef.current += diff;
 
       const phase = timeToBeats(elapsed - startTime, bpm) % 2;
       const sin = phase < 1 ? -1 : 1;
@@ -64,15 +64,19 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
         left -
         timeToBeats(historyIndex / DETECTIONS_PER_SECOND, bpm) * BEAT_WIDTH;
 
-      cursorRef.current.style.transform = `translate(${x.toFixed(
-        2
-      )}px, ${y.toFixed(2)}px)`;
-      cursorRef.current.style.transitionDuration = rest ? `${beatTime}s` : "";
-
       if (transposeRef.current !== transpose) {
         transposeRef.current = transpose;
         setCurrentTranspose(transpose);
       }
+
+      cursorRef.current.style.transform = `translate(${x.toFixed(
+        2
+      )}px, ${y.toFixed(2)}px)`;
+      cursorRef.current.style.transitionDuration = bigDiff
+        ? "0s"
+        : rest
+        ? `${beatTime}s`
+        : "";
     },
     [
       cursorRef,
