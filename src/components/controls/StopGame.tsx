@@ -1,5 +1,5 @@
 import { FiSquare } from "react-icons/fi";
-import { stopGame } from "../../store/game";
+import { stopGame } from "../../game/sing";
 import ActionIcon from "../parts/ActionIcon";
 
 const StopGame = () => {

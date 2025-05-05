@@ -1,7 +1,8 @@
 import useStoreState from "../../hooks/useStoreState";
 import { SongScored } from "../../songs";
 import { appStore } from "../../store/app";
-import { gameStore, loadSong, startGame } from "../../store/game";
+import { gameStore } from "../../store/game";
+import { loadSong, startGame } from "../../game/sing";
 import { seekTo } from "../../utils/player";
 import { parseSongScored } from "../../utils/song";
 import style from "./SongList.module.css";

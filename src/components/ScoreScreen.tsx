@@ -3,7 +3,7 @@ import useStoreState from "../hooks/useStoreState";
 import { appStore } from "../store/app";
 import ActionIcon from "./parts/ActionIcon";
 import style from "./ScoreScreen.module.css";
-import { restartGame } from "../store/game";
+import { restartGame } from "../game/sing";
 
 const ScoreScreen = () => {
   const { percentScored, appPhase, song } = useStoreState(appStore);
