@@ -61,7 +61,7 @@ const notesParser = (song: SongScored): SongNote[] => {
     const time = cursor;
     cursor += duration;
     parsedNotes.push({
-      id: `${id}-${i}`,
+      id: `${id}-${i}-${note}`,
       index: i,
       time,
       duration,

@@ -7,6 +7,7 @@ import standByMe from "./stand-by-me";
 import summerWine from "./summer-wine";
 import jakZapomniec from "./jak-zapomniec";
 import illusion from "./illusion";
+import katyOnAMission from "./katy-on-a-mission";
 
 export type SongScored = Omit<Song, "notes" | "averagePitch" | "video"> & {
   score: string;
@@ -23,6 +24,7 @@ const songs: SongScored[] = [
   summerWine,
   jakZapomniec,
   illusion,
+  katyOnAMission,
   // Add more songs here
 ];
 
