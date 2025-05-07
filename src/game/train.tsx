@@ -1,7 +1,6 @@
 import {
   DETECTIONS_PER_SECOND,
   LATENCY,
-  NOTE_SCORE_RANGE,
   PITCH_TRAINING_TOLERANCE,
 } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
