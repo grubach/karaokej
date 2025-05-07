@@ -15,9 +15,9 @@ const stringifyNotes = (notes: SongNote[]) =>
 const Program = () => {
   const [currentNotes, setCurrentNotes] = useState<SongNote[]>([]);
   const currentNotesRef = useRef<SongNote[]>([]);
-  const { song } = useStoreState(appStore);
+  const { song, notes, averagePitch } = useStoreState(appStore);
   const notesRef = useRef<HTMLDivElement>(null);
-  const { notes, startTime, endTime, bpm } = song;
+  const { startTime, endTime, bpm } = song;
   const left = timeToBeats(startTime, bpm) * BEAT_WIDTH;
   useStore(
     gameStore,
@@ -43,21 +43,26 @@ const Program = () => {
         setCurrentNotes(currentNotes);
         currentNotesRef.current = currentNotes;
       }
-
-
     },
     [notesRef, currentNotesRef, notes, startTime, endTime, bpm, left]
   );
 
   return (
     <div className={style.Program}>
-      <div ref={notesRef} className={style.notes}
-      style= {{
-        left: `${left}px`,
-      }}
+      <div
+        ref={notesRef}
+        className={style.notes}
+        style={{
+          left: `${left}px`,
+        }}
       >
         {currentNotes.map((note) => (
-          <ProgramItem key={note.id} songNote={note} song={song} />
+          <ProgramItem
+            key={note.id}
+            songNote={note}
+            song={song}
+            averagePitch={averagePitch}
+          />
         ))}
       </div>
     </div>

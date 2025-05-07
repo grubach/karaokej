@@ -49,11 +49,12 @@ export const loadPlayer = () => {
 };
 
 export const loadVideo = (videoId: string) => {
+  console.log("Loading video:", videoId);
   if (!player) {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.cueVideoById(videoId);
+  return player.cueVideoById(videoId);
 };
 
 export const playVideo = () => {
@@ -62,7 +63,7 @@ export const playVideo = () => {
     return;
   }
   // player.setPlaybackRate(0.5);
-  player.playVideo();
+  return player.playVideo();
 };
 
 export const pauseVideo = () => {
@@ -70,33 +71,33 @@ export const pauseVideo = () => {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.pauseVideo();
+  return player.pauseVideo();
 };
 
-export const restartVideo = () => {
+export const restartVideo = async () => {
   if (!player) {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.seekTo(0, true);
-  player.playVideo();
+  await player.seekTo(0, true);
+  await player.playVideo();
 };
 
-export const stopVideo = () => {
+export const stopVideo = async () => {
   if (!player) {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.pauseVideo();
-  player.seekTo(0, true);
+  await player.pauseVideo();
+  await player.seekTo(0, true);
 };
 
-export const seekTo = (seconds: number) => {
+export const seekTo = async (seconds: number) => {
   if (!player) {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.seekTo(seconds, true);
+  await player.seekTo(seconds, true);
 };
 
 export const setVideoSpeed = (speed: number) => {
@@ -104,7 +105,7 @@ export const setVideoSpeed = (speed: number) => {
     console.error("YouTube Player not loaded");
     return;
   }
-  player.setPlaybackRate(speed);
+  return player.setPlaybackRate(speed);
 };
 
 export const getVideoTime = async () => {
@@ -112,6 +113,5 @@ export const getVideoTime = async () => {
     console.error("YouTube Player not loaded");
     return 0;
   }
-  const time = await player.getCurrentTime();
-  return time; // Time in seconds
+  return player.getCurrentTime(); // in seconds
 };

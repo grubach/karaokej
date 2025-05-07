@@ -1,4 +1,5 @@
 import { SongScored } from "../songs";
+import { appStore } from "../store/app";
 
 export type Modifier = "narrow";
 
@@ -10,30 +11,6 @@ export type SongNote = {
   pitch: number | null; // in semitones
   text: string; // text to display
   modifier: Modifier | null; // modifier to apply to the note
-};
-
-export type Song = {
-  id: string; // unique identifier
-  title: string;
-  artist: string;
-  video: string; // YouTube video ID
-  bpm: number; // beats per minute
-  startTime: number; // in seconds
-  endTime: number; // in seconds
-  averagePitch: number; // in semitones
-  notes: SongNote[];
-};
-
-export const emptySong: Song = {
-  id: "",
-  title: "",
-  artist: "",
-  video: "",
-  bpm: 0,
-  startTime: 0,
-  endTime: 0,
-  averagePitch: 0,
-  notes: [],
 };
 
 const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -74,21 +51,19 @@ const notesParser = (song: SongScored): SongNote[] => {
   return parsedNotes;
 };
 
-export const parseSongScored = (songScored: SongScored): Song => {
-  const { score, karaokeVideo, originalVideo, ...rest } = songScored;
-  const parsedNotes = notesParser(songScored);
+export const loadSongScored = (song: SongScored) => {
+  const notes = notesParser(song);
 
-  const notesPitches = parsedNotes
+  const notesPitches = notes
     .filter((note) => note.pitch !== null)
     .map((note) => note.pitch!);
   const averagePitch =
     (Math.max(...notesPitches) + Math.min(...notesPitches)) / 2;
 
-  return {
-    ...rest,
-    video: karaokeVideo,
-    // video: originalVideo,
+  appStore.updateValue((state) => ({
+    ...state,
+    song,
+    notes,
     averagePitch,
-    notes: parsedNotes,
-  };
+  }));
 };

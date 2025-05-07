@@ -1,19 +1,17 @@
-import { LATENCY, NOTE_SCORE_RANGE, TIMING_TOLERANCE } from "../constants";
+import {
+  DETECTIONS_PER_SECOND,
+  LATENCY,
+  PITCH_TRAINING_TOLERANCE,
+} from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
 import { beatsToTime } from "../utils/time";
-import {
-  getVideoTime,
-  loadVideo,
-  pauseVideo,
-  playVideo,
-  seekTo,
-} from "../utils/player";
+import { pauseVideo, seekTo } from "../utils/player";
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
 import { SongScored } from "../songs";
 import { loadSongScored, SongNote } from "../utils/song";
 
-// code for singing game mode
+// code for training game mode
 
 let lastPitch: number | null = null;
 let transpose: number = 0;
@@ -52,11 +50,8 @@ const getSongNoteAtTime = (
   pitch: number
 ) => {
   const notesAtTime = notes.filter((note) => {
-    const noteStartTime =
-      song.startTime + beatsToTime(note.time - TIMING_TOLERANCE, song.bpm);
-    const noteEndTime =
-      noteStartTime +
-      beatsToTime(note.duration + 2 * TIMING_TOLERANCE, song.bpm);
+    const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
+    const noteEndTime = noteStartTime + beatsToTime(note.duration, song.bpm);
     return elapsed >= noteStartTime && elapsed <= noteEndTime;
   });
 
@@ -90,9 +85,6 @@ const frame = () => {
   }
 
   const elapsed = currentVideoTime;
-  getVideoTime().then((time) => {
-    currentVideoTime = time;
-  });
 
   if (elapsed > song.endTime) {
     stopGame();
@@ -120,12 +112,7 @@ const frame = () => {
     elapsed,
     anyPitch ?? averagePitch
   );
-  const scoreSongNote = getSongNoteAtTime(
-    song,
-    notes,
-    elapsedWithLatency,
-    anyPitch ?? averagePitch
-  );
+  const scoreSongNote = currentSongNote;
 
   transpose =
     detectedPitch && scoreSongNote?.pitch
@@ -133,32 +120,45 @@ const frame = () => {
       : transpose;
 
   const difference =
-    scoreSongNote?.pitch && anyPitch
-      ? findNearestDifference(scoreSongNote.pitch, anyPitch)
+    scoreSongNote?.pitch && detectedPitch
+      ? findNearestDifference(scoreSongNote.pitch, detectedPitch)
       : null;
 
+  if (scoreSongNote && scoreNoteId !== scoreSongNote.id) {
+    scoreNoteId = scoreSongNote.id;
+    noteScore = 0;
+    noteDetections = 0;
+  }
+
+  const timeProgress = 1 / DETECTIONS_PER_SECOND;
   let points = 0;
 
-  if (difference !== null && Math.abs(difference) < NOTE_SCORE_RANGE) {
-    points = (NOTE_SCORE_RANGE - Math.abs(difference)) / NOTE_SCORE_RANGE;
-  }
+  if (currentVideoTime < song.startTime) {
+    currentVideoTime = song.startTime;
+  } else if (!scoreSongNote) {
+    currentVideoTime += timeProgress;
+  } else if (!scoreSongNote?.pitch) {
+    const noteStartTime =
+      song.startTime + beatsToTime(scoreSongNote.time, song.bpm);
+    const noteEndTime =
+      noteStartTime + beatsToTime(scoreSongNote.duration, song.bpm);
+    currentVideoTime = noteEndTime + timeProgress;
+  } else if (
+    difference !== null &&
+    Math.abs(difference) < PITCH_TRAINING_TOLERANCE
+  ) {
+    points = 1 - Math.abs(difference) / PITCH_TRAINING_TOLERANCE;
+    currentVideoTime += timeProgress * points;
 
-  overallScore += points;
-  overallDetections += 1;
-  if (scoreSongNote) {
-    overallNoteDetections += 1;
-  }
-
-  if (scoreSongNote) {
-    if (scoreNoteId !== scoreSongNote.id) {
-      scoreNoteId = scoreSongNote.id;
-      noteScore = 0;
-      noteDetections = 0;
-    }
+    overallScore += points;
     noteScore += points;
+
+    overallDetections += 1;
+    overallNoteDetections += 1;
     noteDetections += 1;
   }
-  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0;
+
+  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0.01;
 
   const state = {
     elapsed,
@@ -179,10 +179,6 @@ const frame = () => {
 };
 
 export const loadGame = async (newSong: SongScored) => {
-  const { song } = appStore.getValue();
-  if (song?.id !== newSong.id) {
-    await loadVideo(newSong.karaokeVideo);
-  }
   loadSongScored(newSong);
 };
 
@@ -237,8 +233,6 @@ export const startGame = async () => {
   overallDetections = 0;
   overallNoteDetections = 0;
   lastPitch = null;
-
-  await playVideo();
 
   if (!playing) {
     playing = true;

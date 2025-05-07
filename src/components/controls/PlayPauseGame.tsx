@@ -1,5 +1,5 @@
 import { startTransition, useActionState } from "react";
-import { startGame } from "../../game/sing";
+import { startGame } from "../../game";
 import ActionIcon from "../parts/ActionIcon";
 import { FiPause, FiPlay } from "react-icons/fi";
 import useStoreState from "../../hooks/useStoreState";
@@ -36,4 +36,5 @@ const PlayPauseGame = () => {
     />
   );
 };
+
 export default PlayPauseGame;

@@ -7,12 +7,12 @@ import { restartGame } from "../game/sing";
 
 const ScoreScreen = () => {
   const { percentScored, appPhase, song } = useStoreState(appStore);
-  if (appPhase !== "finished") return null;
+  if (appPhase !== "finished" || song === null) return null;
   return (
     <div className={style.ScoreScreen}>
       <img
         className={style.cover}
-        src={`https://img.youtube.com/vi/${song.video}/0.jpg`}
+        src={`https://img.youtube.com/vi/${song.karaokeVideo}/0.jpg`}
       />
       <div className={style.title}>{song.title}</div>
       <div className={style.artist}>{song.artist}</div>

@@ -1,26 +1,28 @@
 import { BEAT_WIDTH, NOTE_HEIGHT, NOTE_SCORE_RANGE } from "../constants";
 import style from "./ProgramItem.module.css";
-import { Song, SongNote } from "../utils/song";
+import { SongNote } from "../utils/song";
 import useStore from "../hooks/useStore";
 import { useRef } from "react";
 import cx from "classnames";
 import { gameStore } from "../store/game";
 import { timeToBeats } from "../utils/time";
+import { SongScored } from "../songs";
 
 type Props = {
   songNote: SongNote;
-  song: Song;
+  song: SongScored;
+  averagePitch: number;
 };
 
 const pointsThreshold = 1 / NOTE_SCORE_RANGE;
 
-const ProgramItem = ({ songNote, song }: Props) => {
+const ProgramItem = ({ songNote, song, averagePitch }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const shapeRef = useRef<HTMLDivElement>(null);
   const passedRef = useRef<HTMLDivElement>(null);
   const goodRef = useRef<HTMLDivElement>(null);
 
-  const { id,index, text, duration, pitch, time } = songNote;
+  const { id, index, text, duration, pitch, time } = songNote;
   const { bpm } = song;
 
   useStore(
@@ -72,7 +74,7 @@ const ProgramItem = ({ songNote, song }: Props) => {
       className={style.ProgramItem}
       style={{
         width: `${duration * BEAT_WIDTH}px`,
-        top: `${((song.averagePitch - pitch!) * NOTE_HEIGHT) / 2}px`,
+        top: `${((averagePitch - pitch!) * NOTE_HEIGHT) / 2}px`,
       }}
     >
       <div ref={containerRef} className={style.movable}>
