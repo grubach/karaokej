@@ -24,11 +24,11 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
   const [currentTranspose, setCurrentTranspose] = useState<number>(0);
   const transposeRef = useRef<number>(-1);
 
-  const { song, speed } = useStoreState(appStore);
+  const { song, speed, averagePitch } = useStoreState(appStore);
   const cursorRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
 
-  const { averagePitch, bpm, startTime } = song;
+  const { bpm, startTime } = song;
 
   const left = -timeToBeats(LATENCY, bpm) * speed * BEAT_WIDTH;
 

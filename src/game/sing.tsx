@@ -1,10 +1,5 @@
-import {
-  LATENCY,
-  NOTE_SCORE_RANGE,
-  TIMING_TOLERANCE,
-} from "../constants";
+import { LATENCY, NOTE_SCORE_RANGE, TIMING_TOLERANCE } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
-import { Song } from "../utils/song";
 import { beatsToTime } from "../utils/time";
 import {
   getVideoTime,
@@ -15,6 +10,8 @@ import {
 } from "../utils/player";
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
+import { SongScored } from "../songs";
+import { SongNote } from "../utils/song";
 
 let lastPitch: number | null = null;
 let transpose: number = 0;
@@ -46,8 +43,13 @@ const findNearestDifference = (target: number, detectedPitch: number) => {
   return diff;
 };
 
-const getSongNoteAtTime = (song: Song, elapsed: number, pitch: number) => {
-  const notesAtTime = song.notes.filter((note) => {
+const getSongNoteAtTime = (
+  song: SongScored,
+  notes: SongNote[],
+  elapsed: number,
+  pitch: number
+) => {
+  const notesAtTime = notes.filter((note) => {
     const noteStartTime =
       song.startTime + beatsToTime(note.time - TIMING_TOLERANCE, song.bpm);
     const noteEndTime =
@@ -77,10 +79,9 @@ const getSongNoteAtTime = (song: Song, elapsed: number, pitch: number) => {
   return nearestNote;
 };
 
-
 let currentVideoTime = 0;
 const frame = () => {
-  const song = appStore.getValue().song;
+  const { song, averagePitch, notes } = appStore.getValue();
   if (song.id === "") {
     console.error("No song loaded");
     return;
@@ -113,13 +114,15 @@ const frame = () => {
   const elapsedWithLatency = elapsed - LATENCY;
   const currentSongNote = getSongNoteAtTime(
     song,
+    notes,
     elapsed,
-    anyPitch ?? song.averagePitch
+    anyPitch ?? averagePitch
   );
   const scoreSongNote = getSongNoteAtTime(
     song,
+    notes,
     elapsedWithLatency,
-    anyPitch ?? song.averagePitch
+    anyPitch ?? averagePitch
   );
 
   transpose =
@@ -173,10 +176,10 @@ const frame = () => {
   gameStore.setValue(gameHistory);
 };
 
-export const loadSong = (newSong: Song) => {
+export const loadSong = (newSong: SongScored) => {
   const { song } = appStore.getValue();
   if (song?.id !== newSong.id) {
-    loadVideo(newSong.video);
+    loadVideo(newSong.karaokeVideo);
   }
   appStore.updateValue((store) => ({
     ...store,
@@ -236,7 +239,7 @@ export const startGame = async () => {
   overallNoteDetections = 0;
   lastPitch = null;
 
-  playVideo();
+  await playVideo();
 
   if (!playing) {
     playing = true;

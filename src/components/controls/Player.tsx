@@ -16,10 +16,10 @@ const Player = () => {
       <div className={style.video}>
         <div className={style.iframe} id="video-player"></div>
       </div>
-      {song.video && (
+      {song.karaokeVideo && (
         <img
           className={style.cover}
-          src={`https://img.youtube.com/vi/${song.video}/0.jpg`}
+          src={`https://img.youtube.com/vi/${song.karaokeVideo}/0.jpg`}
           alt={song.title}
         />
       )}

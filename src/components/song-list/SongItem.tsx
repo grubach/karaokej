@@ -2,11 +2,11 @@ import useStoreState from "../../hooks/useStoreState";
 import { SongScored } from "../../songs";
 import { appStore } from "../../store/app";
 import { gameStore } from "../../store/game";
-import { loadSong, startGame } from "../../game/sing";
-import { seekTo } from "../../utils/player";
-import { parseSongScored } from "../../utils/song";
+import { startGame } from "../../game/sing";
+import { loadVideo, seekTo } from "../../utils/player";
 import style from "./SongList.module.css";
 import c from "classnames";
+import { loadSongScored } from "../../utils/song";
 
 type Props = {
   songScored: SongScored;
@@ -16,10 +16,10 @@ const SongItem = ({ songScored }: Props) => {
   const { song } = useStoreState(appStore);
   const selected = song?.id === songScored.id;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!selected) {
       gameStore.resetValue();
-      seekTo(0);
+      await seekTo(0);
     }
 
     appStore.updateValue((state) => ({
@@ -27,10 +27,11 @@ const SongItem = ({ songScored }: Props) => {
       listOpen: false,
     }));
 
-    loadSong(parseSongScored(songScored));
+    loadSongScored(songScored);
 
     if (!selected) {
-      startGame();
+      await loadVideo(songScored.karaokeVideo);
+      await startGame();
     }
   };
 

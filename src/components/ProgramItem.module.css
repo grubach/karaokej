@@ -21,9 +21,9 @@
   bottom: 100%;
   font-size: 14pt;
 
-  &.narrow {
+  /* &.narrow {
     bottom: 150%;
-  }
+  } */
 }
 
 .shape {
