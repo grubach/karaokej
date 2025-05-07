@@ -3,6 +3,7 @@ import Player from "./Player";
 import ProgressBar from "./ProgressBar";
 import PlayPauseGame from "./PlayPauseGame";
 import Speed from "./Speed";
+import ModeSwitch from "./ModeSwitch";
 import cx from "classnames";
 import { appStore } from "../../store/app";
 import useStoreState from "../../hooks/useStoreState";
@@ -18,8 +19,10 @@ const Controls = () => {
       <Player />
       <ProgressBar />
       <Speed />
+      <ModeSwitch />
       <PlayPauseGame />
     </div>
   );
 };
+
 export default Controls;

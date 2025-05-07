@@ -11,7 +11,9 @@ import {
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
 import { SongScored } from "../songs";
-import { SongNote } from "../utils/song";
+import { loadSongScored, SongNote } from "../utils/song";
+
+// code for singing game mode
 
 let lastPitch: number | null = null;
 let transpose: number = 0;
@@ -176,15 +178,12 @@ const frame = () => {
   gameStore.setValue(gameHistory);
 };
 
-export const loadSong = (newSong: SongScored) => {
+export const loadGame = async (newSong: SongScored) => {
   const { song } = appStore.getValue();
   if (song?.id !== newSong.id) {
-    loadVideo(newSong.karaokeVideo);
+    await loadVideo(newSong.karaokeVideo);
   }
-  appStore.updateValue((store) => ({
-    ...store,
-    song: newSong,
-  }));
+  loadSongScored(newSong);
 };
 
 let playing = false;

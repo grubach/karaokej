@@ -5,6 +5,8 @@ import { emptySong, SongScored } from "../songs";
 
 export type AppPhase = "unstarted" | "playing" | "finished";
 
+export type GameMode = "sing" | "train";
+
 export type AppState = {
   song: SongScored;
   playerState: PlayerState;
@@ -14,6 +16,7 @@ export type AppState = {
   percentScored: number;
   averagePitch: number;
   notes: SongNote[];
+  gameMode: GameMode;
 };
 
 const initialState: AppState = {
@@ -25,6 +28,7 @@ const initialState: AppState = {
   percentScored: 0,
   averagePitch: 0,
   notes: [],
+  gameMode: "train",
 };
 
 export const appStore = createStore(initialState);

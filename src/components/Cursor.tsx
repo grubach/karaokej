@@ -24,13 +24,14 @@ const Cursor = ({ historyIndex, tailIndex }: Props) => {
   const [currentTranspose, setCurrentTranspose] = useState<number>(0);
   const transposeRef = useRef<number>(-1);
 
-  const { song, speed, averagePitch } = useStoreState(appStore);
+  const { song, speed, averagePitch, gameMode } = useStoreState(appStore);
   const cursorRef = useRef<HTMLDivElement>(null);
   const positionRef = useRef<number>(0);
 
   const { bpm, startTime } = song;
 
-  const left = -timeToBeats(LATENCY, bpm) * speed * BEAT_WIDTH;
+  const left =
+    gameMode === "sing" ? -timeToBeats(LATENCY, bpm) * speed * BEAT_WIDTH : 0;
 
   const scale = tailIndex === 0 ? 1 : (0.5 * (10 - tailIndex)) / 10;
 
