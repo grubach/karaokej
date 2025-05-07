@@ -9,8 +9,8 @@ import { gameStore } from "../store/game";
 
 const Track = ({ children }: PropsWithChildren) => {
   const backgroundRef = useRef<HTMLDivElement>(null);
-  const { song } = useStoreState(appStore);
-  const { notes, startTime, endTime, bpm } = song;
+  const { notes, song } = useStoreState(appStore);
+  const { startTime, endTime, bpm } = song;
 
   useStore(
     gameStore,
