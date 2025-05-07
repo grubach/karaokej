@@ -82,7 +82,7 @@ G#4:0.25:ning:narrow  G#4:0.75:comes, B4:0.5:the  A4:1:sto- G#4:0.5:ry's  F#4:0.
 P:2.5
 
 F#4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25
-F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E#4:1:trol
+F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E4:1:trol
 
 P:2
 
@@ -102,7 +102,7 @@ G#4:0.25:for-  G#4:0.75:get, B4:0.5:to  A4:1:play G#4:0.5:my  F#4:0.5:role
 P:2.5
 
 F#4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25
-F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E#4:1:trol
+F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E4:1:trol
 
 P:1.5
 
@@ -179,7 +179,7 @@ G#4:0.25:ning:narrow  G#4:0.75:comes, B4:0.5:the  A4:1:sto- G#4:0.5:ry's  F#4:0.
 P:2.5
 
 F#4:0.25:You F#4:0.75:take  E4:0.25:my F#4:0.5:self, P:0.25
-F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E#4:1:trol
+F#4:0.25:You F#4:0.75:take  A4:0.5:my G#4:1:self  F#4:0.5:con- E4:1:trol
 
 P:1.5
 

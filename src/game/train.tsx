@@ -1,4 +1,9 @@
-import { DETECTIONS_PER_SECOND, LATENCY, NOTE_SCORE_RANGE } from "../constants";
+import {
+  DETECTIONS_PER_SECOND,
+  LATENCY,
+  NOTE_SCORE_RANGE,
+  PITCH_TRAINING_TOLERANCE,
+} from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
 import { beatsToTime } from "../utils/time";
 import { pauseVideo, seekTo } from "../utils/player";
@@ -120,41 +125,41 @@ const frame = () => {
       ? findNearestDifference(scoreSongNote.pitch, detectedPitch)
       : null;
 
-  const PITCH_TRAINING_TOLERANCE = 0.25;
-  const timeProgress = 1 / DETECTIONS_PER_SECOND;
+  if (scoreSongNote && scoreNoteId !== scoreSongNote.id) {
+    scoreNoteId = scoreSongNote.id;
+    noteScore = 0;
+    noteDetections = 0;
+  }
 
-  if (!scoreSongNote?.pitch) {
+  const timeProgress = 1 / DETECTIONS_PER_SECOND;
+  let points = 0;
+
+  if (currentVideoTime < song.startTime) {
+    currentVideoTime = song.startTime;
+  } else if (!scoreSongNote) {
     currentVideoTime += timeProgress;
+  } else if (!scoreSongNote?.pitch) {
+    const noteStartTime =
+      song.startTime + beatsToTime(scoreSongNote.time, song.bpm);
+    const noteEndTime =
+      noteStartTime + beatsToTime(scoreSongNote.duration, song.bpm);
+    currentVideoTime = noteEndTime + timeProgress;
   } else if (
     difference !== null &&
     Math.abs(difference) < PITCH_TRAINING_TOLERANCE
   ) {
-    const accuraccy = 1 - Math.abs(difference) / PITCH_TRAINING_TOLERANCE;
-    currentVideoTime += timeProgress * accuraccy;
-  }
+    points = 1 - Math.abs(difference) / PITCH_TRAINING_TOLERANCE;
+    currentVideoTime += timeProgress * points;
 
-  let points = 0;
-
-  if (difference !== null && Math.abs(difference) < NOTE_SCORE_RANGE) {
-    points = (NOTE_SCORE_RANGE - Math.abs(difference)) / NOTE_SCORE_RANGE;
-  }
-
-  overallScore += points;
-  overallDetections += 1;
-  if (scoreSongNote) {
-    overallNoteDetections += 1;
-  }
-
-  if (scoreSongNote) {
-    if (scoreNoteId !== scoreSongNote.id) {
-      scoreNoteId = scoreSongNote.id;
-      noteScore = 0;
-      noteDetections = 0;
-    }
+    overallScore += points;
     noteScore += points;
+
+    overallDetections += 1;
+    overallNoteDetections += 1;
     noteDetections += 1;
   }
-  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0;
+
+  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0.01;
 
   const state = {
     elapsed,
