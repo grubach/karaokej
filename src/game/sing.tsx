@@ -1,4 +1,4 @@
-import { LATENCY, NOTE_SCORE_RANGE, TIMING_TOLERANCE } from "../constants";
+import { LATENCY, NOTE_SCORE_RANGE, SING_TIMING_TOLERANCE } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
 import { beatsToTime } from "../utils/time";
 import {
@@ -49,14 +49,14 @@ const getSongNoteAtTime = (
   song: SongScored,
   notes: SongNote[],
   elapsed: number,
-  pitch: number
+  pitch: number,
+  tolerance: number
 ) => {
   const notesAtTime = notes.filter((note) => {
     const noteStartTime =
-      song.startTime + beatsToTime(note.time - TIMING_TOLERANCE, song.bpm);
+      song.startTime + beatsToTime(note.time - tolerance, song.bpm);
     const noteEndTime =
-      noteStartTime +
-      beatsToTime(note.duration + 2 * TIMING_TOLERANCE, song.bpm);
+      noteStartTime + beatsToTime(note.duration + 2 * tolerance, song.bpm);
     return elapsed >= noteStartTime && elapsed <= noteEndTime;
   });
 
@@ -118,13 +118,15 @@ const frame = () => {
     song,
     notes,
     elapsed,
-    anyPitch ?? averagePitch
+    anyPitch ?? averagePitch,
+    SING_TIMING_TOLERANCE
   );
   const scoreSongNote = getSongNoteAtTime(
     song,
     notes,
     elapsedWithLatency,
-    anyPitch ?? averagePitch
+    anyPitch ?? averagePitch,
+    SING_TIMING_TOLERANCE
   );
 
   transpose =

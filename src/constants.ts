@@ -3,7 +3,8 @@ export const HISTORY_DURATION = 1; // seconds
 export const HISTORY_SIZE = HISTORY_DURATION * DETECTIONS_PER_SECOND;
 export const PREHISTORY_SIZE = 5;
 export const LATENCY = 0.5; // seconds
-export const TIMING_TOLERANCE = 0.25; // beats
+export const SING_TIMING_TOLERANCE = 0.25; // beats
+export const TRAIN_TIMING_TOLERANCE = 0.25 / 4; // beats
 export const NOTE_SCORE_RANGE = 2; // semitones
 export const PITCH_TRAINING_TOLERANCE = 0.5; // semitones
 

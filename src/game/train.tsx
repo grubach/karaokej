@@ -2,6 +2,7 @@ import {
   DETECTIONS_PER_SECOND,
   LATENCY,
   PITCH_TRAINING_TOLERANCE,
+  TRAIN_TIMING_TOLERANCE,
 } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
 import { beatsToTime } from "../utils/time";
@@ -47,11 +48,14 @@ const getSongNoteAtTime = (
   song: SongScored,
   notes: SongNote[],
   elapsed: number,
-  pitch: number
+  pitch: number,
+  tolerance: number
 ) => {
   const notesAtTime = notes.filter((note) => {
-    const noteStartTime = song.startTime + beatsToTime(note.time, song.bpm);
-    const noteEndTime = noteStartTime + beatsToTime(note.duration, song.bpm);
+    const noteStartTime =
+      song.startTime + beatsToTime(note.time - tolerance, song.bpm);
+    const noteEndTime =
+      noteStartTime + beatsToTime(note.duration + 2 * tolerance, song.bpm);
     return elapsed >= noteStartTime && elapsed <= noteEndTime;
   });
 
@@ -110,7 +114,8 @@ const frame = () => {
     song,
     notes,
     elapsed,
-    anyPitch ?? averagePitch
+    anyPitch ?? averagePitch,
+    TRAIN_TIMING_TOLERANCE
   );
   const scoreSongNote = currentSongNote;
 
@@ -120,8 +125,8 @@ const frame = () => {
       : transpose;
 
   const difference =
-    scoreSongNote?.pitch && detectedPitch
-      ? findNearestDifference(scoreSongNote.pitch, detectedPitch)
+    scoreSongNote?.pitch && anyPitch
+      ? findNearestDifference(scoreSongNote.pitch, anyPitch)
       : null;
 
   if (scoreSongNote && scoreNoteId !== scoreSongNote.id) {
