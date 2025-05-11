@@ -1,6 +1,5 @@
 import { LATENCY, NOTE_SCORE_RANGE, SING_TIMING_TOLERANCE } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
-import { beatsToTime } from "../utils/time";
 import {
   getVideoTime,
   loadVideo,
@@ -11,7 +10,8 @@ import {
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
 import { SongScored } from "../songs";
-import { loadSongScored, SongNote } from "../utils/song";
+import { loadSongScored } from "../utils/song";
+import { findTranspose, findNearestDifference, getSongNoteAtTime } from "../utils/pitchUtils";
 
 // code for singing game mode
 
@@ -23,63 +23,6 @@ let overallNoteDetections: number = 0;
 let scoreNoteId: string | null = null;
 let noteScore: number = 0;
 let noteDetections: number = 0;
-
-const findTranspose = (target: number, detectedPitch: number) => {
-  let transpose = 0;
-  let diff = detectedPitch - target;
-  while (Math.abs(diff) > 6) {
-    if (diff > 0) {
-      transpose -= 1;
-    } else {
-      transpose += 1;
-    }
-    diff = detectedPitch + transpose * 12 - target;
-  }
-
-  return transpose;
-};
-
-const findNearestDifference = (target: number, detectedPitch: number) => {
-  const transpose = findTranspose(target, detectedPitch);
-  const diff = detectedPitch + transpose * 12 - target;
-  return diff;
-};
-
-const getSongNoteAtTime = (
-  song: SongScored,
-  notes: SongNote[],
-  elapsed: number,
-  pitch: number,
-  tolerance: number
-) => {
-  const notesAtTime = notes.filter((note) => {
-    const noteStartTime =
-      song.startTime + beatsToTime(note.time - tolerance, song.bpm);
-    const noteEndTime =
-      noteStartTime + beatsToTime(note.duration + 2 * tolerance, song.bpm);
-    return elapsed >= noteStartTime && elapsed <= noteEndTime;
-  });
-
-  if (notesAtTime.length === 0) {
-    return null;
-  }
-
-  const nearestNote = notesAtTime.reduce((prev, curr) => {
-    const prevDiff = prev?.pitch
-      ? findNearestDifference(prev.pitch, pitch)
-      : Infinity;
-    const currDiff = curr?.pitch
-      ? findNearestDifference(curr.pitch, pitch)
-      : Infinity;
-    if (Math.abs(prevDiff) < Math.abs(currDiff)) {
-      return prev;
-    } else {
-      return curr;
-    }
-  });
-
-  return nearestNote;
-};
 
 let currentVideoTime = 0;
 const frame = () => {
