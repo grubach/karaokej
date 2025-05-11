@@ -210,10 +210,26 @@ const proceedGame = async () => {
   }
 };
 
-export const stopGame = () => {
+export const stopGame = async () => {
   playing = false;
 
-  pauseVideo();
+  await pauseVideo();
+  return true;
+};
+
+export const resumeGame = async () => {
+  await playVideo();
+  if (playing) {
+    return true;
+  }
+  playing = true;
+  proceedGame();
+  return true;
+};
+
+export const seekGame = async (time: number) => {
+  await seekTo(time);
+  currentVideoTime = time;
   return true;
 };
 

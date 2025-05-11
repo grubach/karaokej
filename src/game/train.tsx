@@ -6,7 +6,6 @@ import {
 } from "../constants";
 import { detect, initAudioContext } from "../utils/detect";
 import { beatsToTime } from "../utils/time";
-import { pauseVideo, seekTo } from "../utils/player";
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
 import { SongScored } from "../songs";
@@ -125,8 +124,8 @@ const frame = () => {
       : transpose;
 
   const difference =
-    scoreSongNote?.pitch && anyPitch
-      ? findNearestDifference(scoreSongNote.pitch, anyPitch)
+    scoreSongNote?.pitch && detectedPitch
+      ? findNearestDifference(scoreSongNote.pitch, detectedPitch)
       : null;
 
   if (scoreSongNote && scoreNoteId !== scoreSongNote.id) {
@@ -163,7 +162,7 @@ const frame = () => {
     noteDetections += 1;
   }
 
-  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0.01;
+  const averageNoteScore = noteDetections ? noteScore / noteDetections : 0;
 
   const state = {
     elapsed,
@@ -211,13 +210,23 @@ const proceedGame = async () => {
 
 export const stopGame = () => {
   playing = false;
-
-  pauseVideo();
   return true;
 };
 
+export const resumeGame = () => {
+  if (!playing) {
+    playing = true;
+    proceedGame();
+  }
+  return true;
+};
+
+export const seekGame = (time: number) => {
+  currentVideoTime = time;
+  return true;
+}
+
 export const restartGame = () => {
-  seekTo(0);
   setTimeout(() => {
     startGame();
   }, 100);

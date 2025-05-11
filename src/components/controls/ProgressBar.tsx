@@ -5,7 +5,7 @@ import styles from "./ProgressBar.module.css";
 import { formatSeconds, roundTo } from "../../utils/tools";
 import useStoreState from "../../hooks/useStoreState";
 import { appStore } from "../../store/app";
-import { seekTo } from "../../utils/player";
+import { seekGame } from "../../game";
 
 const ProgressBar = () => {
   const [elapsed, setElapsed] = useState(0);
@@ -27,17 +27,17 @@ const ProgressBar = () => {
     [song]
   );
 
-  const handleSeek = (clientX: number) => {
+  const handleSeek = async (clientX: number) => {
     if (!barRef.current) return;
     const { left, width } = barRef.current.getBoundingClientRect();
     const offset = clientX - left;
     const progress = offset / width;
     const seekTime = song.startTime + progress * song.endTime;
-    seekTo(seekTime);
+    await seekGame(seekTime);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (e.buttons !== 1) return; 
+    if (e.buttons !== 1) return;
     e.preventDefault();
     e.stopPropagation();
     handleSeek(e.clientX);

@@ -9,7 +9,7 @@ import { appStore } from "../../store/app";
 import useStoreState from "../../hooks/useStoreState";
 
 const Controls = () => {
-  const { song } = useStoreState(appStore);
+  const { song, gameMode } = useStoreState(appStore);
   return (
     <div
       className={cx(style.Controls, {
@@ -18,9 +18,9 @@ const Controls = () => {
     >
       <Player />
       <ProgressBar />
-      <Speed />
+      {gameMode === "sing" && <Speed />}
+      {gameMode === "sing" && <PlayPauseGame />}
       <ModeSwitch />
-      <PlayPauseGame />
     </div>
   );
 };

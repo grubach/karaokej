@@ -28,7 +28,7 @@ const initialState: AppState = {
   percentScored: 0,
   averagePitch: 0,
   notes: [],
-  gameMode: "train",
+  gameMode: "sing",
 };
 
 export const appStore = createStore(initialState);

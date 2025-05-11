@@ -1,7 +1,6 @@
-import { startGame } from "../game/sing";
+import { startGame, resumeGame, seekGame, stopGame } from "../game";
 import { appStore } from "../store/app";
 import { gameStore } from "../store/game";
-import { pauseVideo, playVideo, seekTo } from "./player";
 
 export const register = () => {
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -12,25 +11,25 @@ export const register = () => {
 
     if (key === "ArrowLeft") {
       const newxtTime = gameState.elapsed - 1;
-      seekTo(newxtTime);
+      seekGame(newxtTime);
       return;
     }
 
     if (key === "ArrowRight") {
       const newxtTime = gameState.elapsed + 1;
-      seekTo(newxtTime);
+      seekGame(newxtTime);
       return;
     }
 
     if (key === " ") {
       event.preventDefault();
       if (appState.playerState === "playing") {
-        pauseVideo();
+        stopGame();
         return;
       }
 
       if (appState.playerState === "paused") {
-        playVideo();
+        resumeGame();
         return;
       }
 

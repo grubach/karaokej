@@ -1,30 +1,28 @@
-import { startTransition, useActionState } from "react";
-import { startGame } from "../../game";
+import { startTransition } from "react";
+import { restartGame, resumeGame, startGame, stopGame } from "../../game";
 import ActionIcon from "../parts/ActionIcon";
 import { FiPause, FiPlay } from "react-icons/fi";
 import useStoreState from "../../hooks/useStoreState";
 import { appStore } from "../../store/app";
-import { pauseVideo, playVideo, restartVideo } from "../../utils/player";
 
 const PlayPauseGame = () => {
-  const [, handleStart, isPending] = useActionState(startGame, false);
   const { playerState } = useStoreState(appStore);
 
   const handleClick = () => {
     switch (playerState) {
       case "playing":
-        pauseVideo();
+        stopGame();
         break;
       case "paused":
-        playVideo();
+        resumeGame();
         break;
       case "video cued":
         startTransition(() => {
-          handleStart();
+          startGame();
         });
         break;
       default:
-        restartVideo();
+        restartGame();
     }
   };
 
@@ -32,7 +30,6 @@ const PlayPauseGame = () => {
     <ActionIcon
       icon={playerState === "playing" ? FiPause : FiPlay}
       onClick={handleClick}
-      disabled={isPending}
     />
   );
 };

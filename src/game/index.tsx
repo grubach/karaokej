@@ -20,3 +20,39 @@ export const startGame = () => {
     return train.startGame();
   }
 };
+
+export const stopGame = () => {
+  const { gameMode } = appStore.getValue();
+  if (gameMode === "sing") {
+    return sing.stopGame();
+  } else {
+    return train.stopGame();
+  }
+};
+
+export const restartGame = () => {
+  const { gameMode } = appStore.getValue();
+  if (gameMode === "sing") {
+    return sing.restartGame();
+  } else {
+    return train.restartGame();
+  }
+};
+
+export const resumeGame = () => {
+  const { gameMode } = appStore.getValue();
+  if (gameMode === "sing") {
+    return sing.resumeGame();
+  } else {
+    return train.resumeGame();
+  }
+};
+
+export const seekGame = (time: number) => {
+  const { gameMode } = appStore.getValue();
+  if (gameMode === "sing") {
+    return sing.seekGame(time);
+  } else {
+    return train.seekGame(time);
+  }
+};
