@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
-import { BEAT_WIDTH } from "../constants";
+import { BEAT_WIDTH } from "../../constants";
 import style from "./Program.module.css";
 import ProgramItem from "./ProgramItem";
-import { timeToBeats } from "../utils/time";
-import useStore from "../hooks/useStore";
-import { gameStore } from "../store/game";
-import useStoreState from "../hooks/useStoreState";
-import { appStore } from "../store/app";
-import { SongNote } from "../utils/song";
+import { timeToBeats } from "../../utils/time";
+import useStore from "../../hooks/useStore";
+import { gameStore } from "../../store/game";
+import useStoreState from "../../hooks/useStoreState";
+import { appStore } from "../../store/app";
+import { SongNote } from "../../utils/song";
 
 const stringifyNotes = (notes: SongNote[]) =>
   notes.map((note) => note.id).join(",");

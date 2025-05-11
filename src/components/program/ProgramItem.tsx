@@ -1,12 +1,12 @@
-import { BEAT_WIDTH, NOTE_HEIGHT, NOTE_SCORE_RANGE } from "../constants";
+import { BEAT_WIDTH, NOTE_HEIGHT, NOTE_SCORE_RANGE } from "../../constants";
 import style from "./ProgramItem.module.css";
-import { SongNote } from "../utils/song";
-import useStore from "../hooks/useStore";
+import { SongNote } from "../../utils/song";
+import useStore from "../../hooks/useStore";
 import { useRef } from "react";
 import cx from "classnames";
-import { gameStore } from "../store/game";
-import { timeToBeats } from "../utils/time";
-import { SongScored } from "../songs";
+import { gameStore } from "../../store/game";
+import { timeToBeats } from "../../utils/time";
+import { SongScored } from "../../songs";
 
 type Props = {
   songNote: SongNote;
