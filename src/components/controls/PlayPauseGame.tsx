@@ -30,6 +30,7 @@ const PlayPauseGame = () => {
     <ActionIcon
       icon={playerState === "playing" ? FiPause : FiPlay}
       onClick={handleClick}
+      tooltip={playerState === "playing" ? "Pause Game" : "Play Game"}
     />
   );
 };

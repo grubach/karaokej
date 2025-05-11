@@ -7,11 +7,17 @@ type Props = {
   text?: string;
   onClick: () => void;
   disabled?: boolean;
+  tooltip: string;
 };
 
-const ActionIcon = ({ icon: Icon, text, onClick, disabled = false }: Props) => {
+const ActionIcon = ({ icon: Icon, text, onClick, disabled = false, tooltip }: Props) => {
   return (
-    <button className={style.ActionIcon} onClick={onClick} disabled={disabled}>
+    <button 
+      className={style.ActionIcon} 
+      onClick={onClick} 
+      disabled={disabled}
+      title={tooltip}
+    >
       {Icon && (
         <Icon
           size={1.5 * NOTE_HEIGHT}

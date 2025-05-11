@@ -43,7 +43,7 @@ const HidePanel = ({
           [style.down]: direction === "down",
         })}
       >
-        <ActionIcon icon={icon} onClick={handleClick} />
+        <ActionIcon icon={icon} onClick={handleClick} tooltip={open ? "Hide Panel" : "Show Panel"} />
       </div>
     </div>
   );

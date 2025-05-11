@@ -26,6 +26,6 @@ const Speed = () => {
 
   const label = speedValues[speed];
 
-  return <ActionIcon onClick={handleClick} text={label} />;
+  return <ActionIcon onClick={handleClick} text={label} tooltip={`Change Speed (Current: ${label}x)`} />;
 };
 export default Speed;

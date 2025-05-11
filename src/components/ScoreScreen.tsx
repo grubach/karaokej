@@ -17,7 +17,7 @@ const ScoreScreen = () => {
       <div className={style.title}>{song.title}</div>
       <div className={style.artist}>{song.artist}</div>
       <div className={style.score}>{percentScored.toFixed(2)}%</div>
-      <ActionIcon icon={FiRotateCcw} onClick={restartGame} />
+      <ActionIcon icon={FiRotateCcw} onClick={restartGame} tooltip="Restart Game" />
     </div>
   );
 };

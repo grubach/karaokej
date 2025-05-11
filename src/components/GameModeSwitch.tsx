@@ -22,6 +22,7 @@ const GameModeSwitch = () => {
       <ActionIcon
         icon={gameMode === "sing" ? FiTarget : FiMusic}
         onClick={handleClick}
+        tooltip={gameMode === "sing" ? "Switch to Training Mode" : "Switch to Singing Mode"}
       />
     </div>
   );
